@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Novay\\Nue\\": "src/",
+            "Novay\\Nue\\": "src/"
         },
         "files": [
             "src/Helpers.php"
