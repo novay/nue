@@ -6,6 +6,10 @@
 
 Complete Boilerplate for Laravel. This package also contains a set of useful Laravel Blade components. It promotes DRY principles and allows you to keep your HTML nice and clean. Components include alerts, badges, buttons, form inputs (with automatic error feedback), pagination (responsive), and more. The components come with Laravel Livewire integration built in, so you can use them with or without Livewire.
 
+## Screenshot
+
+![nue-package.png](https://raw.githubusercontent.com/novay/imagehost/master/nue-package.png)
+
 ## Documentation
 
 - [Requirements](#requirements)
