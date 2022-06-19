@@ -31,7 +31,6 @@
                 "Novay\\Nue\\NueServiceProvider"
             ], 
             "aliases": {
-                "Notify" : "Novay\\Nue\\Facades\\Notify", 
                 "Nue" : "Novay\\Nue\\Facades\\Nue"
             }
         }
