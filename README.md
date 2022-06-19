@@ -10,19 +10,17 @@ Complete Boilerplate for Laravel. This package also contains a set of useful Lar
 
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Components](#components)
+- [Configuration](#configuration)
+- [Components (Coming Soon! Unstable)](#components)
     - [Alert](#alert)
     - [Badge](#badge)
     - [Button](#button)
     - [Check](#check)
     - [Close](#close)
-    - [Color](#color)
     - [Icon](#icon)
     - [Image](#image)
     - [Input](#input)
     - [Link](#link)
-    - [Pagination](#pagination)
-    - [Progress](#progress)
     - [Radio](#radio)
     - [Select](#select)
     - [Textarea](#textarea)
@@ -38,15 +36,40 @@ Complete Boilerplate for Laravel. This package also contains a set of useful Lar
 
 ## Installation
 
+:::danger New Applications Only
+
+Nue should only be installed into new Laravel applications. Attempting to install Nue into an existing Laravel application will result in unexpected behavior and issues. There are some files that you need to pay attention to:
+1. `database\migrations\2014_10_12_000000_create_users_table.php` replaced.
+2. `App\Http\Controllers\*` and `App\Http\HomeController.php` created or replaced if exists.
+3. `App\Models\User.php` replaced.
+4. `routes\web.php` modified.
+5. `resources\views\welcome.blade.php`, `resources\views\dashboard.blade.php`, `resources\views\auth\*`, `resources\views\layouts\*` and `resources\views\profile\*`
+:::
+
 Require the package via composer:
 
-```console
-$ composer require novay/nue -vvv
 
-$ php artisan vendor:publish --provider="Novay\Nue\NueServiceProvider"
+```bash
+$ composer require novay/nue -vvv
 ```
 
-## Components
+Install with:
+
+```bash
+$ php artisan nue:install --force
+```
+
+And you are ready to go!
+
+## Configuration
+
+Make sure to check out our config files at `config/nue.php`. Here you can :
+- Change the default application name
+- Customize brands or assets files like favicon and the application logo.
+- Disable some built in features like `registration`, `account deletion` etcetera.
+- And others configurations which you can play with.
+
+## Components (Coming Soon! Unstable)
 
 ### Alert
 

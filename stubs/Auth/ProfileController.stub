@@ -95,7 +95,7 @@ class ProfileController extends Controller
 
         me()->update($input);
 
-        notify()->flash('Informasi profile berhasil diperbarui!', 'success');
+        notify()->flash('Your information changed successfully!', 'success');
         return redirect()->back();
     }
 }

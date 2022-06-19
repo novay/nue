@@ -13,14 +13,13 @@
     $wireModel = $attributes->whereStartsWith('wire:model')->first();
     $key = $attributes->get('name', $model ?? $wireModel);
     $id = $attributes->get('id', $model ?? $wireModel);
-    $prefix = config('laravel-bootstrap-components.use_with_model_trait') ? 'model.' : null;
     $attributes = $attributes->class([
         'form-check-input',
         'is-invalid' => $errors->has($key),
     ])->merge([
         'type' => 'checkbox',
         'id' => $id,
-        'wire:model.' . $bind => $model ? $prefix . $model : null,
+        'wire:model.' . $bind => $model ? $model : null,
     ]);
 @endphp
 

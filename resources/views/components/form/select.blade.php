@@ -17,7 +17,6 @@
     $wireModel = $attributes->whereStartsWith('wire:model')->first();
     $key = $attributes->get('name', $model ?? $wireModel);
     $id = $attributes->get('id', $model ?? $wireModel);
-    $prefix = config('laravel-bootstrap-components.use_with_model_trait') ? 'model.' : null;
     $options = Arr::isAssoc($options) ? $options : array_combine($options, $options);
     $attributes = $attributes->class([
         'form-select',
@@ -26,7 +25,7 @@
         'is-invalid' => $errors->has($key),
     ])->merge([
         'id' => $id,
-        'wire:model.' . $bind => $model ? $prefix . $model : null,
+        'wire:model.' . $bind => $model ? $model : null,
     ]);
 @endphp
 
