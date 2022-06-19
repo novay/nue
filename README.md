@@ -36,13 +36,13 @@ Require the package via composer:
 
 
 ```bash
-$ composer require novay/nue -vvv
+composer require novay/nue -vvv
 ```
 
 Install with:
 
 ```bash
-$ php artisan nue:install --force
+php artisan nue:install --force
 ```
 
 And you are ready to go!
