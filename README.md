@@ -21,9 +21,7 @@ Complete Boilerplate for Laravel. This package also contains a set of useful Lar
 - Livewire (Optional)
 - Iconify must be called to use icons, simply use CDN
 
-## Installation
-
-**New Applications Only**
+**You should to know**
 
 Nue should only be installed into new Laravel applications. Attempting to install Nue into an existing Laravel application will result in unexpected behavior and issues. There are some files that you need to pay attention to:
 1. `database\migrations\2014_10_12_000000_create_users_table.php` replaced.
@@ -31,6 +29,8 @@ Nue should only be installed into new Laravel applications. Attempting to instal
 3. `App\Models\User.php` replaced.
 4. `routes\web.php` modified.
 5. `resources\views\welcome.blade.php`, `resources\views\dashboard.blade.php`, `resources\views\auth\*`, `resources\views\layouts\*` and `resources\views\profile\*` created or replaced if exists.
+
+## Installation
 
 Require the package via composer:
 
