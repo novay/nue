@@ -1,4 +1,4 @@
-# Nue Package
+# Nue Boilerplate
 
 [![Packagist](https://img.shields.io/packagist/l/novay/nue.svg?maxAge=2592000)](https://packagist.org/packages/novay/nue)
 [![Total Downloads](https://img.shields.io/packagist/dt/novay/nue.svg?style=flat-square)](https://packagist.org/packages/novay/nue)
@@ -13,17 +13,7 @@ Complete Boilerplate for Laravel. This package also contains a set of useful Lar
 - [Configuration](#configuration)
 - [Components (Coming Soon! Unstable)](#components)
     - [Alert](#alert)
-    - [Badge](#badge)
-    - [Button](#button)
-    - [Check](#check)
-    - [Close](#close)
-    - [Icon](#icon)
-    - [Image](#image)
-    - [Input](#input)
-    - [Link](#link)
-    - [Radio](#radio)
-    - [Select](#select)
-    - [Textarea](#textarea)
+    - ...
 - [Publishing Assets](#publishing-assets)
     - [Custom Views](#custom-views)
     - [Custom Icons](#custom-icons)
@@ -36,15 +26,14 @@ Complete Boilerplate for Laravel. This package also contains a set of useful Lar
 
 ## Installation
 
-:::danger New Applications Only
+**New Applications Only**
 
 Nue should only be installed into new Laravel applications. Attempting to install Nue into an existing Laravel application will result in unexpected behavior and issues. There are some files that you need to pay attention to:
 1. `database\migrations\2014_10_12_000000_create_users_table.php` replaced.
 2. `App\Http\Controllers\*` and `App\Http\HomeController.php` created or replaced if exists.
 3. `App\Models\User.php` replaced.
 4. `routes\web.php` modified.
-5. `resources\views\welcome.blade.php`, `resources\views\dashboard.blade.php`, `resources\views\auth\*`, `resources\views\layouts\*` and `resources\views\profile\*`
-:::
+5. `resources\views\welcome.blade.php`, `resources\views\dashboard.blade.php`, `resources\views\auth\*`, `resources\views\layouts\*` and `resources\views\profile\*` created or replaced if exists.
 
 Require the package via composer:
 
