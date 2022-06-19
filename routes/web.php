@@ -14,32 +14,32 @@ Route::group([
 	Route::post('logout', 'LoginController@logout')->name('logout');
 
 	// Registration...
-    if (Features::enabled(Features::registration())) {
-    	Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
+	if (Features::enabled(Features::registration())) {
+		Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
 		Route::post('register', 'RegisterController@register');
-    }
+	}
 
 	// Password Reset...
-    if (Features::enabled(Features::resetPasswords())) {
-    	Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
+	if (Features::enabled(Features::resetPasswords())) {
+		Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
 		Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 		Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
 		Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
 
 		Route::get('password/confirm', 'ConfirmPasswordController@showConfirmForm')->name('password.confirm');
 		Route::post('password/confirm', 'ConfirmPasswordController@confirm');
-    }
+	}
 
 	// Email Verification...
-    if (Features::enabled(Features::emailVerification())) {
-    	Route::get('email/verify', 'VerificationController@show')->name('verification.notice');
+	if (Features::enabled(Features::emailVerification())) {
+		Route::get('email/verify', 'VerificationController@show')->name('verification.notice');
 		Route::get('email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
 		Route::post('email/resend', 'VerificationController@resend')->name('verification.resend');
-    }
+	}
 
-    // Account Prefixes...
-    if (Features::enabled(Features::updateProfile())) {
-	    Route::group(['prefix' => 'profile'], function () 
+	// Update Profile Informations...
+	if (Features::enabled(Features::updateProfile())) {
+		Route::group(['prefix' => 'profile'], function () 
 		{
 			// User & Profile...
 			Route::get('/', 'ProfileController@show')->name('profile.show');
@@ -47,10 +47,10 @@ Route::group([
 			// Profile Information, Update Password & Change Photo...
 			Route::put('/', 'ProfileController@update')->name('profile.update');
 
-		    // Terminate Account...
-		    if (Features::enabled(Features::terminateAccount())) {
+			// Terminate Account...
+			if (Features::enabled(Features::terminateAccount())) {
 				Route::delete('/', 'ProfileController@destroy')->name('profile.destroy');
-		    }
+			}
 		});
-    }
+	}
 });
