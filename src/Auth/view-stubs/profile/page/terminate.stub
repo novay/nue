@@ -19,7 +19,7 @@
 </div>
 <div class="modal fade" id="modal-delete">
     <div class="modal-dialog">
-        {!! Form::open(['class' => 'modal-content', 'method' => 'PUT']) !!}
+        {!! Form::open(['class' => 'modal-content', 'method' => 'DELETE']) !!}
             <div class="modal-body">
                 <h3 class="mb-3">{{ __('Delete Account') }}</h3>
                 <p>{{ __('Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}</p>
