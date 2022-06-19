@@ -1,0 +1,41 @@
+{
+    "name": "novay/nue",
+    "description": "Complete Boilerplate for Laravel.",
+    "keywords": ["laravel", "ui", "boilerplate"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Noviyanto Rahmadi",
+            "email": "novay@btekno.id"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "laravel/framework": "^8.00",
+        "laravelcollective/html": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Novay\\Nue\\": "src/",
+        },
+        "files": [
+            "src/Helpers.php"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Novay\\Nue\\NueServiceProvider"
+            ], 
+            "aliases": {
+                "Notify" : "Novay\\Nue\\Facades\\Notify", 
+                "Nue" : "Novay\\Nue\\Facades\\Nue"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

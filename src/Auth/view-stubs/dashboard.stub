@@ -1,0 +1,27 @@
+@extends('layouts.app')
+@section('title', __('Dashboard'))
+@section('m-home', 'active')
+
+@section('content')
+    <div class="content container-fluid">
+        <div class="row justify-content-sm-center text-center py-10">
+            <div class="col-sm-7 col-md-5">
+                <img class="img-fluid mb-5" src="https://cdn.btekno.id/templates/v2/svg/illustrations/oc-collaboration.svg" alt="" data-hs-theme-appearance="default">
+                <img class="img-fluid mb-5" src="https://cdn.btekno.id/templates/v2/svg/illustrations-light/oc-collaboration.svg" alt="" data-hs-theme-appearance="dark">
+
+                @if(session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                <h1>{{ __('Hello, nice to see you!') }}</h1>
+                <p>{{ __('You are now minutes away from creativity than ever before. Enjoy!') }}</p>
+
+                <a class="btn btn-primary" href="javascript:;">
+                    {{ __('You are logged in!') }}
+                </a>
+            </div>
+        </div>
+    </div>
+@endsection
