@@ -21,7 +21,7 @@ class NueCommand extends Command
      *
      * @var string
      */
-    protected $description = 'List all Nue commands';
+    protected $description = 'List all Nue commands.';
 
     /**
      * @var string

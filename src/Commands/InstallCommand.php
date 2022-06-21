@@ -5,6 +5,10 @@ namespace Novay\Nue\Commands;
 use Illuminate\Console\Command;
 use InvalidArgumentException;
 
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
+use Symfony\Component\Finder\SplFileInfo;
+
 class InstallCommand extends Command
 {
     /**
@@ -19,7 +23,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the Nue components and resources';
+    protected $description = 'Install the Nue components and resources.';
 
     /**
      * The views that need to be exported.
@@ -27,6 +31,11 @@ class InstallCommand extends Command
      * @var array
      */
     protected $views = [
+        'layouts/app.stub' => 'layouts/app.blade.php',
+        'layouts/blank.stub' => 'layouts/blank.blade.php',
+        'layouts/partials/aside.stub' => 'layouts/partials/aside.blade.php',
+        'layouts/partials/header.stub' => 'layouts/partials/header.blade.php',
+        'welcome.stub' => 'welcome.blade.php',
         'auth/login.stub' => 'auth/login.blade.php',
         'auth/passwords/confirm.stub' => 'auth/passwords/confirm.blade.php',
         'auth/passwords/email.stub' => 'auth/passwords/email.blade.php',
@@ -34,11 +43,6 @@ class InstallCommand extends Command
         'auth/register.stub' => 'auth/register.blade.php',
         'auth/verify.stub' => 'auth/verify.blade.php',
         'dashboard.stub' => 'dashboard.blade.php',
-        'welcome.stub' => 'welcome.blade.php',
-        'layouts/app.stub' => 'layouts/app.blade.php',
-        'layouts/blank.stub' => 'layouts/blank.blade.php',
-        'layouts/partials/aside.stub' => 'layouts/partials/aside.blade.php',
-        'layouts/partials/header.stub' => 'layouts/partials/header.blade.php',
         'profile/show.stub' => 'profile/show.blade.php',
         'profile/page/basic.stub' => 'profile/page/basic.blade.php',
         'profile/page/email.stub' => 'profile/page/email.blade.php',
@@ -75,6 +79,9 @@ class InstallCommand extends Command
         copy(__DIR__.'/../../stubs/Models/User.stub', app_path('Models/User.php'));
         $this->comment('<options=bold,reverse;fg=green> OK </> Replace models.');
         
+        // Init Database...
+        $this->initDatabase();
+
         $this->comment('');
         $this->info('🤙 Nue package generated successfully in '.time_execute($mtime).' seconds.');
     }
@@ -126,8 +133,8 @@ class InstallCommand extends Command
     {
         $this->callSilent('nue:auth');
 
+        // Home Controller
         $controller = app_path('Http/Controllers/HomeController.php');
-
         if (file_exists($controller) && ! $this->option('force')) {
             if ($this->confirm("The [HomeController.php] file already exists. Do you want to replace it?")) {
                 file_put_contents($controller, $this->compileControllerStub());
@@ -136,11 +143,26 @@ class InstallCommand extends Command
             file_put_contents($controller, $this->compileControllerStub());
         }
 
+        // Route modifications
         file_put_contents(
             base_path('routes/web.php'),
             file_get_contents(__DIR__.'/../Auth/stubs/routes.stub'),
             FILE_APPEND
         );
+
+        // Nue Controllers
+        if (! is_dir($directory = app_path('Http/Controllers/Nue'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        $filesystem = new Filesystem;
+        collect($filesystem->allFiles(__DIR__.'/../../stubs/Nue'))
+            ->each(function (SplFileInfo $file) use ($filesystem) {
+                $filesystem->copy(
+                    $file->getPathname(),
+                    app_path('Http/Controllers/Nue/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
+                );
+            });
     }
 
     /**
@@ -166,5 +188,17 @@ class InstallCommand extends Command
         return implode(DIRECTORY_SEPARATOR, [
             config('view.paths')[0] ?? resource_path('views'), $path,
         ]);
+    }
+
+    /**
+     * Create tables and seed it.
+     *
+     * @return void
+     */
+    public function initDatabase()
+    {
+        $this->call('migrate');
+
+        $this->call('db:seed', ['--class' => \Novay\Nue\NueTableSeeder::class]);
     }
 }

@@ -63,12 +63,10 @@
                     <div class="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1" style="max-width: 25rem;">
                         <form method="POST" action="{{ route('password.confirm') }}" novalidate>
                             @csrf
-
                             <div class="mb-5">
                                 <h1 class="display-4">{{ __('Confirm Password') }}</h1>
                                 <p>{{ __('Please confirm your password before continuing.') }}</p>
                             </div>
-
                             <div class="mb-4">
                                 <label class="form-label w-100" for="password" tabindex="0">
                                     <span class="d-flex justify-content-between align-items-center">
@@ -95,13 +93,11 @@
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="d-grid mb-1">
                                 <button type="submit" class="btn btn-primary btn-lg">
                                     {{ __('Confirm Password') }}
                                 </button>
                             </div>
-
                             @if(Route::has('password.request'))
                                 <div class="text-center">
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -109,7 +105,6 @@
                                     </a>
                                 </div>
                             @endif
-
                         </form>
                     </div>
                 </div>

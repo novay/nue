@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Contracts\Auth\Authenticatable|null user()
  * @method static \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard guard()
  *
- * @see \Encore\Admin\Admin
+ * @see \Novay\Nue\Nue
  */
 class Nue extends Facade
 {

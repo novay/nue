@@ -22,7 +22,7 @@
                             <a class="" href="javascript:;" id="accountNavbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation>
                                 @if(Novay\Nue\Features::enabled(Novay\Nue\Features::profilePhoto()))
                                     <div class="avatar avatar-sm avatar-circle">
-                                        <img class="avatar-img" src="{{ Nue::user()->photo ?? config('nue.brand.default_avatar') }}" alt="{{ Nue::user()->name }}">
+                                        <img class="avatar-img" src="{{ Nue::user()->photo_url }}" alt="{{ Nue::user()->name }}">
                                     </div>
                                 @else
                                     <span class="text-secondary">{{ Nue::user()->name }}</span>
@@ -33,7 +33,7 @@
                                     <div class="d-flex align-items-center">
                                         @if(Novay\Nue\Features::enabled(Novay\Nue\Features::profilePhoto()))
                                             <div class="avatar avatar-sm avatar-circle me-3">
-                                                <img class="avatar-img" src="{{ Nue::user()->photo ?? config('nue.brand.default_avatar') }}" alt="{{ Nue::user()->name }}">
+                                                <img class="avatar-img" src="{{ Nue::user()->photo_url }}" alt="{{ Nue::user()->name }}">
                                             </div>
                                         @endif
                                         <div class="flex-grow-1">

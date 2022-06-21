@@ -63,12 +63,10 @@
                     <div class="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1" style="max-width: 25rem;">
                         <form method="POST" action="{{ route('register') }}" novalidate>
                             @csrf
-
                             <div class="mb-5">
                                 <h1 class="display-4">{{ __('Register') }}</h1>
                                 <p>Already have an account? <a class="link" href="{{ route('login') }}">Sign in here</a></p>
                             </div>
-
                             <div class="mb-2">
                                 <label class="form-label" for="email">{{ __('Name') }}</label>
                                 <input id="name" type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" autocomplete="name" autofocus>
@@ -76,7 +74,6 @@
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="mb-2">
                                 <label class="form-label" for="{{ config('nue.username') }}">
                                     @if(config('nue.username') == 'email')
@@ -90,7 +87,6 @@
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="mb-2">
                                 <label class="form-label w-100" for="password" tabindex="0">
                                     {{ __('Password') }}
@@ -110,7 +106,6 @@
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="mb-2">
                                 <label class="form-label w-100" for="password-confirm" tabindex="0">
                                     {{ __('Confirm Password') }}
@@ -130,14 +125,12 @@
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="checkbox" id="agree" required>
                                 <label class="form-check-label" for="agree">
                                     I accept the <a href="#">Terms and Conditions</a>
                                 </label>
                             </div>
-
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary btn-lg">
                                     {{ __('Register') }}

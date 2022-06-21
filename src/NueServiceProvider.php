@@ -4,9 +4,44 @@ namespace Novay\Nue;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class NueServiceProvider extends ServiceProvider
 {
+    /**
+     * @var array
+     */
+    protected $commands = [
+        Commands\NueCommand::class,
+        Commands\InstallCommand::class,
+        Commands\UninstallCommand::class,
+        Commands\AuthCommand::class,
+        Commands\ExtendCommand::class,
+        Commands\ImportCommand::class,
+    ];
+
+    /**
+     * The application's route middleware.
+     *
+     * @var array
+     */
+    protected $routeMiddleware = [
+        'nue.activity'      => Http\Middleware\Activity::class,
+        'nue.permission'    => Http\Middleware\Permission::class,
+    ];
+
+    /**
+     * The application's route middleware groups.
+     *
+     * @var array
+     */
+    protected $middlewareGroups = [
+        'web' => [
+            'nue.activity',
+            'nue.permission',
+        ],
+    ];
+    
     /**
      * Boot the application events.
      *
@@ -14,6 +49,8 @@ class NueServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->ensureHttps();
+
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nue');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         
@@ -29,16 +66,28 @@ class NueServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([
-                Commands\NueCommand::class,
-                Commands\InstallCommand::class,
-                Commands\AuthCommand::class,
-            ]);
+            $this->commands($this->commands);
         }
 
         $this->app->singleton('notify', function ($app) {
             return $this->app->make('Novay\Nue\Services\Notifier');
         });
+        
+        $this->registerRouteMiddleware();
+    }
+
+    /**
+     * Force to set https scheme if https enabled.
+     *
+     * @return void
+     */
+    protected function ensureHttps()
+    {
+        $is_admin = Str::startsWith(request()->getRequestUri(), '/'.ltrim(config('nue.route.prefix'), '/'));
+        if ((config('nue.https') || config('nue.secure')) && $is_admin) {
+            url()->forceScheme('https');
+            $this->app['request']->server->set('HTTPS', true);
+        }
     }
 
     /**
@@ -66,8 +115,25 @@ class NueServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../database/migrations/2014_10_12_000000_create_users_table.php' => database_path('migrations/2014_10_12_000000_create_users_table.php'),
+            __DIR__.'/../database/migrations/2021_01_01_000000_create_nue_tables.php' => database_path('migrations/2021_01_01_000000_create_nue_tables.php'),
         ], 'nue-migrations');
+    }
 
+    /**
+     * Register the route middleware.
+     *
+     * @return void
+     */
+    protected function registerRouteMiddleware()
+    {
+        // register route middleware.
+        foreach ($this->routeMiddleware as $key => $middleware) {
+            app('router')->aliasMiddleware($key, $middleware);
+        }
 
+        // register middleware group.
+        foreach ($this->middlewareGroups as $key => $middleware) {
+            app('router')->middlewareGroup($key, $middleware);
+        }
     }
 }

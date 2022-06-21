@@ -1,0 +1,12 @@
+<?php
+
+namespace :namespace;
+
+use Nue\Core\Extension;
+
+class :class_name extends Extension
+{
+    public $name = ':base_package';
+
+    public $views = __DIR__.'/../resources/views';
+}

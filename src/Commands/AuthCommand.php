@@ -21,7 +21,7 @@ class AuthCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Scaffold the authentication controllers (silent call)';
+    protected $description = 'Scaffold the authentication controllers (silent call).';
 
     /**
      * Execute the console command.

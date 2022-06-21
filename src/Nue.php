@@ -2,14 +2,14 @@
 
 namespace Novay\Nue;
 
-use Closure;
 use Illuminate\Support\Facades\Auth;
+use Novay\Nue\Traits\HasMenu;
+use Novay\Nue\Traits\HasAssets;
 
-/**
- * Class Nue.
- */
 class Nue
 {
+    use HasMenu, HasAssets;
+
     /**
      * The Nue version.
      *
@@ -52,5 +52,40 @@ class Nue
         $guard = config('nue.guard') ?: 'web';
 
         return Auth::guard($guard);
+    }
+
+    /**
+     * Extend a extension.
+     *
+     * @param string $name
+     * @param string $class
+     *
+     * @return void
+     */
+    public static function extend($name, $class)
+    {
+        static::$extensions[$name] = $class;
+    }
+
+    /**
+     * Register the laravel-admin builtin routes.
+     *
+     * @return void
+     *
+     * @deprecated Use Admin::routes() instead();
+     */
+    public function registerAuthRoutes()
+    {
+        $this->routes();
+    }
+
+    /**
+     * Register the laravel-admin builtin routes.
+     *
+     * @return void
+     */
+    public function routes()
+    {
+        // 
     }
 }

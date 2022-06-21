@@ -3,6 +3,7 @@
     "description": "Complete Boilerplate for Laravel.",
     "keywords": ["laravel", "ui", "boilerplate"],
     "license": "MIT",
+    "homepage": "https://github.com/novay/nue",
     "authors": [
         {
             "name": "Noviyanto Rahmadi",
@@ -11,7 +12,8 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
-        "laravelcollective/html": "^6.3"
+        "laravelcollective/html": "^6.3", 
+        "yajra/laravel-datatables-oracle": "^10.0"
     },
     "autoload": {
         "psr-4": {

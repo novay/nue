@@ -53,13 +53,11 @@
                 </div>
                 <div class="col-lg-4 d-flex justify-content-center align-items-center min-vh-lg-100">
                     <div class="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1" style="max-width: 25rem;">
-
                         @if(session('resent'))
                             <div class="alert alert-success" role="alert">
                                 {{ __('A fresh verification link has been sent to your email.') }}
                             </div>
                         @endif
-
                         <div class="text-center">
                             <div class="mb-4">
                                 <img class="avatar avatar-xxl avatar-4x3" src="https://cdn.btekno.id/templates/v2/svg/illustrations/oc-email-verification.svg" alt="Image Description" data-hs-theme-appearance="default">

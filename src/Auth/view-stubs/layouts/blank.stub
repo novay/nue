@@ -14,10 +14,7 @@
     <link rel="stylesheet" href="https://cdn.btekno.id/templates/v2/css/theme.min.css">
     <link rel="preload" href="https://cdn.btekno.id/templates/v2/css/theme.min.css" data-hs-appearance="default" as="style">
     <link rel="preload" href="https://cdn.btekno.id/templates/v2/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
-
-    <style>
-        .i-1x{font-size:1em}.i-2x{font-size:2em}.i-3x{font-size:3em}.i-4x{font-size:4em}.i-5x{font-size:5em}.i-6x{font-size:6em}.i-7x{font-size:7em}.i-8x{font-size:8em}.i-9x{font-size:9em}.i-10x{font-size:10em}.i-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.i-xs{font-size:.75em;line-height:.08333em;vertical-align:.125em}.i-sm{font-size:.875em;line-height:.07143em;vertical-align:.05357em}.i-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.i-xl{font-size:1.5em;line-height:.04167em;vertical-align:-.125em}.i-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}
-    </style>
+    <link rel="stylesheet" href="https://cdn.btekno.id/templates/v2/css/nue.css?v=2">
 
     <style data-hs-appearance-onload-styles>
         *{transition:unset!important}
@@ -41,7 +38,7 @@
     @yield('content')
 
     <script src="https://cdn.btekno.id/templates/v2/js/vendor.min.js"></script>
-    <script src="https://cdn.btekno.id/templates/v2/js/theme.min.js?v=4"></script>
+    <script src="https://cdn.btekno.id/templates/v2/js/theme.min.js?v=5"></script>
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 
     @if(notify()->ready())

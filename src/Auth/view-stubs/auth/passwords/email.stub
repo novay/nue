@@ -55,16 +55,13 @@
                     <div class="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1" style="max-width: 25rem;">
                         <form method="POST" action="{{ route('password.email') }}" novalidate>
                             @csrf
-
                             @if(session('status'))
                                 <div class="alert alert-soft-success rounded-1" role="alert">{{ session('status') }}</div>
                             @endif
-
                             <div class="mb-5">
                                 <h1 class="display-4">{{ __('Forgot Password') }} ?</h1>
                                 <p>Enter the email address you used when you joined and we'll send you instructions to reset your password.</p>
                             </div>
-
                             <div class="mb-4">
                                 <label class="form-label" for="email">
                                     {{ __('Email Address') }}
@@ -74,13 +71,11 @@
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="d-grid mb-1">
                                 <button type="submit" class="btn btn-primary btn-lg">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>
-
                             <div class="text-center">
                                 <a class="btn btn-link" href="{{ route('login') }}">
                                     <i class="bi-chevron-left"></i> Back to Sign in

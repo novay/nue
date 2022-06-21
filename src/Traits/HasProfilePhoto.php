@@ -57,11 +57,11 @@ trait HasProfilePhoto
      *
      * @return string
      */
-    public function getProfilePhotoUrlAttribute()
+    public function getPhotoUrlAttribute()
     {
         return $this->photo
                     ? Storage::disk($this->profilePhotoDisk())->url($this->photo)
-                    : $this->defaultProfilePhotoUrl();
+                    : $this->defaultPhotoUrl();
     }
 
     /**
@@ -69,7 +69,7 @@ trait HasProfilePhoto
      *
      * @return string
      */
-    protected function defaultProfilePhotoUrl()
+    protected function defaultPhotoUrl()
     {
         $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
             return mb_substr($segment, 0, 1);
