@@ -16,13 +16,13 @@ class :class_nameServiceProvider extends ServiceProvider
         }
 
         if ($views = $extension->views()) {
-            $this->loadViewsFrom($views, ':base_package');
+            $this->loadViewsFrom($views, 'nue-:base_package');
         }
 
         if ($this->app->runningInConsole() && $assets = $extension->assets()) {
             $this->publishes(
                 [$assets => public_path('vendor/:package')],
-                ':base_package'
+                'nue-:base_package'
             );
         }
 

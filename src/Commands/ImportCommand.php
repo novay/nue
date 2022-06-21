@@ -2,7 +2,7 @@
 
 namespace Novay\Nue\Commands;
 
-use Nue\Core\Nue;
+use Novay\Nue\Nue;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 

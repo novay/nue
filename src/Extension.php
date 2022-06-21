@@ -150,4 +150,68 @@ abstract class Extension
 
         Route::group($attributes, $callback);
     }
+
+    /**
+     * Create a item in Nue left side menu.
+     *
+     * @param string $title
+     * @param string $uri
+     * @param string $icon
+     * @param int    $parentId
+     * @param array  $children
+     *
+     * @throws \Exception
+     *
+     * @return Model
+     */
+    protected static function createMenu($title, $uri, $icon = 'fa-bars', $parentId = 0, array $children = [])
+    {
+        $menuModel = config('nue.database.menu_model');
+
+        $lastOrder = $menuModel::max('order');
+        /**
+         * @var Model
+         */
+        $menu = $menuModel::create([
+            'parent_id' => $parentId,
+            'order'     => $lastOrder + 1,
+            'title'     => $title,
+            'icon'      => $icon,
+            'uri'       => $uri,
+        ]);
+        if (!empty($children)) {
+            $extension = static::getInstance();
+            foreach ($children as $child) {
+                if ($extension->validateMenu($child)) {
+                    $subTitle = Arr::get($child, 'title');
+                    $subUri = Arr::get($child, 'path');
+                    $subIcon = Arr::get($child, 'icon');
+                    $subChildren = Arr::get($child, 'children', []);
+                    static::createMenu($subTitle, $subUri, $subIcon, $menu->getKey(), $subChildren);
+                }
+            }
+        }
+
+        return $menu;
+    }
+
+    /**
+     * Create a permission for this extension.
+     *
+     * @param       $name
+     * @param       $slug
+     * @param       $path
+     * @param array $methods
+     */
+    protected static function createPermission($name, $slug, $path, $methods = [])
+    {
+        $permissionModel = config('nue.database.permissions_model');
+
+        $permissionModel::create([
+            'name'        => $name,
+            'slug'        => $slug,
+            'http_path'   => '/'.trim($path, '/'),
+            'http_method' => $methods,
+        ]);
+    }
 }
