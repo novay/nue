@@ -16,20 +16,20 @@ class :class_name extends Extension
      *
      * @return void
      */
-    public static function boot()
-    {
-        // 
+    // public static function boot()
+    // {
+    //     // 
 
-        Nue::extend(':base_package', __CLASS__);
-    }
+    //     Nue::extend(':base_package', __CLASS__);
+    // }
 
     /**
      * {@inheritdoc}
      */
-    public static function import()
-    {
-        parent::createMenu(':class_name', ':base_package', 'fa:asterisk');
+    // public static function import()
+    // {
+    //     parent::createMenu(':class_name', ':base_package', 'fa:asterisk');
 
-        parent::createPermission(':class_name', 'ext.:base_package', ':base_package*');
-    }
+    //     parent::createPermission(':class_name', 'ext.:base_package', ':base_package*');
+    // }
 }
