@@ -84,7 +84,7 @@ class NueTableSeeder extends Seeder
                 'order'     => 1,
                 'title'     => 'Dashboard',
                 'icon'      => 'icon-park-twotone:dashboard-one',
-                'uri'       => '/home',
+                'uri'       => 'home',
             ],
             [
                 'parent_id' => 0,
