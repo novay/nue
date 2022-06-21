@@ -96,14 +96,14 @@
                                     <span class="d-block text-success">Package manifest generated successfully.</span>
                                     <span class="d-block text-white-70">&gt; $ php artisan nue</span>
                                     <span class="d-block text-white-70"></span>
-                                    <span class="d-block text-success">Nue version 1.00</span>
+                                    <span class="d-block text-success">Nue version 2.00</span>
                                     <span class="d-block text-success">&nbsp;</span>
                                     <span class="d-block text-warning">Available commands:</span>
                                     <span class="d-block text-white">&nbsp;nue:install&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Install the Nue components and resources.</span>
                                     <span class="d-block text-white">&nbsp;nue:auth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scaffold the authentication controllers (silent call).</span>
                                     <span class="d-block text-white">&nbsp;nue:uninstall&nbsp;&nbsp;&nbsp;Uninstall the Nue package.</span>
-                                    <span class="d-block text-danger">&nbsp;nue:extend&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build your own Nue extension.</span>
-                                    <span class="d-block text-danger">&nbsp;nue:import&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import your Nue extension.</span>
+                                    <span class="d-block text-white-70">&nbsp;nue:extend&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build your own Nue extension.</span>
+                                    <span class="d-block text-white-70">&nbsp;nue:import&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import your Nue extension.</span>
                                 </span>
                             </div>
                         </div>
