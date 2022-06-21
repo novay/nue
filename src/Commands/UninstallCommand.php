@@ -47,7 +47,7 @@ class UninstallCommand extends Command
      */
     protected function removeFilesAndDirectories()
     {
-        $this->laravel['files']->deleteDirectory(config('nue.directory'));
+        $this->laravel['files']->deleteDirectory(app_path('Nue'));
         $this->laravel['files']->deleteDirectory(app_path('Http/Controllers/Auth'));
         $this->laravel['files']->deleteDirectory(app_path('Http/Controllers/Nue'));
         $this->laravel['files']->deleteDirectory(base_path('resources/views/auth'));
