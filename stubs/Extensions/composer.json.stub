@@ -30,7 +30,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                ":namespace:class_nameServiceProvider"
+                ":namespaceProviders\\:class_nameServiceProvider"
             ]
         }
     }

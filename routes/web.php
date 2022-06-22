@@ -4,7 +4,7 @@ use Novay\Nue\Features;
 
 Route::group([
 	'namespace' => 'App\Http\Controllers', 
-	'middleware' => config('nue.middleware', ['web']), 
+	'middleware' => config('nue.route.middleware', ['web', 'nue']), 
 	'prefix' => config('nue.route.prefix', '')
 ], function () {
 

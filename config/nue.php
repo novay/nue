@@ -75,16 +75,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Nue Routes Middleware
+    | Nue Route Settings
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which middleware Nue will assign to the routes
-    | that it registers with the application. If necessary, you may change
-    | these middleware but typically this provided default is preferred.
+    | The routing configuration of the nue page, including the path prefix,
+    | the controller namespace, and the default middleware. If you want to
+    | access through the root path, just set the prefix to empty string.
     |
     */
+    'route' => [
 
-    'middleware' => env('NUE_AUTH_MIDDLEWARE', ['web']),
+        'prefix' => env('NUE_ROUTE_PREFIX', ''),
+
+        'middleware' => env('NUE_ROUTE_MIDDLEWARE', ['web', 'nue']),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -154,25 +158,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Nue route settings
-    |--------------------------------------------------------------------------
-    |
-    | The routing configuration of the nue page, including the path prefix,
-    | the controller namespace, and the default middleware. If you want to
-    | access through the root path, just set the prefix to empty string.
-    |
-    */
-    'route' => [
-
-        'prefix' => env('NUE_PREFIX', ''),
-
-        'namespace' => 'App\\Nue\\Controllers',
-
-        'middleware' => ['web'],
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Nue database settings
     |--------------------------------------------------------------------------
     |
@@ -232,7 +217,7 @@ return [
          * or specific method to path like: get:nue/settings/log-activity.
          */
         'except' => [
-            env('NUE_PREFIX', '').'/settings/log-activity',
+            env('NUE_ROUTE_PREFIX', '').'/settings/log-activity',
         ],
     ],
 

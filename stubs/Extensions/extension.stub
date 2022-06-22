@@ -2,7 +2,6 @@
 
 namespace :namespace;
 
-use Novay\Nue\Nue;
 use Novay\Nue\Extension;
 
 class :class_name extends Extension
@@ -12,18 +11,9 @@ class :class_name extends Extension
     public $views = __DIR__.'/../resources/views';
 
     /**
-     * Bootstrap this package.
-     *
-     * @return void
-     */
-    // public static function boot()
-    // {
-    //     // 
-
-    //     Nue::extend(':base_package', __CLASS__);
-    // }
-
-    /**
+     * Enable this function if you want to automatically inject menu & permission
+     * for your package into nue.
+     * 
      * {@inheritdoc}
      */
     // public static function import()

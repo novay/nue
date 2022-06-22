@@ -36,7 +36,7 @@ class NueServiceProvider extends ServiceProvider
      * @var array
      */
     protected $middlewareGroups = [
-        'web' => [
+        'nue' => [
             'nue.activity',
             'nue.permission',
         ],

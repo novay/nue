@@ -56,11 +56,16 @@ class ExtendCommand extends Command
      * @var array
      */
     protected $dirs = [
-        'database/migrations',
-        'database/seeds',
-        'resources/assets',
+        // 'config', 
+        // 'database/migrations',
+        // 'database/seeds',
+        // 'resources/lang',
         'resources/views',
         'src/Http/Controllers',
+        // 'src/Http/Middleware',
+        // 'src/Console',
+        'src/Models',
+        'src/Providers',
         'routes',
     ];
 
@@ -106,24 +111,22 @@ class ExtendCommand extends Command
     {
         $tree = <<<TREE
 {$this->extensionPath()}
-    ├── LICENSE
+    ├── LICENSE.md
     ├── README.md
     ├── composer.json
-    ├── database
-    │   ├── migrations
-    │   └── seeds
     ├── resources
-    │   ├── assets
     │   └── views
     │       └── index.blade.php
     ├── routes
     │   └── web.php
     └── src
         ├── {$this->className}.php
-        ├── {$this->className}ServiceProvider.php
         └── Http
-            └── Controllers
-                └── {$this->className}Controller.php
+        │   └── Controllers
+        │       └── {$this->className}Controller.php
+        └── Models
+        └── Providers
+            └── {$this->className}ServiceProvider.php
 TREE;
 
         $this->info($tree);
@@ -140,17 +143,17 @@ TREE;
 
         // copy files
         $this->copy([
-            __DIR__.'/stubs/extension/view.stub'       => 'resources/views/index.blade.php',
-            __DIR__.'/stubs/extension/.gitignore.stub' => '.gitignore',
-            __DIR__.'/stubs/extension/README.md.stub'  => 'README.md',
-            __DIR__.'/stubs/extension/LICENSE.stub'    => 'LICENSE',
+            __DIR__.'/../../stubs/Extensions/view.stub'       => 'resources/views/index.blade.php',
+            __DIR__.'/../../stubs/Extensions/.gitignore.stub' => '.gitignore',
+            __DIR__.'/../../stubs/Extensions/README.md.stub'  => 'README.md',
+            __DIR__.'/../../stubs/Extensions/LICENSE.stub'    => 'LICENSE.md',
         ]);
 
         // make composer.json
         $composerContents = str_replace(
             [':package', ':namespace', ':class_name'],
             [$this->package, str_replace('\\', '\\\\', $this->namespace).'\\\\', $this->className],
-            file_get_contents(__DIR__.'/stubs/extension/composer.json.stub')
+            file_get_contents(__DIR__.'/../../stubs/Extensions/composer.json.stub')
         );
         $this->putFile('composer.json', $composerContents);
 
@@ -158,7 +161,7 @@ TREE;
         $classContents = str_replace(
             [':namespace', ':class_name', ':title', ':path', ':base_package'],
             [$this->namespace, $this->className, Str::title($this->className), basename($this->package), basename($this->package)],
-            file_get_contents(__DIR__.'/stubs/extension/extension.stub')
+            file_get_contents(__DIR__.'/../../stubs/Extensions/extension.stub')
         );
         $this->putFile("src/{$this->className}.php", $classContents);
 
@@ -166,15 +169,15 @@ TREE;
         $providerContents = str_replace(
             [':namespace', ':class_name', ':base_package', ':package'],
             [$this->namespace, $this->className, basename($this->package), $this->package],
-            file_get_contents(__DIR__.'/stubs/extension/service-provider.stub')
+            file_get_contents(__DIR__.'/../../stubs/Extensions/service-provider.stub')
         );
-        $this->putFile("src/{$this->className}ServiceProvider.php", $providerContents);
+        $this->putFile("src/Providers/{$this->className}ServiceProvider.php", $providerContents);
 
         // make controller
         $controllerContent = str_replace(
             [':namespace', ':class_name', ':base_package'],
             [$this->namespace, $this->className, basename($this->package)],
-            file_get_contents(__DIR__.'/stubs/extension/controller.stub')
+            file_get_contents(__DIR__.'/../../stubs/Extensions/controller.stub')
         );
         $this->putFile("src/Http/Controllers/{$this->className}Controller.php", $controllerContent);
 
@@ -182,7 +185,7 @@ TREE;
         $routesContent = str_replace(
             [':namespace', ':class_name', ':path'],
             [$this->namespace, $this->className, basename($this->package)],
-            file_get_contents(__DIR__.'/stubs/extension/routes.stub')
+            file_get_contents(__DIR__.'/../../stubs/Extensions/routes.stub')
         );
         $this->putFile('routes/web.php', $routesContent);
     }
