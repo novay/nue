@@ -111,7 +111,7 @@ class ExtendCommand extends Command
     {
         $tree = <<<TREE
 {$this->extensionPath()}
-    ├── LICENSE.md
+    ├── LICENSE
     ├── README.md
     ├── composer.json
     ├── resources
@@ -146,7 +146,7 @@ TREE;
             __DIR__.'/../../stubs/Extensions/view.stub'       => 'resources/views/index.blade.php',
             __DIR__.'/../../stubs/Extensions/.gitignore.stub' => '.gitignore',
             __DIR__.'/../../stubs/Extensions/README.md.stub'  => 'README.md',
-            __DIR__.'/../../stubs/Extensions/LICENSE.stub'    => 'LICENSE.md',
+            __DIR__.'/../../stubs/Extensions/LICENSE.stub'    => 'LICENSE',
         ]);
 
         // make composer.json
