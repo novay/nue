@@ -9,8 +9,8 @@
                     <div class="position-absolute top-0 start-0 end-0 mt-3 mx-3">
                         <div class="d-flex justify-content-between">
                             <a href="/">
-                                <img class="w-100" height="50" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-hs-theme-appearance="default" style="min-width: 7rem; max-width: 7rem;">
-                                <img class="w-100" height="50" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-hs-theme-appearance="dark" style="min-width: 7rem; max-width: 7rem;">
+                                <img class="w-100" height="50" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" style="min-width: 7rem; max-width: 7rem;">
+                                <img class="w-100" height="50" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" style="min-width: 7rem; max-width: 7rem;">
                             </a>
                             <div class="dropdown dropup zi-2">
                                 <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation></button>
@@ -33,8 +33,8 @@
                     </div>
                     <div class="d-none d-lg-block" style="max-width: 23rem;">
                         <div class="text-center mb-5">
-                            <img class="img-fluid" src="https://cdn.btekno.id/templates/v2/svg/illustrations/oc-chatting.svg" alt="" style="width: 12rem;" data-hs-theme-appearance="default">
-                            <img class="img-fluid" src="https://cdn.btekno.id/templates/v2/svg/illustrations-light/oc-chatting.svg" alt="" style="width: 12rem;" data-hs-theme-appearance="dark">
+                            <img class="img-fluid" src="https://cdn.btekno.id/templates/nue/svg/illustrations/oc-chatting.svg" alt="" style="width: 12rem;" data-nue-theme-appearance="default">
+                            <img class="img-fluid" src="https://cdn.btekno.id/templates/nue/svg/illustrations-light/oc-chatting.svg" alt="" style="width: 12rem;" data-nue-theme-appearance="dark">
                         </div>
                         <div class="mb-5">
                             <h2 class="display-5">Build digital products with:</h2>

@@ -25,9 +25,9 @@
                     {{ __('Current Password') }} <span class="text-danger">*</span>
                 </label>
                 <div class="col-sm-9">
-                    <div class="input-group input-group-merge {{ $errors->first('old_password', ' is-invalid') }}" data-hs-validation-validate-class>
+                    <div class="input-group input-group-merge {{ $errors->first('old_password', ' is-invalid') }}" data-nue-validation-validate-class>
                         <input type="password" class="js-toggle-password form-control" name="old_password" placeholder="{{ __('Enter your current password') }}" aria-label="{{ __('Enter your current password') }}"
-                        data-hs-toggle-password-options='{
+                        data-nue-toggle-password-options='{
                             "target": "#password-target",
                             "defaultClass": "bi-eye-slash",
                             "showClass": "bi-eye",

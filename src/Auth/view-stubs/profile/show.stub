@@ -4,8 +4,8 @@
 @section('js')
     <script>
         (function() {
-            new HSFileAttach('.js-file-attach')
-            new HSTogglePassword('.js-toggle-password')
+            new NueFileAttach('.js-file-attach')
+            new NueTogglePassword('.js-toggle-password')
         })()
     </script>
 @endsection
@@ -33,7 +33,7 @@
                     </div>
 
                     <div id="navbarVerticalNavMenu" class="collapse navbar-collapse">
-                        <ul id="navbarSettings" class="js-sticky-block js-scrollspy card card-navbar-nav nav nav-tabs nav-lg nav-vertical" data-hs-sticky-block-options='{
+                        <ul id="navbarSettings" class="js-sticky-block js-scrollspy card card-navbar-nav nav nav-tabs nav-lg nav-vertical" data-nue-sticky-block-options='{
                                 "parentSelector": "#navbarVerticalNavMenu",
                                 "targetSelector": "#header",
                                 "breakpoint": "lg",

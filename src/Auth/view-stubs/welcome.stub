@@ -20,21 +20,21 @@
 @section('js')
     <script>
         (function() {
-            new HSHeader('#header').init()
+            new NueHeader('#header').init()
         })()
     </script>
 @endsection
 
 @section('content')
-    <header id="header" class="navbar navbar-expand-lg navbar-center navbar-light bg-white navbar-absolute-top navbar-show-hide" data-hs-header-options='{
+    <header id="header" class="navbar navbar-expand-lg navbar-center navbar-light bg-white navbar-absolute-top navbar-show-hide" data-nue-header-options='{
             "fixMoment": 0,
             "fixEffect": "slide"
         }'>
         <div class="container-lg">
             <nav class="js-mega-menu navbar-nav-wrap">
                 <a class="navbar-brand" href="/" aria-label="Logo">
-                    <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-hs-theme-appearance="default">
-                    <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-hs-theme-appearance="dark">
+                    <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-nue-theme-appearance="default">
+                    <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
                     <span class="position-absolute top-50 translate-middle-y h1 fw-bold">
                         {{ config('nue.name') }}
                     </span>

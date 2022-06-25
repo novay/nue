@@ -27,9 +27,9 @@
                     <label for="password" class="form-label fw-semi-bold text-muted">
                         {{ __('Current Password') }} <span class="text-danger">*</span>
                     </label>
-                    <div class="input-group input-group-merge" data-hs-validation-validate-class>
+                    <div class="input-group input-group-merge" data-nue-validation-validate-class>
                         <input type="password" class="js-toggle-password form-control" name="password" placeholder="{{ __('Enter your current password') }}" aria-label="{{ __('Enter your current password') }}" required
-                        data-hs-toggle-password-options='{
+                        data-nue-toggle-password-options='{
                             "target": "#password-target",
                             "defaultClass": "bi-eye-slash",
                             "showClass": "bi-eye",

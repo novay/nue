@@ -1,10 +1,10 @@
 <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-white">
     <div class="navbar-nav-wrap">
         <a class="navbar-brand" href="/" aria-label="UI">
-            <img class="navbar-brand-logo" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-hs-theme-appearance="default">
-            <img class="navbar-brand-logo" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-hs-theme-appearance="dark">
-            <img class="navbar-brand-logo-mini" src="{{ config('nue.brand.logo.mini.light') }}" alt="Logo" data-hs-theme-appearance="default">
-            <img class="navbar-brand-logo-mini" src="{{ config('nue.brand.logo.mini.dark') }}" alt="Logo" data-hs-theme-appearance="dark">
+            <img class="navbar-brand-logo" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-nue-theme-appearance="default">
+            <img class="navbar-brand-logo" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
+            <img class="navbar-brand-logo-mini" src="{{ config('nue.brand.logo.mini.light') }}" alt="Logo" data-nue-theme-appearance="default">
+            <img class="navbar-brand-logo-mini" src="{{ config('nue.brand.logo.mini.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
         </a>
 
         <div class="navbar-nav-wrap-content-start">
