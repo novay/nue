@@ -4,7 +4,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/novay/nue.svg?style=flat-square)](https://packagist.org/packages/novay/nue)
 [![Pull request welcome](https://img.shields.io/badge/pr-welcome-green.svg?style=flat-square)]()
 
-Complete Boilerplate for Laravel. This package also contains a set of useful Laravel Blade components. It promotes DRY principles and allows you to keep your HTML nice and clean. Components include alerts, badges, buttons, form inputs (with automatic error feedback), pagination (responsive), and more. The components come with Laravel Livewire integration built in, so you can use them with or without Livewire.
+
+[Baca Dokumentasi Disini](https://nue.btekno.id/docs)
 
 ## Screenshot
 
@@ -22,17 +23,7 @@ Complete Boilerplate for Laravel. This package also contains a set of useful Lar
 ## Requirements
 
 - Laravel
-- Livewire (Optional)
 - Iconify must be called to use icons, simply use CDN
-
-**You should to know**
-
-Nue should only be installed into new Laravel applications. Attempting to install Nue into an existing Laravel application will result in unexpected behavior and issues. There are some files that you need to pay attention to:
-1. `database\migrations\2014_10_12_000000_create_users_table.php` replaced.
-2. `App\Http\Controllers\*` and `App\Http\HomeController.php` created or replaced if exists.
-3. `App\Models\User.php` replaced.
-4. `routes\web.php` modified.
-5. `resources\views\welcome.blade.php`, `resources\views\dashboard.blade.php`, `resources\views\auth\*`, `resources\views\layouts\*` and `resources\views\profile\*` created or replaced if exists.
 
 ## Installation
 
