@@ -11,10 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.btekno.id/templates/nue/css/vendor.min.css">
-    <link rel="stylesheet" href="https://cdn.btekno.id/templates/nue/css/theme.min.css">
-    <link rel="preload" href="https://cdn.btekno.id/templates/nue/css/theme.min.css" data-nue-appearance="default" as="style">
-    <link rel="preload" href="https://cdn.btekno.id/templates/nue/css/theme-dark.min.css" data-nue-appearance="dark" as="style">
-    <link rel="stylesheet" href="https://cdn.btekno.id/templates/nue/css/nue.css">
+    <link rel="stylesheet" href="https://cdn.btekno.id/templates/nue/css/nue.min.css">
+    <link rel="preload" href="https://cdn.btekno.id/templates/nue/css/nue.min.css" data-nue-appearance="default" as="style">
+    <link rel="preload" href="https://cdn.btekno.id/templates/nue/css/nue-dark.min.css" data-nue-appearance="dark" as="style">
     
     <style data-nue-appearance-onload-styles>
         *{transition:unset!important}
@@ -44,7 +43,7 @@
     </main>
 
     <script src="https://cdn.btekno.id/templates/nue/js/vendor.min.js"></script>
-    <script src="https://cdn.btekno.id/templates/nue/js/theme.min.js"></script>
+    <script src="https://cdn.btekno.id/templates/nue/js/nue.min.js"></script>
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     
     <script>
