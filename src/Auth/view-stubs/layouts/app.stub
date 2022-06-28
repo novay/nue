@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.btekno.id/templates/nue/css/nue.min.css">
     <link rel="preload" href="https://cdn.btekno.id/templates/nue/css/nue.min.css" data-nue-appearance="default" as="style">
     <link rel="preload" href="https://cdn.btekno.id/templates/nue/css/nue-dark.min.css" data-nue-appearance="dark" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
     
     <style data-nue-appearance-onload-styles>
         *{transition:unset!important}
@@ -45,6 +46,7 @@
     <script src="https://cdn.btekno.id/templates/nue/js/vendor.min.js"></script>
     <script src="https://cdn.btekno.id/templates/nue/js/nue.min.js"></script>
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
     
     <script>
         (function() {
@@ -53,6 +55,12 @@
                 NueBsDropdown.init()
             }
         })()
+        $(document).ajaxStart(function() {
+            NProgress.start();
+        });
+        $(document).ajaxStop(function() {
+            NProgress.done();
+        });
     </script>
 
     @if(notify()->ready())
