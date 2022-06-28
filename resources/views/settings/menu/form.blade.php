@@ -10,7 +10,7 @@
 		<div class="col-sm-9">
 			<div class="tom-select-custom tom-select-custom-with-tags">
 				<select class="js-select form-select" autocomplete="off" name="parent_id" 
-					data-hs-tom-select-options='{
+					data-nue-tom-select-options='{
 						"hideSearch": true
 					}'>
 					@foreach($options as $i => $temp)
@@ -70,7 +70,7 @@
 		<div class="col-sm-9">
 			<div class="tom-select-custom tom-select-custom-with-tags">
 				<select class="js-select form-select" autocomplete="off" multiple name="roles[]" 
-					data-hs-tom-select-options='{
+					data-nue-tom-select-options='{
 						"hideSearch": true,
 						"placeholder": "Select roles ..."
 					}'>
@@ -95,7 +95,7 @@
 		<div class="col-sm-9">
 			<div class="tom-select-custom tom-select-custom-with-tags">
 				<select class="js-select form-select" autocomplete="off" name="permission" 
-					data-hs-tom-select-options='{
+					data-nue-tom-select-options='{
 						"hideSearch": true,
 						"placeholder": "Select permission ..."
 					}'>

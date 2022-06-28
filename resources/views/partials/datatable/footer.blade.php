@@ -5,7 +5,7 @@
                 <span class="me-2">Showing:</span>
                 <div class="tom-select-custom">
                     <select id="datatable-entries" class="js-select form-select form-select-borderless w-auto" autocomplete="off" style="padding:7px 1.8rem 7px .5rem" 
-                        data-hs-tom-select-options='{
+                        data-nue-tom-select-options='{
                             "searchInDropdown": false,
                             "hideSearch": true
                         }'>

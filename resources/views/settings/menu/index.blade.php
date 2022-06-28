@@ -36,7 +36,7 @@
 	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/nestable2@1.6.0/jquery.nestable.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			HSCore.components.HSTomSelect.init('.js-select')
+			Nue.components.NueSelect.init('.js-select')
 
 			$('#nestable-menu').on('click', function(e) {
 				var target = $(e.target),

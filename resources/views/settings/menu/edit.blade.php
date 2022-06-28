@@ -6,7 +6,7 @@
 
 @section('js')
     <script>
-        HSCore.components.HSTomSelect.init('.js-select')
+        Nue.components.NueSelect.init('.js-select')
     </script>
 @endsection
 

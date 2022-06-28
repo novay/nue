@@ -3,7 +3,7 @@
 
 @section('js')
     <script>
-        var table = HSCore.components.HSDatatables.init('.js-datatable', {
+        var table = Nue.components.NueDatatables.init('.js-datatable', {
             scrollY: 'calc(100vh - 250px)',
             ajax : '{!! request()->fullUrl() !!}?datatable=true', 
             columns: [

@@ -28,7 +28,7 @@
                     @endif
                 </span>
             </a>
-            <div id="navbar-nue-{{ $item['id'] }}" class="nav-collapse collapse {{ request()->segment(1) == $item['uri'] ? 'show' : '' }}" data-bs-parent="#navbar-menu-page-{{ $item['id'] }}" hs-parent-area="#navbar-menu">
+            <div id="navbar-nue-{{ $item['id'] }}" class="nav-collapse collapse {{ request()->segment(1) == $item['uri'] ? 'show' : '' }}" data-bs-parent="#navbar-menu-page-{{ $item['id'] }}" nue-parent-area="#navbar-menu">
                 @foreach($item['children'] as $item)
                     @include('nue::partials.menu', $item)
                 @endforeach

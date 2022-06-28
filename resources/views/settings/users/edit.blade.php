@@ -6,9 +6,9 @@
 
 @section('js')
     <script>
-        new HSFileAttach('.js-file-attach')
-        new HSTogglePassword('.js-toggle-password')
-        HSCore.components.HSTomSelect.init('.js-select')
+        new NueFileAttach('.js-file-attach')
+        new NueTogglePassword('.js-toggle-password')
+        Nue.components.NueSelect.init('.js-select')
     </script>
 @endsection
 

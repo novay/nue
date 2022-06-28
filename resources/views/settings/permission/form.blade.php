@@ -24,7 +24,7 @@
         <div class="col-sm-9">
             <div class="tom-select-custom tom-select-custom-with-tags mb-1">
                 <select class="js-select form-select form-style" name="http_method[]" autocomplete="off" multiple
-                    data-hs-tom-select-options='{
+                    data-nue-tom-select-options='{
                         "placeholder": "HTTP method",
                         "hideSearch": true
                     }'>
