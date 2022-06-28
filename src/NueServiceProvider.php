@@ -18,6 +18,8 @@ class NueServiceProvider extends ServiceProvider
         Commands\AuthCommand::class,
         Commands\ExtendCommand::class,
         Commands\ImportCommand::class,
+        Commands\CreateUserCommand::class,
+        Commands\ResetPasswordCommand::class,
     ];
 
     /**

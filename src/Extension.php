@@ -164,7 +164,7 @@ abstract class Extension
      *
      * @return Model
      */
-    protected static function createMenu($title, $uri, $icon = 'fa-bars', $parentId = 0, array $children = [])
+    public static function createMenu($title, $uri, $icon = 'fa-bars', $parentId = 0, array $children = [])
     {
         $menuModel = config('nue.database.menu_model');
 
@@ -203,7 +203,7 @@ abstract class Extension
      * @param       $path
      * @param array $methods
      */
-    protected static function createPermission($name, $slug, $path, $methods = [])
+    public static function createPermission($name, $slug, $path, $methods = [])
     {
         $permissionModel = config('nue.database.permissions_model');
 
