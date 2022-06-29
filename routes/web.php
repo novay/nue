@@ -43,7 +43,7 @@ Route::group([
 	});
 	
 	// Nue Namespace...
-	Route::group(['namespace' => 'Nue'], function () 
+	Route::group(['namespace' => 'Nue', 'middleware' => 'auth'], function () 
 	{
 		// Update Profile Informations...
 		if (Features::enabled(Features::updateProfile())) {

@@ -16,7 +16,9 @@
             </button>
             <div class="navbar-vertical-content">
                 <div id="navbar-menu" class="nav nav-pills nav-vertical card-navbar-nav">
-                    @each('nue::partials.menu', Nue::menu(), 'item')                         
+                    @auth
+                        @each('nue::partials.menu', Nue::menu(), 'item')
+                    @endauth
                 </div>
             </div>
             <div class="navbar-vertical-footer">
