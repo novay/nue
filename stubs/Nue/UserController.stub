@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Nue\Users;
+namespace App\Http\Controllers\Nue;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class RoleController extends Controller
+class UserController extends Controller
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'Roles';
+    protected $title;
 
     /**
      * Create a new controller instance.
@@ -22,11 +22,13 @@ class RoleController extends Controller
      */
     public function __construct() 
     {
-        $this->models = config('nue.database.roles_model');
+        $this->title = __('Users');
+
+        $this->models = config('nue.database.users_model');
         $this->data = new $this->models;
         
-        $this->prefix = 'users.roles';
-        $this->view = 'nue::users.roles';
+        $this->prefix = 'users.users';
+        $this->view = 'nue::users.users';
 
         $this->tCreate = __('Created', ['title' => $this->title]);
         $this->tUpdate = __('Updated', ['title' => $this->title]);
@@ -79,14 +81,24 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'slug' => 'required', 
+            'photo' => 'mimes:jpg,jpeg,png', 
             'name' => 'required', 
+            'email' => 'required|unique:users,email', 
+            'password' => 'required|min:5',
+            'password_confirmation' => 'required|same:password',
         ]);
 
         $input = $request->all();
-        
-        $role = $this->data->create($input);
-        $role->permissions()->sync($request->permissions);
+        $input['password'] = bcrypt($request->password);
+        $input['plain'] = encrypt($request->password);
+
+        $user = $this->data->create($input);
+        $user->roles()->sync($request->roles);
+        $user->permissions()->sync($request->permissions);
+
+        if (isset($input['photo'])) {
+            $user->updateProfilePhoto($input['photo']);
+        }
         
         notify()->flash($this->tCreate, 'success');
         return redirect(route("$this->prefix.index"));
@@ -134,13 +146,23 @@ class RoleController extends Controller
         $edit = $this->data->findOrFail($id);
 
         $this->validate($request, [
-            'slug' => 'required', 
+            'photo' => 'mimes:jpg,jpeg,png', 
             'name' => 'required', 
+            'email' => 'required|unique:users,email,'.$edit->id, 
+            'password_confirmation' => 'same:password',
         ]);
 
         $input = $request->all();
+
+        $input['password'] = $request->filled('password') ? bcrypt($request->password) : $edit->password;
+        $input['plain'] = $request->filled('password') ? encrypt($request->password) : $edit->plain;
+
+        if (isset($input['photo'])) {
+            $edit->updateProfilePhoto($input['photo']);
+        }
         
         $edit->update($input);
+        $edit->roles()->sync($request->roles);
         $edit->permissions()->sync($request->permissions);
         
         notify()->flash($this->tUpdate, 'success');
@@ -181,12 +203,27 @@ class RoleController extends Controller
                         <label class="form-check-label" for="pilihan['.$data->id.']"></label>
                     </div>';
             })
-            ->editColumn('permission', function($data) {
+            ->editColumn('roles', function($data) {
                 $return = '';
-                foreach($data->permissions as $temp) {
-                    $return .= '<label class="badge bg-soft-success text-success me-1">'.$temp->name.'</label>';
+                foreach($data->roles as $temp) {
+                    $return .= '<label class="badge bg-soft-success text-success">
+                        <span class="legend-indicator bg-success"></span>'.$temp->name.'
+                    </label>';
                 }
                 return $return;
+            })
+            ->editColumn('password', function($data) {
+                if(!is_null($data->plain)):
+                    $plain = decrypt($data->plain);
+                    return '<span data-bs-toggle="tooltip" data-bs-placement="top" title="'.$plain.'">
+                        <i class="bi bi-shield-lock-fill"></i> &bullet;&bullet;&bullet;&bullet;&bullet;
+                    </span>';
+                endif;
+            })
+            ->editColumn('last_login_at', function($data) {
+                if(!is_null($data['last_login_at'])):
+                    return date('d/m/Y H:i A', strtotime($data->last_login_at));
+                endif;
             })
             ->editColumn('action', function($data) {
                 return '<a href="'.route("$this->prefix.edit", $data->id).'" class="btn btn-xs btn-info rounded-xs">

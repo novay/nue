@@ -157,36 +157,12 @@ class InstallCommand extends Command
             mkdir($directory, 0755, true);
         }
 
-        if (! is_dir($directory = app_path('Http/Controllers/Nue/Settings'))) {
-            mkdir($directory, 0755, true);
-        }
-
-        if (! is_dir($directory = app_path('Http/Controllers/Nue/Users'))) {
-            mkdir($directory, 0755, true);
-        }
-
         $filesystem = new Filesystem;
         collect($filesystem->allFiles(__DIR__.'/../../stubs/Nue'))
             ->each(function (SplFileInfo $file) use ($filesystem) {
                 $filesystem->copy(
                     $file->getPathname(),
                     app_path('Http/Controllers/Nue/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
-                );
-            });
-
-        collect($filesystem->allFiles(__DIR__.'/../../stubs/Nue/Settings'))
-            ->each(function (SplFileInfo $file) use ($filesystem) {
-                $filesystem->copy(
-                    $file->getPathname(),
-                    app_path('Http/Controllers/Nue/Settings/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
-                );
-            });
-
-        collect($filesystem->allFiles(__DIR__.'/../../stubs/Nue/Users'))
-            ->each(function (SplFileInfo $file) use ($filesystem) {
-                $filesystem->copy(
-                    $file->getPathname(),
-                    app_path('Http/Controllers/Nue/Users/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
                 );
             });
     }

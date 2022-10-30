@@ -68,14 +68,14 @@ Route::group([
 		}
 
 		// Nue Initialize...
-		Route::group(['namespace' => 'Users', 'prefix' => 'users', 'as' => 'users.'], function () 
+		Route::group(['prefix' => 'users', 'as' => 'users.'], function () 
 		{
 			Route::resource('roles', 'RoleController');
 			Route::resource('permission', 'PermissionController');
 			Route::resource('users', 'UserController');
 		});
 
-		Route::group(['namespace' => 'Settings', 'prefix' => 'settings', 'as' => 'settings.'], function () 
+		Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () 
 		{
 			Route::resource('system', 'SystemController')->only(['index']);
 			Route::resource('menu', 'MenuController')->except(['create']);
