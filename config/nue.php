@@ -59,7 +59,7 @@ return [
 
         'default_avatar' => 'https://cdn.btekno.id/templates/v2/img/160x160/img1.jpg', 
 
-        'cdn' => 'https://cdn.btekno.id/templates/nue'
+        'cdn' => 'https://aws.btekno.id/templates/nue'
     ], 
 
     /*
