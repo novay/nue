@@ -56,6 +56,7 @@ class NueServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nue');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         
+        $this->registerTranslations();
         $this->registerConfig();
         $this->configurePublishing();
     }
@@ -89,6 +90,24 @@ class NueServiceProvider extends ServiceProvider
         if ((config('nue.https') || config('nue.secure')) && $is_admin) {
             url()->forceScheme('https');
             $this->app['request']->server->set('HTTPS', true);
+        }
+    }
+
+    /**
+     * Register translations.
+     *
+     * @return void
+     */
+    public function registerTranslations()
+    {
+        $langPath = resource_path('lang/modules/' . 'nue');
+
+        if (is_dir($langPath)) {
+            $this->loadTranslationsFrom($langPath, 'nue');
+            $this->loadJsonTranslationsFrom($langPath, 'nue');
+        } else {
+            $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'nue');
+            $this->loadJsonTranslationsFrom(__DIR__.'/../resources/lang', 'nue');
         }
     }
 

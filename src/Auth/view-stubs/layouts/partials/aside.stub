@@ -1,66 +1,67 @@
-<aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
+<aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white">
     <div class="navbar-vertical-container">
         <div class="navbar-vertical-footer-offset">
-            <a class="navbar-brand" href="/" aria-label="UI">
-                <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-nue-theme-appearance="default">
-                <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
+            <a class="navbar-brand d-flex" href="/" aria-label="Nue">
+                <img class="navbar-brand-logo" height="50" width="auto" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-nue-theme-appearance="default">
+                <img class="navbar-brand-logo" height="50" width="auto" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
                 <img class="navbar-brand-logo-mini" src="{{ config('nue.brand.logo.mini.light') }}" alt="Logo" data-nue-theme-appearance="default">
                 <img class="navbar-brand-logo-mini" src="{{ config('nue.brand.logo.mini.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
-                <span class="navbar-brand-logo h1 fw-bold mt-2">
-                    {{ config('nue.name') }}
-                </span>
             </a>
             <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
                 <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
                 <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
             </button>
             <div class="navbar-vertical-content">
-                <div id="navbar-menu" class="nav nav-pills nav-vertical card-navbar-nav">
-                    @auth
-                        @each('nue::partials.menu', Nue::menu(), 'item')
-                    @endauth
+                <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
+                    @isset($menu)
+                        @yield('menu')
+                    @else
+                        @auth
+                            @each('nue::partials.menu', Nue::menu(), 'item')
+                        @endauth
+                    @endisset
                 </div>
             </div>
             <div class="navbar-vertical-footer">
                 <ul class="navbar-vertical-footer-list">
                     <li class="navbar-vertical-footer-list-item">
                         <div class="dropdown dropup">
-                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation></button>
-                            <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectThemeDropdown">
-                                <a class="dropdown-item" href="#" data-icon="ic:twotone-deblur" data-value="auto">
-                                    <i class="iconify me-2" data-icon="ic:twotone-deblur"></i>
-                                    <span class="text-truncate" title="Auto (System Default)">Auto (System Default)</span>
+                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="theme-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+                            </button>
+                            <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border" aria-labelledby="theme-dropdown">
+                                <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
+                                    <i class="bi-moon-stars me-2"></i>
+                                    <span class="text-truncate" title="{{ __('Mode Auto') }}">{{ __('Mode Auto') }}</span>
                                 </a>
-                                <a class="dropdown-item" href="#" data-icon="ic:twotone-light-mode" data-value="default">
-                                    <i class="iconify me-2" data-icon="ic:twotone-light-mode"></i>
-                                    <span class="text-truncate" title="Default (Light Mode)">Default (Light Mode)</span>
+                                <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
+                                    <i class="bi-brightness-high me-2"></i>
+                                    <span class="text-truncate" title="{{ __('Mode Light') }}">{{ __('Mode Light') }}</span>
                                 </a>
-                                <a class="dropdown-item active" href="#" data-icon="ic:twotone-dark-mode" data-value="dark">
-                                    <i class="iconify me-2" data-icon="ic:twotone-dark-mode"></i>
-                                    <span class="text-truncate" title="Dark Mode">Dark Mode</span>
+                                <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
+                                    <i class="bi-moon me-2"></i>
+                                    <span class="text-truncate" title="{{ __('Mode Dark') }}">{{ __('Mode Dark') }}</span>
                                 </a>
                             </div>
                         </div>
                     </li>
                     <li class="navbar-vertical-footer-list-item">
                         <div class="dropdown dropup">
-                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="otherLinksDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="help-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
                                 <i class="bi-info-circle"></i>
                             </button>
-                            <div class="dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="otherLinksDropdown">
-                                <span class="dropdown-header">Help</span>
+                            <div class="dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border" aria-labelledby="help-dropdown">
+                                <span class="dropdown-header">{{ __('Help') }}</span>
                                 <a class="dropdown-item" href="https://nue.btekno.id/docs" target="_blank">
-                                    <i class="iconify h3 dropdown-item-icon mb-0" data-icon="icon-park-twotone:book-one"></i>
-                                    <span class="text-truncate" title="Documentation">Documentation</span>
+                                    <i class="bi-journals dropdown-item-icon me-n1"></i>
+                                    <span class="text-truncate" title="{{ __('Documentation') }}">{{ __('Documentation') }}</span>
                                 </a>
                                 <a class="dropdown-item" href="https://github.com/novay/nue/blob/master/CHANGELOG.md" target="_blank">
-                                    <i class="iconify h3 dropdown-item-icon mb-0" data-icon="icon-park-twotone:exchange-four"></i>
-                                    <span class="text-truncate" title="Changelog">Changelog</span>
+                                    <i class="bi-command dropdown-item-icon me-n1"></i>
+                                    <span class="text-truncate" title="{{ __('Changelog') }}">{{ __('Changelog') }}</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <span class="dropdown-header">Contact Us</span>
                                 <a class="dropdown-item" href="https://wa.me/628115555573" target="_blank">
-                                    <i class="iconify h3 dropdown-item-icon mb-0" data-icon="icon-park-twotone:wechat"></i>
+                                    <i class="bi-alt dropdown-item-icon me-n1"></i>
                                     <span class="text-truncate" title="WhatsApp">WhatsApp</span>
                                 </a>
                             </div>
@@ -68,23 +69,23 @@
                     </li>
                     <li class="navbar-vertical-footer-list-item">
                         <div class="dropdown dropup">
-                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectLanguageDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                                <img class="avatar avatar-xss avatar-circle" src="https://cdn.btekno.id/templates/nue/vendor/flag-icon-css/flags/1x1/gb.svg" alt="">
+                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+                                <img class="avatar avatar-xss avatar-circle" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ config('app.locale') == 'id' ? 'id' : 'us' }}.svg" alt="">
                             </button>
-                            <div class="dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectLanguageDropdown">
-                                <span class="dropdown-header">Select language</span>
-                                <a class="dropdown-item" href="#">
-                                    <img class="avatar avatar-xss avatar-circle me-2" src="https://cdn.btekno.id/templates/nue/vendor/flag-icon-css/flags/1x1/gb.svg" alt="">
-                                    <span class="text-truncate" title="English">English</span>
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <img class="avatar avatar-xss avatar-circle me-2" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDkwMFY2MDBIMHoiLz48cGF0aCBmaWxsPSJyZWQiIGQ9Ik0wIDBIOTAwVjMwMEgweiIvPjwvc3ZnPg==" alt="">
-                                    <span class="text-truncate" title="Bahasa Indonesia">Bahasa Indonesia</span>
-                                </a>
+                            <div class="dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border" aria-labelledby="language-dropdown">
+                                <span class="dropdown-header">{{ __('Select Language') }}</span>
+                                @foreach(config('nue.locales') as $i => $temp)
+                                    <a class="dropdown-item {{ config('app.locale') == $i ? 'active' : '' }}" href="{{ route('locale', $i) }}">
+                                        <img class="avatar avatar-xss avatar-circle me-2" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ $i == 'en' ? 'us' : $i }}.svg" alt="Flag">
+                                        <span class="text-truncate" title="{{ __($temp) }}">
+                                            {{ __($temp) }}
+                                        </span>
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </li>
-                </ul>
+                </ul>    
             </div>
         </div>
     </div>

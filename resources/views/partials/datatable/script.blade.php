@@ -22,30 +22,32 @@ bInfo : false,
 bProcessing: false, 
 bLengthChange: false, 
 fnDrawCallback: function( oSettings ) {
+    $('[data-bs-toggle="tooltip"]').tooltip();
     $('#delete-selected').on('click', function(e) {
         e.preventDefault();
-        swal({
-            title: 'Are you sure?',
-            html: 'Please type <b>delete</b> to confirm.',
-            type: 'warning',
+        Swal.fire({
+            title: '{{ __('Are you sure?') }}',
+            html: '{!! __('Type Delete') !!}',
+            icon: 'warning',
             input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
             showCancelButton: true,
             confirmButtonText: 'Sure',
             showLoaderOnConfirm: true,
-            preConfirm: function (data) {
-                return new Promise(function (resolve, reject) {
-                    setTimeout(function() {
-                        if (data !== 'delete') {
-                            reject('Please enter according to the command.')
-                        } else {
-                            resolve()
-                        }
-                    }, 1000)
-                })
+            preConfirm: (data) => {
+                if (data !== 'delete') {
+                    Swal.showValidationMessage(
+                        `{!! __('Please enter according to the command.') !!}`
+                    )
+                }
             },
-            allowOutsideClick: false
-        }).then(function(data) {
-            $("#submit-all").submit();
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if(result.value) {
+                $("#submit-all").submit();
+            }
         })
     });
 }

@@ -32,8 +32,9 @@ class InstallCommand extends Command
      */
     protected $views = [
         'layouts/app.stub' => 'layouts/app.blade.php',
-        'layouts/blank.stub' => 'layouts/blank.blade.php',
+        'layouts/base.stub' => 'layouts/base.blade.php',
         'layouts/partials/aside.stub' => 'layouts/partials/aside.blade.php',
+        'layouts/partials/head.stub' => 'layouts/partials/head.blade.php',
         'layouts/partials/header.stub' => 'layouts/partials/header.blade.php',
         'welcome.stub' => 'welcome.blade.php',
         'auth/login.stub' => 'auth/login.blade.php',
@@ -44,7 +45,8 @@ class InstallCommand extends Command
         'auth/verify.stub' => 'auth/verify.blade.php',
         'dashboard.stub' => 'dashboard.blade.php',
         'profile/show.stub' => 'profile/show.blade.php',
-        'profile/page/basic.stub' => 'profile/page/basic.blade.php',
+        'profile/page/overview.stub' => 'profile/page/overview.blade.php',
+        'profile/page/personal.stub' => 'profile/page/personal.blade.php',
         'profile/page/email.stub' => 'profile/page/email.blade.php',
         'profile/page/password.stub' => 'profile/page/password.blade.php',
         'profile/page/terminate.stub' => 'profile/page/terminate.blade.php',
@@ -155,12 +157,36 @@ class InstallCommand extends Command
             mkdir($directory, 0755, true);
         }
 
+        if (! is_dir($directory = app_path('Http/Controllers/Nue/Settings'))) {
+            mkdir($directory, 0755, true);
+        }
+
+        if (! is_dir($directory = app_path('Http/Controllers/Nue/Users'))) {
+            mkdir($directory, 0755, true);
+        }
+
         $filesystem = new Filesystem;
         collect($filesystem->allFiles(__DIR__.'/../../stubs/Nue'))
             ->each(function (SplFileInfo $file) use ($filesystem) {
                 $filesystem->copy(
                     $file->getPathname(),
                     app_path('Http/Controllers/Nue/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
+                );
+            });
+
+        collect($filesystem->allFiles(__DIR__.'/../../stubs/Nue/Settings'))
+            ->each(function (SplFileInfo $file) use ($filesystem) {
+                $filesystem->copy(
+                    $file->getPathname(),
+                    app_path('Http/Controllers/Nue/Settings/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
+                );
+            });
+
+        collect($filesystem->allFiles(__DIR__.'/../../stubs/Nue/Users'))
+            ->each(function (SplFileInfo $file) use ($filesystem) {
+                $filesystem->copy(
+                    $file->getPathname(),
+                    app_path('Http/Controllers/Nue/Users/'.Str::replaceLast('.stub', '.php', $file->getFilename()))
                 );
             });
     }

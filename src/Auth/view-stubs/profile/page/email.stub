@@ -1,52 +1,81 @@
-{!! Form::model(me(), ['method' => 'PUT', 'files' => true]) !!}
-    <div id="emailSection" class="card">
+<script src="{{ config('nue.brand.cdn') }}/vendor/nue-toggle-password/nue-toggle-password.js"></script>
+<script>
+    new NueTogglePassword('.js-toggle-password');
+    $("#form-email").validate({
+        errorClass: "is-invalid",
+        submitHandler: function(form) {
+            $("#submit-email").attr("disabled", true);
+            $.ajax({
+                url: "{{ route("profile.update") }}",
+                type: "PUT",
+                data: $('#form-email').serialize(),
+                success: function( response ) {
+                    document.getElementById("form-email").reset();
+                    Toast.fire({
+                        icon: response.type,
+                        title: response.message
+                    });
+                    $("#submit-email").attr("disabled", false);
+                    $('#dialog-ajax').modal('hide');
+                },
+                error: function(reject) {
+                    var response = $.parseJSON(reject.responseText);
+                    $.each(response.errors, function(key, val) {
+                        $("#" + key + "-error").text(val[0]);
+                        $("#" + key + "-error").addClass('invalid-feedback');
+                        $("#" + key + "-error").prev().addClass('is-invalid');
+                    });
+                    $("#submit-email").attr("disabled", false);
+                }
+            });
+        }
+    });
+</script>
 
-        <div class="card-header">
-            <h3 class="card-title mb-1">{{ __('Update Email') }}</h3>
-            <p class="text-muted d-block mb-0">
-                {{ __('Update your email address here if it\'s needed.') }}
-            </p>
-        </div>
+{!! Form::model(me(), ['id' => 'form-email', 'method' => 'PUT', 'files' => true]) !!}
+    <div class="card rounded-0 shadow-none border-0">
         <div class="alert alert-secondary mb-0 rounded-0">
-            <p class="mb-0">{{ __('Your current email address is') }} <span class="fw-semi-bold">{{ me()->email }}</span></p>
+            <p class="mb-0">{{ __('Your current email address is') }} <span class="fw-semibold">{{ me()->email }}</span></p>
         </div>
         <div class="card-body">
-            <div class="row mb-3">
-                <label for="email" class="col-sm-3 col-form-label form-label">
+            <div class="row mb-2">
+                <label for="email" class="col-sm-4 col-form-label form-label">
                     {{ __('New Email') }} <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-9">
-                    {!! Form::text('email', null, ['class' => 'form-control' . $errors->first('email', ' is-invalid')]) !!}
-                    <x-nue::error for="email" class="mt-1" />
+                <div class="col-sm-8">
+                    {!! Form::text('email', null, ['class' => 'form-control form-control-sm rounded-0' . $errors->first('email', ' is-invalid')]) !!}
+                    <span id="email-error" class="d-block invalid-feedback mt-1"></span>
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="old_password" class="col-sm-3 col-form-label form-label">
+            <div class="row mb-2">
+                <label for="old_password" class="col-sm-4 col-form-label form-label">
                     {{ __('Current Password') }} <span class="text-danger">*</span>
                 </label>
-                <div class="col-sm-9">
-                    <div class="input-group input-group-merge {{ $errors->first('old_password', ' is-invalid') }}" data-nue-validation-validate-class>
-                        <input type="password" class="js-toggle-password form-control" name="old_password" placeholder="{{ __('Enter your current password') }}" aria-label="{{ __('Enter your current password') }}"
+                <div class="col-sm-8">
+                    <div class="input-group input-group-merge rounded-0 {{ $errors->first('old_password', ' is-invalid') }}" data-nue-validation-validate-class>
+                        <input type="password" class="js-toggle-password form-control form-control-sm rounded-0" name="old_password" placeholder="{{ __('Password Placeholder') }}" aria-label="{{ __('Password Placeholder') }}"
                         data-nue-toggle-password-options='{
-                            "target": "#password-target",
+                            "target": "#password-email-target",
                             "defaultClass": "bi-eye-slash",
                             "showClass": "bi-eye",
-                            "classChangeTarget": "#password-icon"
+                            "classChangeTarget": "#password-email-icon"
                         }'>
-                        <a id="password-target" class="input-group-append input-group-text" href="javascript:;">
-                            <i id="password-icon" class="bi-eye"></i>
+                        <a id="password-email-target" class="input-group-append input-group-text" href="javascript:;">
+                            <i id="password-email-icon" class="bi-eye"></i>
                         </a>
                     </div>
-                    <x-nue::error for="password" class="mt-1" />
+                    <span id="old_password-error" class="d-block invalid-feedback mt-1"></span>
                 </div>
-            </div>
-
-            <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Save changes') }}
-                </button>
             </div>
         </div>
     </div>
     {!! Form::hidden('page', 'email') !!}
+
+    <div class="position-absolute bottom-0 left-0 w-100 p-3">
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary rounded-xs" id="submit-email">
+                {{ __('Save changes') }}
+            </a>
+        </div>
+    </div>
 {!! Form::close() !!}

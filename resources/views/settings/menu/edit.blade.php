@@ -1,31 +1,34 @@
-@extends('layouts.app')
-@section('title', "Edit :: $title")
+@extends('layouts.base')
+@section('title', __('Edit')." :: $title")
 
 @section('css')
+    <link rel="stylesheet" href="{{ config('nue.brand.cdn') }}/vendor/tom-select/css/tom-select.bootstrap5.min.css">
 @endsection
 
 @section('js')
+    <script src="{{ config('nue.brand.cdn') }}/vendor/tom-select/js/tom-select.complete.min.js"></script>
+    <script src="{{ config('nue.brand.cdn') }}/js/nue-tom-select.js"></script>
     <script>
-        Nue.components.NueSelect.init('.js-select')
+        $(document).ready(function() {
+            Nue.components.NueTomSelect.init('.js-select');
+        });
     </script>
 @endsection
 
 @section('content')
     
     @include('nue::partials.breadcrumb', ['lists' => [
-        'Settings' => 'javascript:;', 
+        'Nue Settings' => 'javascript:;', 
         $title => route("$prefix.index"), 
-        'Edit' => 'active'
+        __('Edit') => 'active'
     ]])
 
+    @include('nue::partials.toolbar', [
+        'back' => route("$prefix.index")
+    ])
+
     {!! Form::model($edit, ['route' => ["$prefix.update", $edit->id], 'method' => 'PUT']) !!}
-        <div class="card rounded-0 shadow-0 border-top-0">
-            <div class="card-header rounded-0 bg-white p-2">
-                <h2 class="page-header-title mb-0">
-                    Edit {{ $title }}
-                </h2>
-                <p class="mb-0">Please make changes according to your needs.</p>
-            </div>
+        <div class="card rounded-0 shadow-0 border-0">
             @include("$view.form")
         </div>
     {!! Form::close() !!}

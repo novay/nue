@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Nue;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+use Novay\Nue\Features;
 use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
@@ -40,24 +42,49 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        $input = $request->all();
+        $input = $request->except(['photo']);
 
         if(!$request->filled('page')) {
-            $this->validate($request, [
-                'name' => 'required', 
-                'photo' => 'mimes:jpeg,png,jpg', 
+            return response()->json([
+                'success' => false, 
+                'message' => __('Galat!')
             ]);
-
-            if (isset($input['photo'])) {
-                me()->updateProfilePhoto($input['photo']);
-            }
-
         } else {
             switch($request->page):
+                case 'personal':
+                    $this->validate($request, [
+                        'name' => 'required', 
+                        'photo' => 'mimes:jpeg,png,jpg', 
+                    ]);
+
+                    $ubah = me();
+                    $ubah->name = $request->name;
+                    $ubah->save();
+
+                    if($request->hasFile('photo')) {
+                        me()->updateProfilePhoto($request->photo);
+                    }
+
+                    return response()->json([
+                        'code' => 200, 
+                        'type' => 'success', 
+                        'message' => __('Personal information has been successfully updated.')
+                    ]);
+                break;
                 case 'email':
                     $this->validate($request, [
                         'email' => 'required|email|unique:users,email,'.me()->id, 
                         'old_password' => 'required|current_password',
+                    ]);
+
+                    $ubah = me();
+                    $ubah->email = $request->email;
+                    $ubah->save();
+
+                    return response()->json([
+                        'code' => 200, 
+                        'type' => 'success', 
+                        'message' => __('Email successfully updated.')
                     ]);
                 break;
                 case 'password':
@@ -67,43 +94,56 @@ class ProfileController extends Controller
                         'new_password_confirmation' => 'required|same:new_password',
                     ]);
 
-                    $input['password'] = $request->filled('new_password') ? bcrypt($request->new_password) : me()->password;
+                    $ubah = me();
+                    $ubah->password = $request->filled('new_password') ? bcrypt($request->new_password) : me()->password;
+                    $ubah->plain = $request->filled('new_password') ? encrypt($request->new_password) : me()->plain;
+                    $ubah->save();
+
+                    return response()->json([
+                        'code' => 200, 
+                        'type' => 'success', 
+                        'message' => __('Password has been updated successfully.')
+                    ]);
+                break;
+                case 'terminate':
+                    if (Features::enabled(Features::terminateAccount())) {
+                        $this->validate($request, [
+                            'terminate_password' => 'required|current_password',
+                        ]);
+
+                        $user = me();
+                        DB::transaction(function () use ($user) {
+                            $user->deleteProfilePhoto();
+                            $user->delete();
+                        });
+
+                        if ($request->hasSession()) {
+                            $request->session()->invalidate();
+                            $request->session()->regenerateToken();
+                        }
+
+                        return response()->json([
+                            'code' => 200, 
+                            'type' => 'success', 
+                            'message' => __('Account deleted successfully.')
+                        ]);
+                        return redirect('/');
+                    }
+
+                    return response()->json([
+                        'success' => false, 
+                        'message' => __('Forbidden!')
+                    ]);
                 break;
                 default:
-                    abort(404);
+                    return response()->json([
+                        'success' => false, 
+                        'message' => __('Galat!')
+                    ]);
                 break;
             endswitch;
         }
 
-        me()->update($input);
-
-        notify()->flash('Informasi profile berhasil diperbarui!', 'success');
-        return redirect()->back();
-    }
-
-    /**
-     * Delete or terminate account.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     */
-    public function destroy(Request $request)
-    {
-        $this->validate($request, [
-            'password' => 'required|current_password',
-        ]);
-
-        $user = me();
-        DB::transaction(function () use ($user) {
-            $user->deleteProfilePhoto();
-            $user->delete();
-        });
-
-        if ($request->hasSession()) {
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-        }
-
-        return redirect('/');
+        return abort(404);
     }
 }

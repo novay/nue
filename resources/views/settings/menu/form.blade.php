@@ -1,11 +1,11 @@
 @isset($edit)
-	<div class="card-body bg-light pb-10" style="min-height:calc(100vh - 163px)">
+	<div class="card-body bg-light border-top rounded-0 pb-10" style="min-height:calc(100vh - 130px)">
 @else
-	<div class="card-body">
+	<div class="card-body rounded-0">
 @endisset
-	<div class="row mb-2">
+	<div class="row mb-1">
 		<label class="col-sm-3 col-form-label" for="parent_id">
-			Parent
+			{{ __('Parent') }}
 		</label>
 		<div class="col-sm-9">
 			<div class="tom-select-custom tom-select-custom-with-tags">
@@ -27,52 +27,53 @@
 		</div>
 	</div>
 
-	<div class="row mb-2">
+	<div class="row mb-1">
 		<label class="col-sm-3 col-form-label" for="title">
-			Title <span class="text-danger">*</span>
+			{{ __('Title') }} <span class="text-danger">*</span>
 		</label>
 		<div class="col-sm-9">
-			{!! Form::text('title', null, ['class' => 'form-control form-control-sm form-style' . $errors->first('title', ' is-invalid')]) !!}
+			{!! Form::text('title', null, ['class' => 'form-control form-control-sm rounded-0' . $errors->first('title', ' is-invalid')]) !!}
 			{!! $errors->first('title', ' <span class="invalid-feedback">:message</span>') !!}
 		</div>
 	</div>
 
-	<div class="row mb-2">
+	<div class="row mb-1">
 		<label class="col-sm-3 col-form-label" for="icon">
-			Icon <span class="text-danger">*</span>
+			{{ __('Icon') }}
 		</label>
 		<div class="col-sm-9">
-			{!! Form::text('icon', null, ['class' => 'form-control form-control-sm form-style' . $errors->first('icon', ' is-invalid'), 'placeholder' => 'eg. icon-park-twotone:save-one']) !!}
-			{!! $errors->first('icon', ' <span class="invalid-feedback">:message</span>') !!}
-			<span class="small mt-1">
-				<span class="iconify" data-icon="fa:info-circle"></span>
-				Get the icons from here <a href="https://iconify.design" target="_blank">https://iconify.design</a>
+			{!! Form::text('icon', null, ['class' => 'form-control form-control-sm rounded-0', 'placeholder' => 'eg. person']) !!}
+			<span class="small">
+				<small>
+					<i class="bi bi-info-circle"></i>
+					{{ __('Get Icons') }} <a href="https://icons.getbootstrap.com" target="_blank">https://icons.getbootstrap.com</a>
+				</small>
 			</span>
 		</div>
 	</div>
 
-	<div class="row mb-2">
+	<div class="row mb-1">
 		<label class="col-sm-3 col-form-label" for="uri">
-			URI
+			{{ __('URI') }}
 		</label>
 		<div class="col-sm-9">
 			<div class="input-group input-group-sm">
-				<span class="input-group-text bg-light">{{ env('APP_URL') }}/</span>
-				{!! Form::text('uri', null, ['class' => 'form-control form-style']) !!}
+				<span class="input-group-text bg-light rounded-0">{{ env('APP_URL') }}/</span>
+				{!! Form::text('uri', null, ['class' => 'form-control rounded-0', 'autocomplete' => 'off']) !!}
 			</div>
 		</div>
 	</div>
 
-	<div class="row mb-2">
+	<div class="row mb-1">
 		<label class="col-sm-3 col-form-label" for="roles[]">
-			Roles
+			{{ __('Roles') }}
 		</label>
 		<div class="col-sm-9">
-			<div class="tom-select-custom tom-select-custom-with-tags">
+			<div class="tom-select-custom">
 				<select class="js-select form-select" autocomplete="off" multiple name="roles[]" 
 					data-nue-tom-select-options='{
 						"hideSearch": true,
-						"placeholder": "Select roles ..."
+						"placeholder": "{{ __('Select roles') }} ..."
 					}'>
 					@foreach(config('nue.database.roles_model')::pluck('name', 'id') as $i => $temp)
 						<option value="{{ $i }}"
@@ -88,16 +89,16 @@
 		</div>
 	</div>
 
-	<div class="row mb-2">
+	<div class="row mb-1">
 		<label class="col-sm-3 col-form-label" for="permission">
-			Permission
+			{{ __('Permission') }}
 		</label>
 		<div class="col-sm-9">
-			<div class="tom-select-custom tom-select-custom-with-tags">
+			<div class="tom-select-custom">
 				<select class="js-select form-select" autocomplete="off" name="permission" 
 					data-nue-tom-select-options='{
 						"hideSearch": true,
-						"placeholder": "Select permission ..."
+						"placeholder": "{{ __('Select permission') }} ..."
 					}'>
 					@foreach(config('nue.database.permissions_model')::pluck('name', 'slug') as $i => $temp)
 						<option value="{{ $i }}"
@@ -123,17 +124,12 @@
 		<div class="card card-sm bg-dark border-dark mx-2">
 			<div class="card-body">
 				<div class="row justify-content-center justify-content-sm-between">
-					<div class="col">
-						<a href="{{ route("$prefix.index") }}" class="btn btn-ghost-light">
-							<span class="iconify" data-icon="heroicons-solid:arrow-left"></span>
-							Back
-						</a>
-					</div>
+					<div class="col"></div>
 					<div class="col-auto">
 						<div class="d-flex gap-3">
-							<button type="reset" class="btn btn-ghost-light">Reset</button>
+							<button type="reset" class="btn btn-ghost-light">{{ __('Reset') }}</button>
 							<button type="submit" class="btn btn-primary">
-								Save
+								{{ __('Save') }}
 							</button>
 						</div>
 					</div>

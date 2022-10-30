@@ -1,6 +1,7 @@
 <?php 
 
 use Novay\Nue\Features;
+use Illuminate\Support\Facades\Cookie;
 
 Route::group([
 	'namespace' => 'App\Http\Controllers', 
@@ -8,10 +9,19 @@ Route::group([
 	'prefix' => config('nue.route.prefix', '')
 ], function () {
 
+	// Language Selectors
+	Route::get('lang/{flag?}', function($flag) {
+        $languages = config('nue.locales');
+        if(array_key_exists($flag, $languages)):
+            Cookie::queue(Cookie::make('locale', $flag, (60 * 24 * 365 * 10)));
+        endif;
+
+        return redirect()->back();
+	})->name('locale');
+
 	// Auth Namespace...
 	Route::group(['namespace' => 'Auth'], function () 
 	{
-
 		// Login & Logout...
 		Route::get('login', 'LoginController@showLoginForm')->name('login');
 		Route::post('login', 'LoginController@login');
@@ -52,24 +62,24 @@ Route::group([
 				// User & Profile...
 				Route::get('/', 'ProfileController@show')->name('profile.show');
 
-				// Profile Information, Update Password & Change Photo...
+				// Profile Information, Update Password, Change Photo & Terminate Account...
 				Route::put('/', 'ProfileController@update')->name('profile.update');
-
-				// Terminate Account...
-				if (Features::enabled(Features::terminateAccount())) {
-					Route::delete('/', 'ProfileController@destroy')->name('profile.destroy');
-				}
 			});
 		}
 
 		// Nue Initialize...
-		Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () 
+		Route::group(['namespace' => 'Users', 'prefix' => 'users', 'as' => 'users.'], function () 
 		{
-			Route::resource('users', 'UserController');
 			Route::resource('roles', 'RoleController');
 			Route::resource('permission', 'PermissionController');
+			Route::resource('users', 'UserController');
+		});
+
+		Route::group(['namespace' => 'Settings', 'prefix' => 'settings', 'as' => 'settings.'], function () 
+		{
+			Route::resource('system', 'SystemController')->only(['index']);
 			Route::resource('menu', 'MenuController')->except(['create']);
-			Route::resource('log-activity', 'LogActivityController')->only(['index', 'destroy']);
+			Route::resource('audit', 'AuditController')->only(['index', 'destroy']);
 		});
 	});
 });

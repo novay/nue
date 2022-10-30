@@ -1,0 +1,118 @@
+<?php
+
+namespace App\Http\Controllers\Nue\Settings;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+
+use Novay\Nue\Models\ActivityLog;
+
+class AuditController extends Controller
+{
+    /**
+     * Title for current resource.
+     *
+     * @var string
+     */
+    protected $title;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(ActivityLog $data) 
+    {
+        $this->title = __('Log Activity');
+        $this->data = $data;
+        
+        $this->prefix = 'settings.audit';
+        $this->view = 'nue::settings.audit';
+
+        $this->tDelete = __('Deleted', ['title' => $this->title]);
+        view()->share([
+            'title' => $this->title, 
+            'view' => $this->view, 
+            'prefix' => $this->prefix
+        ]);
+    }
+
+    /**
+     * Index interface.
+     *
+     * @param Request $request
+     *
+     * @return Content
+     */
+    public function index(Request $request)
+    {
+        $data = $this->data->with('user')->latest();
+
+        if($request->has('datatable')):
+            return $this->datatable($data);
+        endif;
+
+        return view("{$this->view}.index", compact('data'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        if($request->has('pilihan')):
+            foreach($request->pilihan as $temp):
+                $data = $this->data->findOrFail($temp);
+                $data->delete();
+            endforeach;
+            
+            notify()->flash($this->tDelete, 'success');
+            return redirect()->back();
+        endif;
+    }
+
+    /**
+     * Datatable API
+     * @param  $data
+     * @return Datatable
+     */
+    public function datatable($data) 
+    {
+        return datatables()->of($data)
+            ->editColumn('pilihan', function($data) {
+                return '<div class="form-check mb-0">
+                    <input type="checkbox" class="form-check-input pilihan" id="pilihan['.$data->id.']" name="pilihan[]" value="'.$data->id.'">
+                        <label class="form-check-label" for="pilihan['.$data->id.']"></label>
+                    </div>';
+            })
+            ->editColumn('user', function($data) {
+                return optional($data->user)->name;
+            })
+            ->editColumn('method', function($data) {
+                $color = Arr::get(ActivityLog::$methodColors, $data->method, 'bg-secondary');
+
+                return "<span class=\"badge bg-$color\">$data->method</span>";
+            })
+            ->editColumn('path', function($data) {
+                return '<label class="badge bg-info">'.$data->path.'</label>';
+            })
+            ->editColumn('ip', function($data) {
+                return '<label class="badge bg-primary">'.$data->ip.'</label>';
+            })
+            ->editColumn('input', function($data) {
+                $input = json_decode($data->input, true);
+                $input = Arr::except($input, ['_token', '_method', '_previous_']);
+                if (empty($input)) {
+                    return '<code>{}</code>';
+                }
+
+                return '<pre>'.json_encode($input, JSON_PRETTY_PRINT | JSON_HEX_TAG).'</pre>';
+            })
+            ->escapeColumns(['*'])->toJson();
+    }
+}

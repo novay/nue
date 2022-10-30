@@ -4,14 +4,16 @@
             @if(url()->isValidUrl($item['uri']))
                 <a class="nav-link {{ Request::is($item['uri']) ? 'active' : '' }}" href="{{ $item['uri'] }}" target="_blank">
             @else
-                <a class="nav-link {{ Request::is($item['uri']) ? 'active' : '' }}" href="{{ nue_url($item['uri']) }}">
+                <a class="nav-link {{ Request::is($item['uri']) ? 'active' : '' }}" href="{{ nue_url($item['uri']) }}" data-pjax>
             @endif
-                <i class="iconify nav-icon" data-icon="{{ $item['icon'] }}"></i>
+                @if(!is_null($item['icon']))
+                    <i class="bi bi-{{ $item['icon'] }} nav-icon me-n2"></i>
+                @endif
                 <span class="nav-link-title">
                     @if (Lang::has($titleTranslation = 'nue.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
                         {{ __($titleTranslation) }}
                     @else
-                        {{ $item['title'] }}
+                        {{ __($item['title']) }}
                     @endif
                 </span>
             </a>
@@ -19,12 +21,14 @@
     @else
         <div class="nav-item">
             <a class="nav-link dropdown-toggle collapsed {{ request()->segment(1) == $item['uri'] ? 'active' : '' }}" href="#navbar-nue-{{ $item['id'] }}" role="button" data-bs-toggle="collapse" data-bs-target="#navbar-nue-{{ $item['id'] }}" aria-expanded="false" aria-controls="navbar-nue-{{ $item['id'] }}">
-                <i class="iconify nav-icon" data-icon="{{ $item['icon'] }}"></i>
+                @if(!is_null($item['icon']))
+                    <i class="bi bi-{{ $item['icon'] }} nav-icon me-n2"></i>
+                @endif
                 <span class="nav-link-title">
                     @if (Lang::has($titleTranslation = 'nue.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
                         {{ __($titleTranslation) }}
                     @else
-                        {{ $item['title'] }}
+                        {{ __($item['title']) }}
                     @endif
                 </span>
             </a>

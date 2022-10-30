@@ -15,7 +15,7 @@ class Nue
      *
      * @var string
      */
-    const VERSION = '2.00';
+    const VERSION = '3.00';
 
     /**
      * @var array

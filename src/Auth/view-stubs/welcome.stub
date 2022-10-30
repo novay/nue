@@ -1,4 +1,4 @@
-@extends('layouts.blank')
+@extends('layouts.base')
 @section('title', __('Welcome'))
 
 @section('css')
@@ -9,7 +9,7 @@
             }
         }
         .nue-title {
-            font-size: 3.75rem;
+            font-size: 3.35rem;
             line-height: 1;
             letter-spacing: -0.025em;
             font-weight: 800;
@@ -18,11 +18,6 @@
 @endsection
 
 @section('js')
-    <script>
-        (function() {
-            new NueHeader('#header').init()
-        })()
-    </script>
 @endsection
 
 @section('content')
@@ -35,41 +30,55 @@
                 <a class="navbar-brand" href="/" aria-label="Logo">
                     <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-nue-theme-appearance="default">
                     <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
-                    <span class="position-absolute top-50 translate-middle-y h1 fw-bold">
-                        {{ config('nue.name') }}
-                    </span>
                 </a>
                 <div class="navbar-nav-wrap-secondary-content">
                     <div class="dropdown">
-                        <a href="javascript:;" class="me-2 text-secondary" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation></a>
-                        <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectThemeDropdown">
-                            <a class="dropdown-item" href="#" data-icon="ic:twotone-deblur" data-value="auto">
-                                <i class="iconify i-2x me-2" data-icon="ic:twotone-deblur"></i>
-                                <span class="text-truncate" title="Auto (system default)">Auto (system default)</span>
+                        <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="theme-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation></button>
+                        <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border dropdown-menu-end" aria-labelledby="theme-dropdown">
+                            <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
+                                <i class="bi-moon-stars me-2"></i>
+                                <span class="text-truncate" title="{{ __('Mode Auto') }}">{{ __('Mode Auto') }}</span>
                             </a>
-                            <a class="dropdown-item" href="#" data-icon="ic:twotone-light-mode" data-value="default">
-                                <i class="iconify i-2x me-2" data-icon="ic:twotone-light-mode"></i>
-                                <span class="text-truncate" title="Default (light mode)">Default (light mode)</span>
+                            <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
+                                <i class="bi-brightness-high me-2"></i>
+                                <span class="text-truncate" title="{{ __('Mode Light') }}">{{ __('Mode Light') }}</span>
                             </a>
-                            <a class="dropdown-item active" href="#" data-icon="ic:twotone-dark-mode" data-value="dark">
-                                <i class="iconify i-2x me-2" data-icon="ic:twotone-dark-mode"></i>
-                                <span class="text-truncate" title="Dark">Dark</span>
+                            <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
+                                <i class="bi-moon me-2"></i>
+                                <span class="text-truncate" title="{{ __('Mode Dark') }}">{{ __('Mode Dark') }}</span>
                             </a>
+                        </div>
+                    </div>
+                    <div class="dropdown me-2">
+                        <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+                            <img class="avatar avatar-xss avatar-circle" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ config('app.locale') == 'id' ? 'id' : 'us' }}.svg" alt="">
+                        </button>
+
+                        <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border dropdown-menu-end" aria-labelledby="language-dropdown">
+                            <span class="dropdown-header">{{ __('Select Language') }}</span>
+                            @foreach(config('nue.locales') as $i => $temp)
+                                <a class="dropdown-item {{ config('app.locale') == $i ? 'active' : '' }}" href="{{ route('locale', $i) }}">
+                                    <img class="avatar avatar-xss avatar-circle me-2" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ $i == 'en' ? 'us' : $i }}.svg" alt="Flag">
+                                    <span class="text-truncate" title="{{ __($temp) }}">
+                                        {{ __($temp) }}
+                                    </span>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                     @guest
                         @if(Route::has('login'))
-                            <a class="btn btn-sm btn-secondary navbar-btn" href="{{ route('login') }}">
-                                {{ __('Login') }}
+                            <a class="btn btn-secondary navbar-btn" href="{{ route('login') }}">
+                                {{ __('Sign in') }}
                             </a>
                         @endif
                         @if(Route::has('register'))
-                            <a class="btn btn-sm btn-primary navbar-btn" href="{{ route('register') }}">
+                            <a class="btn btn-primary navbar-btn" href="{{ route('register') }}">
                                 {{ __('Register') }}
                             </a>
                         @endif
                     @else
-                        <a class="btn btn-sm btn-secondary navbar-btn" href="{{ config('nue.home') }}">
+                        <a class="btn btn-secondary navbar-btn" href="{{ config('nue.home') }}">
                             {{ __('Dashboard') }}
                         </a>
                     @endguest
@@ -83,9 +92,11 @@
             <div class="animated fadeInUp container-lg content-space-t-3 content-space-t-lg-4">
                 <div class="w-lg-75 mx-lg-auto mx-auto">
                     <div class="text-center mb-5">
-                        <h1 class="nue-title mb-3">Nue Package for everyone!</h1>
+                        <h1 class="nue-title mb-3">
+                            {{ __('Welcome Title') }}
+                        </h1>
                         <p class="fs-2">
-                            Developer friendly and highly customizable Admin &amp; Dashboard for Laravel.
+                            {{ __('Welcome Desc') }}
                         </p>
                     </div>
                     <div class="card bg-dark mb-5">
@@ -96,7 +107,7 @@
                                     <span class="d-block text-success">Package manifest generated successfully.</span>
                                     <span class="d-block text-white-70">&gt; $ php artisan nue</span>
                                     <span class="d-block text-white-70"></span>
-                                    <span class="d-block text-success">Nue version 2.00</span>
+                                    <span class="d-block text-success">Nue version 3.00</span>
                                     <span class="d-block text-success">&nbsp;</span>
                                     <span class="d-block text-warning">Available commands:</span>
                                     <span class="d-block text-white">&nbsp;nue:install&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Install the Nue components and resources.</span>
@@ -110,8 +121,8 @@
                     </div>
                 </div>
                 <div class="d-grid mx-auto" style="max-width: 10rem;">
-                    <a class="btn btn-dark btn-lg" href="https://github.com/novay/nue" target="_blank">
-                        <span class="iconify me-1" data-icon="simple-icons:github"></span>
+                    <a class="btn btn-dark btn-lg fw-semibold" href="https://github.com/novay/nue" target="_blank">
+                        <i class="bi bi-github me-1"></i>
                         Github
                     </a>
                 </div>

@@ -1,0 +1,101 @@
+<script src="{{ config('nue.brand.cdn') }}/vendor/nue-file-attach/nue-file-attach.min.js"></script>
+<script>
+    new NueFileAttach('.js-file-attach');
+    $("#form-personal").validate({
+        errorClass: "is-invalid",
+        submitHandler: function(form) {
+            $("#submit-personal").attr("disabled", true);
+            $.ajax({
+                url: "{{ route("profile.update") }}",
+                type: "PUT",
+                data: $('#form-personal').serialize(),
+                success: function( response ) {
+                    document.getElementById("form-personal").reset();
+                    Toast.fire({
+                        icon: response.type,
+                        title: response.message
+                    });
+                    $("#submit-personal").attr("disabled", false);
+                    $('#dialog-ajax').modal('hide');
+                },
+                error: function(reject) {
+                    var response = $.parseJSON(reject.responseText);
+                    $.each(response.errors, function(key, val) {
+                        $("#" + key + "-error").text(val[0]);
+                        $("#" + key + "-error").addClass('invalid-feedback');
+                        $("#" + key + "-error").prev().addClass('is-invalid');
+                    });
+                    $("#submit-personal").attr("disabled", false);
+                }
+            });
+        }
+    });
+</script>
+
+{!! Form::model(me(), ['id' => 'form-personal', 'method' => 'PUT', 'files' => true]) !!}
+    <div class="card-body p-0">
+        @if(Novay\Nue\Features::enabled(Novay\Nue\Features::profilePhoto()))
+            <div class="profile-cover">
+                <div class="profile-cover-img-wrapper">
+                    <img class="profile-cover-img rounded-0" src="https://cdn.btekno.id/templates/nue/img/1920x400/img2.jpg" alt="">
+                </div>
+            </div>
+            <label class="avatar avatar-xxl avatar-circle avatar-uploader profile-cover-avatar" for="editAvatarUploaderModal">
+                <img id="editAvatarImgModal" class="avatar-img" src="{{ me()->photo_url }}" alt="">
+                <input type="file" class="js-file-attach avatar-uploader-input" id="editAvatarUploaderModal" name="photo" data-nue-file-attach-options='{
+                    "textTarget": "#editAvatarImgModal",
+                    "mode": "image",
+                    "targetAttr": "src",
+                    "allowTypes": [".png", ".jpeg", ".jpg"]
+                }'>
+                <span class="avatar-uploader-trigger">
+                    <i class="bi-pencil-fill avatar-uploader-icon shadow-sm"></i>
+                </span>
+            </label>
+            <x-nue::error for="photo" class=" text-center mt-1" />
+        @else
+            <div class="card-header">
+                <h3 class="card-title mb-1">{{ __('Profile Information') }}</h3>
+                <p class="text-muted d-block mb-0">
+                    {{ __('Update your account\'s profile information and email address.') }}
+                </p>
+            </div>
+        @endif
+        <div class="card-body">
+            <div class="row mb-2">                
+                <label for="name" class="col-sm-4 col-form-label">
+                    {{ __('Name') }} <span class="text-danger">*</span>
+                </label>
+                <div class="col-sm-8">
+                    {{ Form::text('name', null, ['class' => 'form-control form-control-sm rounded-0' . $errors->first('name', ' is-invalid'), 'placeholder' => __('Enter your name')]) }}
+                    <span id="name-error" class="d-block invalid-feedback mt-1"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="name" class="col-sm-4 col-form-label">
+                    {{ __('Email') }}
+                </label>
+                <div class="col-sm-8">
+                    {{ Form::text('email', null, ['class' => 'form-control form-control-sm rounded-0', 'placeholder' => __('Enter your email address'), 'disabled']) }}
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="phone" class="col-sm-4 col-form-label">
+                    {{ __('Phone') }} <span class="form-label-secondary">({{ __('Optional') }})</span>
+                </label>
+                <div class="col-sm-8">
+                    {{ Form::text('phone', null, ['class' => 'form-control form-control-sm rounded-0', 'placeholder' => __('Enter your phone number')]) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-absolute bottom-0 left-0 w-100 p-3">
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary rounded-xs" id="submit-personal">
+                {{ __('Save changes') }}
+            </a>
+        </div>
+    </div>
+    {!! Form::hidden('page', 'personal') !!}
+{!! Form::close() !!}

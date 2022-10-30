@@ -128,3 +128,48 @@ if (!function_exists('array_delete')) {
         }
     }
 }
+
+if (!function_exists('human_file_size')) {
+    /**
+     * @param int $bytes
+     * @param int $precision
+     * @return string
+     */
+    function human_file_size($bytes, $precision = 2): string
+    {
+        $units = ['B', 'kB', 'MB', 'GB', 'TB'];
+
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+
+        $bytes /= pow(1024, $pow);
+
+        return number_format($bytes, $precision, ',', '.') . ' ' . $units[$pow];
+    }
+}
+
+if (!function_exists('get_file_data')) {
+    /**
+     * @param string $file
+     * @param bool $toArray
+     * @return bool|mixed
+     */
+    function get_file_data($file, $toArray = true)
+    {
+        $file = File::get($file);
+        if (!empty($file)) {
+            if ($toArray) {
+                return json_decode($file, true);
+            }
+
+            return $file;
+        }
+
+        if (!$toArray) {
+            return null;
+        }
+
+        return [];
+    }
+}

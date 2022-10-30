@@ -24,7 +24,7 @@ return [
     | If your page is going to be accessed via https, set it to `true`.
     |
     */
-    'https' => env('NUE_HTTPS', false),
+    'https' => env('NUE_HTTPS', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,9 +42,9 @@ return [
 
             'default' => [
 
-                'light' => 'https://cdn.btekno.id/img/logo.svg', 
+                'light' => 'https://aws.btekno.id/cdn/images/nue.svg', 
 
-                'dark' => 'https://cdn.btekno.id/img/logo-inverse.svg'
+                'dark' => 'https://aws.btekno.id/cdn/images/nue-light.svg'
 
             ],
 
@@ -57,8 +57,27 @@ return [
             ],
         ], 
 
-        'default_avatar' => 'https://cdn.btekno.id/templates/v2/img/160x160/img1.jpg'
+        'default_avatar' => 'https://cdn.btekno.id/templates/v2/img/160x160/img1.jpg', 
+
+        'cdn' => 'https://cdn.btekno.id/templates/nue'
     ], 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Nue Locales
+    |--------------------------------------------------------------------------
+    |
+    | Here are the list of available language for your application.
+    | Feel free to adding some if you want to use your own language into
+    | your application.
+    |
+    */
+    'locales' => [
+
+        'en' => 'EN',
+        
+        'id' => 'ID',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -133,9 +152,9 @@ return [
     */
 
     'features' => [
-        Features::registration(),
-        Features::resetPasswords(),
-        Features::emailVerification(),
+        // Features::registration(),
+        // Features::resetPasswords(),
+        // Features::emailVerification(),
         Features::updateProfile(),
         Features::updateEmail(),
         Features::updatePassword(),
@@ -203,7 +222,7 @@ return [
     */
     'user_activities' => [
 
-        'enable' => true,
+        'enable' => false,
 
         /*
          * Only logging allowed methods in the list
