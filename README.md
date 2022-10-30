@@ -30,7 +30,7 @@ Require the package via composer:
 
 
 ```bash
-composer require novay/nue "3.02"
+composer require novay/nue "3.03"
 ```
 
 Install with:
