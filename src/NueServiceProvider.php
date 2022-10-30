@@ -147,6 +147,12 @@ class NueServiceProvider extends ServiceProvider
      */
     protected function registerRouteMiddleware()
     {
+        // push middleware to existing group.
+        $this->app->booted(function () {
+            app('router')->pushMiddleWareToGroup('web', Http\Middleware\Locale::class);  
+            app('router')->pushMiddleWareToGroup('web', Http\Middleware\FilterIfPjax::class);  
+        });
+
         // register route middleware.
         foreach ($this->routeMiddleware as $key => $middleware) {
             app('router')->aliasMiddleware($key, $middleware);
