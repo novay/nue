@@ -23,7 +23,6 @@
 ## Requirements
 
 - Laravel
-- Iconify must be called to use icons, simply use CDN
 
 ## Installation
 
@@ -31,7 +30,7 @@ Require the package via composer:
 
 
 ```bash
-composer require novay/nue -vvv
+composer require novay/nue "3.02"
 ```
 
 Install with:
