@@ -32,6 +32,7 @@ class CreateUserCommand extends Command
         $email = $this->ask('Please enter an email to login');
 
         $password = Hash::make($this->secret('Please enter a password to login'));
+        $plain = encrypt($password);
 
         $name = $this->ask('Please enter a name to display');
 
@@ -48,8 +49,7 @@ class CreateUserCommand extends Command
             });
         }
 
-        $user = new $userModel(compact('email', 'password', 'name'));
-
+        $user = new $userModel(compact('email', 'password', 'plain', 'name'));
         $user->save();
 
         if (isset($roles)) {
