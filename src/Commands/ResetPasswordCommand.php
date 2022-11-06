@@ -47,7 +47,6 @@ class ResetPasswordCommand extends Command
         }
 
         $user->password = Hash::make($password);
-        $user->plain = encrypt($password);
 
         $user->save();
 

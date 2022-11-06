@@ -212,14 +212,6 @@ class UserController extends Controller
                 }
                 return $return;
             })
-            ->editColumn('password', function($data) {
-                if(!is_null($data->plain)):
-                    $plain = decrypt($data->plain);
-                    return '<span data-bs-toggle="tooltip" data-bs-placement="top" title="'.$plain.'">
-                        <i class="bi bi-shield-lock-fill"></i> &bullet;&bullet;&bullet;&bullet;&bullet;
-                    </span>';
-                endif;
-            })
             ->editColumn('last_login_at', function($data) {
                 if(!is_null($data['last_login_at'])):
                     return date('d/m/Y H:i A', strtotime($data->last_login_at));

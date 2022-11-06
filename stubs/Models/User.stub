@@ -20,7 +20,10 @@ use Novay\Nue\Traits\HasProfilePhoto;
 use Novay\Nue\Traits\DefaultDatetimeFormat;
 use Novay\Nue\Traits\HasPermissions;
 
-class User extends Model implements AuthenticatableContract//, MustVerifyEmailContract, CanResetPasswordContract
+class User extends Model implements 
+    AuthenticatableContract, 
+    MustVerifyEmailContract, 
+    CanResetPasswordContract
 {
     use HasApiTokens, Notifiable;
     use HasProfilePhoto;
@@ -39,7 +42,6 @@ class User extends Model implements AuthenticatableContract//, MustVerifyEmailCo
         'name',
         'email',
         'password',
-        'plain',
         'phone',
         'last_login_at', 
         'last_login_ip'
@@ -52,7 +54,6 @@ class User extends Model implements AuthenticatableContract//, MustVerifyEmailCo
      */
     protected $hidden = [
         'password',
-        'plain',
         'remember_token',
     ];
 

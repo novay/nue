@@ -30,6 +30,8 @@ class NueServiceProvider extends ServiceProvider
     protected $routeMiddleware = [
         'nue.activity'      => Http\Middleware\Activity::class,
         'nue.permission'    => Http\Middleware\Permission::class,
+        'nue.pjax'          => Http\Middleware\Pjax::class,
+        // 'nue.ui'            => Http\Middleware\Ui::class,
     ];
 
     /**
@@ -41,6 +43,7 @@ class NueServiceProvider extends ServiceProvider
         'nue' => [
             'nue.activity',
             'nue.permission',
+            'nue.pjax',
         ],
     ];
     
@@ -150,7 +153,6 @@ class NueServiceProvider extends ServiceProvider
         // push middleware to existing group.
         $this->app->booted(function () {
             app('router')->pushMiddleWareToGroup('web', Http\Middleware\Locale::class);  
-            app('router')->pushMiddleWareToGroup('web', Http\Middleware\FilterIfPjax::class);  
         });
 
         // register route middleware.

@@ -6,11 +6,7 @@
     <script src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/datatables.net.extensions/select/select.min.js"></script>
     <script>
         Nue.components.NueDatatables.init('.js-datatable', {
-            bSort: false, 
-            paging: false,
-            searching: false, 
-            bInfo: false, 
-            scrollY: 'calc(100vh - 215px)',
+            scrollY: 'calc(100vh - 200px)',
             ajax : '{!! request()->fullUrl() !!}?datatable=true', 
             columns: [
                 { data: 'pilihan', name: 'pilihan', className: 'text-center', orderable: false, searchable: false },
@@ -43,7 +39,7 @@
     	<div class="card border-0 shadow-none rounded-0">
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table id="datatable" class="js-datatable table table-sm table-hover table-borderless">
+                    <table id="datatable" class="js-datatable table table-sm table-hover table-bordered table-nowrap">
                         <thead class="thead-light">
                             <tr>
                                 <th class="table-column-pr-0" width="1">
@@ -58,7 +54,7 @@
                                 <th>{{ __('Path') }}</th>
                                 <th>{{ __('IP') }}</th>
                                 <th>{{ __('Input') }}</th>
-                                <th>{{ __('Created') }}</th>
+                                <th>{{ __('Created At') }}</th>
                             </tr>
                         </thead>
                     </table>

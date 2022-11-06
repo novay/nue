@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response as BaseResponse;
 
-class FilterIfPjax
+class Pjax
 {
     /** @var \Symfony\Component\DomCrawler\Crawler */
     protected $crawler;

@@ -7,7 +7,7 @@
                 <a class="nav-link {{ Request::is($item['uri']) ? 'active' : '' }}" href="{{ nue_url($item['uri']) }}" data-pjax>
             @endif
                 @if(!is_null($item['icon']))
-                    <i class="bi bi-{{ $item['icon'] }} nav-icon me-n2"></i>
+                    <i class="bi bi-{{ $item['icon'] }} nav-icon me-n1"></i>
                 @endif
                 <span class="nav-link-title">
                     @if (Lang::has($titleTranslation = 'nue.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
@@ -19,24 +19,16 @@
             </a>
         </div>
     @else
-        <div class="nav-item">
-            <a class="nav-link dropdown-toggle collapsed {{ request()->segment(1) == $item['uri'] ? 'active' : '' }}" href="#navbar-nue-{{ $item['id'] }}" role="button" data-bs-toggle="collapse" data-bs-target="#navbar-nue-{{ $item['id'] }}" aria-expanded="false" aria-controls="navbar-nue-{{ $item['id'] }}">
-                @if(!is_null($item['icon']))
-                    <i class="bi bi-{{ $item['icon'] }} nav-icon me-n2"></i>
-                @endif
-                <span class="nav-link-title">
-                    @if (Lang::has($titleTranslation = 'nue.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
-                        {{ __($titleTranslation) }}
-                    @else
-                        {{ __($item['title']) }}
-                    @endif
-                </span>
-            </a>
-            <div id="navbar-nue-{{ $item['id'] }}" class="nav-collapse collapse {{ request()->segment(1) == $item['uri'] ? 'show' : '' }}" data-bs-parent="#navbar-menu-page-{{ $item['id'] }}" nue-parent-area="#navbar-menu">
-                @foreach($item['children'] as $item)
-                    @include('nue::partials.menu', $item)
-                @endforeach
-            </div>
-        </div>
+        <span class="dropdown-header mt-2 px-2">
+            @if (Lang::has($titleTranslation = 'nue.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
+                {{ __($titleTranslation) }}
+            @else
+                {{ __($item['title']) }}
+            @endif
+        </span>
+        <small class="bi-three-dots nav-subtitle-replacer"></small>
+        @foreach($item['children'] as $item)
+            @include('nue::partials.menu', $item)
+        @endforeach
     @endif
 @endif

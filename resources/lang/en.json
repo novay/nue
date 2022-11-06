@@ -1,6 +1,6 @@
 {
 	"Welcome": "Welcome", 
-	"Welcome Title": "Laravel Administration with a Nue way!", 
+	"Welcome Title": "Laravel Backend with a Nue way!", 
 	"Welcome Desc": "Developer friendly and highly customizable Admin & Dashboard for Laravel.", 
 	"Don't have an account yet?": "Don't have an account yet?", 
 	"Sign up here": "Sign up here", 
@@ -132,5 +132,19 @@
 	"Account deleted successfully.": "Account deleted successfully.", 
 	"Created": ":title created successfully!", 
 	"Updated": ":title changed successfully!", 
-	"Deleted": "Some :title deleted successfully!"
+	"Deleted": "Some :title deleted successfully!", 
+	"Already have an account?": "Already have an account?", 
+	"Sign in here": "Sign in here", 
+	"I accept the Terms and Conditions": "I accept the Terms and Conditions", 
+	"Verify Your Email Address": "Verify Your Email Address", 
+	"A fresh verification link has been sent to your email.": "A fresh verification link has been sent to your email.", 
+	"Verify Your Email": "Verify Your Email", 
+	"We've sent a link to your email address:": "We've sent a link to your email address:", 
+	"Please follow the link inside to continue.": "Please follow the link inside to continue.", 
+	"Didn't receive an email?": "Didn't receive an email?", 
+	"Request Another": "Request Another", 
+	"Forgot Password": "Forgot Password", 
+	"Enter the email address you used when you joined and we'll send you instructions to reset your password.": "Enter the email address you used when you joined and we'll send you instructions to reset your password.", 
+	"Send Password Reset Link": "Send Password Reset Link", 
+	"Back to Sign in": "Back to Sign in"
 }

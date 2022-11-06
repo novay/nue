@@ -20,7 +20,6 @@ class NueTableSeeder extends Seeder
         $user->create([
             'email' => 'novay@btekno.id',
             'password' => bcrypt('adminsss'),
-            'plain' => encrypt('adminsss'),
             'name'     => 'Noviyanto Rahmadi',
         ]);
 

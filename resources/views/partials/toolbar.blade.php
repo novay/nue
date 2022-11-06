@@ -12,7 +12,7 @@
         <div class="w-100">
             <div class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group rounded-0">
                 <div class="input-group-prepend input-group-text px-2">
-                    <i class="bi-search"></i>
+                    <i class="bi-filter"></i>
                 </div>
                 <input id="datatabe-search" type="search" class="form-control rounded-0 ps-5" placeholder="{{ __('Search') }}" aria-label="{{ __('Search') }}" autocomplete="off">
             </div>

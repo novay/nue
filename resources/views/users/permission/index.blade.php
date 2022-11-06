@@ -4,10 +4,9 @@
 @section('js')
     <script src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/datatables.net.extensions/select/select.min.js"></script>
-    <script src="/js/nue-datatables.js"></script>
     <script>
         Nue.components.NueDatatables.init('.js-datatable', {
-            scrollY: 'calc(100vh - 215px)',
+            scrollY: 'calc(100vh - 200px)',
             ajax : '{!! request()->fullUrl() !!}?datatable=true', 
             columns: [
                 { data: 'pilihan', name: 'pilihan', className: 'pe-0 bg-light text-center', orderable: false, searchable: false },

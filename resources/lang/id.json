@@ -132,5 +132,19 @@
 	"Account deleted successfully.": "Akun berhasil dihapus.", 
 	"Created": "Data :title berhasil dibuat!", 
 	"Updated": "Data :title berhasil diubah!", 
-	"Deleted": "Beberapa data :title berhasil dihapus!"
+	"Deleted": "Beberapa data :title berhasil dihapus!", 
+	"Already have an account?": "Sudah memiliki akun?", 
+	"Sign in here": "Masuk disini", 
+	"I accept the Terms and Conditions": "Saya setuju dengan Syarat & Ketentuan", 
+	"Verify Your Email Address": "Verifikasi alamat surel Anda", 
+	"A fresh verification link has been sent to your email.": "Tautan verifikasi baru telah dikirim ke email Anda.", 
+	"Verify Your Email": "Verifikasi Email Anda", 
+	"We've sent a link to your email address:": "Kami telah mengirimkan tautan ke alamat email Anda:", 
+	"Please follow the link inside to continue.": "Silakan ikuti tautan di surel untuk melanjutkan.", 
+	"Didn't receive an email?": "Surel tidak masuk?", 
+	"Request Another": "Kirim Ulang", 
+	"Forgot Password": "Lupa Sandi", 
+	"Enter the email address you used when you joined and we'll send you instructions to reset your password.": "Masukkan surel yang Anda yang terdaftar dan kami akan mengirimkan instruksi untuk mengatur ulang kata sandi Anda.", 
+	"Send Password Reset Link": "Atur Ulang Kata Sandi", 
+	"Back to Sign in": "Kembali"
 }

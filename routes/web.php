@@ -7,9 +7,8 @@ Route::group([
 	'namespace' => 'App\Http\Controllers', 
 	'middleware' => config('nue.route.middleware', ['web', 'nue']), 
 	'prefix' => config('nue.route.prefix', '')
-], function () {
+], function() {
 
-	// Language Selectors
 	Route::get('lang/{flag?}', function($flag) {
         $languages = config('nue.locales');
         if(array_key_exists($flag, $languages)):
@@ -19,22 +18,17 @@ Route::group([
         return redirect()->back();
 	})->name('locale');
 
-	// Auth Namespace...
-	Route::group(['namespace' => 'Auth'], function () 
-	{
-		// Login & Logout...
+	Route::namespace('Auth')->group(function() {
 		Route::get('login', 'LoginController@showLoginForm')->name('login');
 		Route::post('login', 'LoginController@login');
 		Route::post('logout', 'LoginController@logout')->name('logout');
 
-		// Registration...
-		if (Features::enabled(Features::registration())) {
+		if(Features::enabled(Features::registration())):
 			Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
 			Route::post('register', 'RegisterController@register');
-		}
+		endif;
 
-		// Password Reset...
-		if (Features::enabled(Features::resetPasswords())) {
+		if(Features::enabled(Features::resetPasswords())):
 			Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
 			Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 			Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
@@ -42,41 +36,30 @@ Route::group([
 
 			Route::get('password/confirm', 'ConfirmPasswordController@showConfirmForm')->name('password.confirm');
 			Route::post('password/confirm', 'ConfirmPasswordController@confirm');
-		}
+		endif;
 
-		// Email Verification...
-		if (Features::enabled(Features::emailVerification())) {
+		if(Features::enabled(Features::emailVerification())):
 			Route::get('email/verify', 'VerificationController@show')->name('verification.notice');
 			Route::get('email/verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
 			Route::post('email/resend', 'VerificationController@resend')->name('verification.resend');
-		}
+		endif;
 	});
 	
-	// Nue Namespace...
-	Route::group(['namespace' => 'Nue', 'middleware' => 'auth'], function () 
-	{
-		// Update Profile Informations...
-		if (Features::enabled(Features::updateProfile())) {
-			Route::group(['prefix' => 'profile'], function () 
-			{
-				// User & Profile...
+	Route::namespace('Nue')->middleware(['auth'])->group(function() {
+		if(Features::enabled(Features::updateProfile())):
+			Route::prefix('profile')->group(function() {
 				Route::get('/', 'ProfileController@show')->name('profile.show');
-
-				// Profile Information, Update Password, Change Photo & Terminate Account...
 				Route::put('/', 'ProfileController@update')->name('profile.update');
 			});
-		}
+		endif;
 
-		// Nue Initialize...
-		Route::group(['prefix' => 'users', 'as' => 'users.'], function () 
-		{
+		Route::prefix('users')->as('users.')->group(function() {
 			Route::resource('roles', 'RoleController');
 			Route::resource('permission', 'PermissionController');
 			Route::resource('users', 'UserController');
 		});
 
-		Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () 
-		{
+		Route::prefix('settings')->as('settings.')->group(function() {
 			Route::resource('system', 'SystemController')->only(['index']);
 			Route::resource('menu', 'MenuController')->except(['create']);
 			Route::resource('audit', 'AuditController')->only(['index', 'destroy']);

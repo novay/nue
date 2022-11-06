@@ -1,4 +1,4 @@
-<div class="card-footer py-2">
+<div class="card-footer bg-light border-bottom rounded-0 py-0 px-2">
     <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
         <div class="col-sm d-sm-block d-none">
             <div class="d-flex justify-content-center justify-content-sm-start align-items-center">

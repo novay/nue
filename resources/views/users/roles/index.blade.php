@@ -9,7 +9,7 @@
             paging: false,
             searching: false, 
             bInfo: false, 
-            scrollY: 'calc(100vh - 215px)',
+            scrollY: 'calc(100vh - 200px)',
             ajax : '{!! request()->fullUrl() !!}?datatable=true', 
             columns: [
                 { data: 'pilihan', name: 'pilihan', className: 'pe-0 bg-light text-center', orderable: false, searchable: false },

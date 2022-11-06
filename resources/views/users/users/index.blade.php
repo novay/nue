@@ -4,9 +4,9 @@
 @section('js')
     <script src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/datatables.net.extensions/select/select.min.js"></script>
-    <script>
+    <script data-exec-on-popstate>
         var table = Nue.components.NueDatatables.init('.js-datatable', {
-            scrollY: 'calc(100vh - 215px)',
+            scrollY: 'calc(100vh - 199px)',
             ajax : '{!! request()->fullUrl() !!}?datatable=true', 
             columns: [
                 { data: 'pilihan', name: 'pilihan', className: 'pe-0 bg-light text-center', orderable: false, searchable: false },
@@ -14,7 +14,6 @@
                 { data: 'action', name: 'action', className: 'text-center', orderable: false, searchable: false }, 
                 { data: 'name', name: 'name' },
                 { data: 'email', name: 'email' },
-                { data: 'password', name: 'password', className: 'text-center', orderable: false, searchable: false },
                 { data: 'roles', name: 'roles', orderable: false, searchable: false },
                 { data: 'last_login_at', name: 'last_login_at', orderable: false, searchable: false },
             ],
@@ -53,7 +52,6 @@
                                 <th width="1"></th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Email') }}</th>
-                                <th>{{ __('Password') }}</th>
                                 <th>{{ __('Roles') }}</th>
                                 <th>{{ __('Last Login') }}</th>
                             </tr>

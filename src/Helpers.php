@@ -173,3 +173,19 @@ if (!function_exists('get_file_data')) {
         return [];
     }
 }
+
+if (!function_exists('echo_limit')) {
+    /**
+     * @param string $file
+     * @param bool $toArray
+     * @return bool|mixed
+     */
+    function echo_limit($x, $length = 200)
+    {
+        if(strlen($x) <= $length):
+            echo $x;
+        else:
+            return substr($x, 0, $length) . '...';
+        endif;
+    }
+}

@@ -14,7 +14,9 @@ return [
     | login page.
     |
     */
-    'name' => 'Nue UI',
+    'name' => 'Nµe',
+    
+    'version' => '3.1.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -74,9 +76,9 @@ return [
     */
     'locales' => [
 
-        'en' => 'EN',
+        'en' => 'English (US)',
         
-        'id' => 'ID',
+        'id' => 'Bahasa Indonesia (ID)',
     ],
 
     /*
@@ -186,7 +188,7 @@ return [
     'database' => [
 
         // Database connection for following tables.
-        'connection' => '',
+        'connection' => 'mysql',
 
         // User tables and model.
         'users_table' => 'users',
@@ -233,10 +235,11 @@ return [
          * Routes that will not log to database.
          *
          * All method to path like: nue/settings/log-activity
-         * or specific method to path like: get:nue/settings/log-activity.
+         * or specific method to path like: get:settings/audit.
          */
         'except' => [
-            env('NUE_ROUTE_PREFIX', '').'/settings/log-activity',
+            'settings/audit',
+            'settings/audit/hapus-all'
         ],
     ],
 
@@ -252,7 +255,7 @@ return [
     | Indicates whether to check menu roles.
     |--------------------------------------------------------------------------
     */
-    'check_menu_roles'       => true,
+    'check_menu_roles' => true,
 
     /*
     |--------------------------------------------------------------------------

@@ -88,4 +88,16 @@ class Nue
     {
         // 
     }
+
+    /*
+     * Disable Pjax for current Request
+     *
+     * @return void
+     */
+    public function disablePjax()
+    {
+        if (request()->pjax()) {
+            request()->headers->set('X-PJAX', false);
+        }
+    }
 }
