@@ -1,16 +1,14 @@
 <aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white">
     <div class="navbar-vertical-container">
         <div class="navbar-vertical-footer-offset">
+            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
+                <i class="bi-list navbar-toggler-short-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'></i>
+                <i class="bi-list navbar-toggler-full-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'></i>
+            </button>
             <a class="navbar-brand d-flex" href="/" aria-label="Nue">
                 <img class="navbar-brand-logo" height="50" width="auto" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-nue-theme-appearance="default">
                 <img class="navbar-brand-logo" height="50" width="auto" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
-                <img class="navbar-brand-logo-mini" src="{{ config('nue.brand.logo.mini.light') }}" alt="Logo" data-nue-theme-appearance="default">
-                <img class="navbar-brand-logo-mini" src="{{ config('nue.brand.logo.mini.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
             </a>
-            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
-                <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
-                <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
-            </button>
             <div class="navbar-vertical-content">
                 <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                     @isset($menu)
@@ -22,70 +20,30 @@
                     @endisset
                 </div>
             </div>
-            <div class="navbar-vertical-footer">
-                <ul class="navbar-vertical-footer-list">
-                    <li class="navbar-vertical-footer-list-item">
-                        <div class="dropdown dropup">
-                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="theme-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                            </button>
-                            <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border" aria-labelledby="theme-dropdown">
-                                <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
-                                    <i class="bi-moon-stars me-2"></i>
-                                    <span class="text-truncate" title="{{ __('Mode Auto') }}">{{ __('Mode Auto') }}</span>
-                                </a>
-                                <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
-                                    <i class="bi-brightness-high me-2"></i>
-                                    <span class="text-truncate" title="{{ __('Mode Light') }}">{{ __('Mode Light') }}</span>
-                                </a>
-                                <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
-                                    <i class="bi-moon me-2"></i>
-                                    <span class="text-truncate" title="{{ __('Mode Dark') }}">{{ __('Mode Dark') }}</span>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="navbar-vertical-footer-list-item">
-                        <div class="dropdown dropup">
-                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="help-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                                <i class="bi-info-circle"></i>
-                            </button>
-                            <div class="dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border" aria-labelledby="help-dropdown">
-                                <span class="dropdown-header">{{ __('Help') }}</span>
-                                <a class="dropdown-item" href="https://nue.btekno.id/docs" target="_blank">
-                                    <i class="bi-journals dropdown-item-icon me-n1"></i>
-                                    <span class="text-truncate" title="{{ __('Documentation') }}">{{ __('Documentation') }}</span>
-                                </a>
-                                <a class="dropdown-item" href="https://github.com/novay/nue/blob/master/CHANGELOG.md" target="_blank">
-                                    <i class="bi-command dropdown-item-icon me-n1"></i>
-                                    <span class="text-truncate" title="{{ __('Changelog') }}">{{ __('Changelog') }}</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="https://wa.me/628115555573" target="_blank">
-                                    <i class="bi-alt dropdown-item-icon me-n1"></i>
-                                    <span class="text-truncate" title="WhatsApp">WhatsApp</span>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="navbar-vertical-footer-list-item">
-                        <div class="dropdown dropup">
-                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                                <img class="avatar avatar-xss avatar-circle" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ config('app.locale') == 'id' ? 'id' : 'us' }}.svg" alt="">
-                            </button>
-                            <div class="dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border" aria-labelledby="language-dropdown">
-                                <span class="dropdown-header">{{ __('Select Language') }}</span>
-                                @foreach(config('nue.locales') as $i => $temp)
-                                    <a class="dropdown-item {{ config('app.locale') == $i ? 'active' : '' }}" href="{{ route('locale', $i) }}">
-                                        <img class="avatar avatar-xss avatar-circle me-2" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ $i == 'en' ? 'us' : $i }}.svg" alt="Flag">
-                                        <span class="text-truncate" title="{{ __($temp) }}">
-                                            {{ __($temp) }}
-                                        </span>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    </li>
-                </ul>    
+            <div class="navbar-vertical-footer bg-white">
+                <div class="nav nav-pills nav-vertical card-navbar-nav p-0 mb-2">
+                    <div class="nav-item">
+                        <a class="nav-link" href="javascript:;" data-href="{{ route('profile.show') }}?page=preferences&time={{ time() }}" id="dialog-button" data-size="modal-lg">
+                            <i class="bi bi-gear nav-icon me-n2"></i>
+                            <span class="nav-link-title">
+                                Settings
+                            </span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-link" href="">
+                            <i class="bi bi-info-circle nav-icon me-n2"></i>
+                            <span class="nav-link-title">
+                                Kirim Masukan
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-3" />
+                <p class="mb-0 text-start small text-muted" style="font-size:70%">
+                    {{ date('Y') }} © Enter(wind)<br/>
+                    {{ config('nue.name') }} v{{ config('nue.version') }}
+                </p>
             </div>
         </div>
     </div>

@@ -11,6 +11,11 @@
                 <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
                 <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
             </button>
+            @isset($title)
+                <div class="align-items-center ms-n2">
+                    <h3 class="mb-0">{{ $title }}</h3>
+                </div>
+            @endisset
             @stack('toolbar')
             @auth
                 <div class="navbar-nav-wrap-content-end">

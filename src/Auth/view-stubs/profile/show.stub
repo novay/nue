@@ -3,7 +3,7 @@
         height: calc(100vh - 200px);
     }
 </style>
-<div class="modal-content modal-opacity rounded">
+<div class="modal-content modal-opacity rounded" style="background: #fffffff2;">
     <div class="row gx-2">
         <div class="col-12 col-md-4 px-2">
             <div class="navbar-brand px-2 mt-2">
@@ -22,15 +22,15 @@
             </div>
             <ul class="nav nav-pills nav-vertical card-navbar-nav px-1 py-0">
                 <li class="nav-item">
-                    <a class="nav-link rounded-1 px-2 text-start active" href="#tabs-ringkasan" data-bs-toggle="tab">
-                        <i class="bi bi-speedometer nav-icon me-n2"></i>
+                    <a class="nav-link rounded-1 px-2 text-start {{ $request->page != 'preferences' ? 'active' : '' }}" href="#tabs-ringkasan" data-bs-toggle="tab">
+                        <i class="bi bi-speedometer nav-icon"></i>
                         {{ __('Overview') }}
                     </a>
                 </li>
                 @if(Novay\Nue\Features::enabled(Novay\Nue\Features::updateProfile()))
                     <li class="nav-item">
                         <a class="nav-link rounded-1 px-2 text-start" href="#tabs-personal" data-bs-toggle="tab">
-                            <i class="bi bi-person-circle nav-icon me-n2"></i>
+                            <i class="bi bi-person-circle nav-icon"></i>
                             {{ __('Personal Info') }}
                         </a>
                     </li>
@@ -38,7 +38,7 @@
                 @if(Novay\Nue\Features::enabled(Novay\Nue\Features::updateEmail()))
                     <li class="nav-item">
                         <a class="nav-link rounded-1 px-2 text-start py-3" href="#tabs-email" data-bs-toggle="tab">
-                            <i class="bi bi-envelope-check nav-icon me-n2"></i>
+                            <i class="bi bi-envelope-check nav-icon"></i>
                             {{ __('Change Email') }}
                         </a>
                     </li>
@@ -46,15 +46,21 @@
                 @if(Novay\Nue\Features::enabled(Novay\Nue\Features::updatePassword()))
                     <li class="nav-item">
                         <a class="nav-link rounded-1 px-2 text-start" href="#tabs-sandi" data-bs-toggle="tab">
-                            <i class="bi bi-shield-lock nav-icon me-n2"></i>
+                            <i class="bi bi-shield-lock nav-icon"></i>
                             {{ __('Password & Security') }}
                         </a>
                     </li>
                 @endif
+                <li class="nav-item">
+                    <a class="nav-link rounded-1 px-2 text-start {{ $request->page == 'preferences' ? 'active' : '' }}" href="#tabs-preferensi" data-bs-toggle="tab">
+                        <i class="bi bi-gear nav-icon"></i>
+                        {{ __('Preferences') }}
+                    </a>
+                </li>
                 @if(Novay\Nue\Features::enabled(Novay\Nue\Features::terminateAccount()))
                     <li class="nav-item">
                         <a class="nav-link rounded-1 px-2 text-danger text-start" href="#tabs-terminate" data-bs-toggle="tab">
-                            <i class="bi bi-trash nav-icon me-n2"></i>
+                            <i class="bi bi-trash nav-icon"></i>
                             {{ __('Terminate Account') }}
                         </a>
                     </li>
@@ -62,9 +68,9 @@
             </ul>
         </div>
         <div class="col-12 col-md-8 ps-lg-0">
-            <div class="tab-content">
+            <div class="tab-content p-1 shadow-sm">
 
-                <div class="tab-pane active show" id="tabs-ringkasan">
+                <div class="tab-pane {{ $request->page != 'preferences' ? 'active show' : '' }}" id="tabs-ringkasan">
                     <div class="card rounded-0">
                         <div class="card-header">
                             <h4 class="card-title">{{ __('Overview') }}</h4>
@@ -113,6 +119,17 @@
                         </div>
                     </div>
                 @endif
+
+                <div class="tab-pane {{ $request->page == 'preferences' ? 'active show' : '' }}" id="tabs-preferensi">
+                    <div class="card rounded-0">
+                        <div class="card-header">
+                            <h4 class="card-title">{{ __('Preferences') }}</h4>
+                        </div>
+                        <div class="card-body p-0 card-body-height card-profile">
+                            @include('profile.page.preferences')
+                        </div>
+                    </div>
+                </div>
 
                 @if(Novay\Nue\Features::enabled(Novay\Nue\Features::terminateAccount()))
                     <div class="tab-pane" id="tabs-terminate">

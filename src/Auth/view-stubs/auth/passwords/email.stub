@@ -3,79 +3,80 @@
 
 @section('content')
     <main id="content" role="main" class="main">
-        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url(https://aws.btekno.id/templates/front-dashboard/2.1/svg/components/card-3.svg);">
+        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ config('nue.brand.cdn') }}/svg/components/card-3.svg);">
             <div class="shape shape-bottom zi-1">
                 <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
                     <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
                 </svg>
             </div>
         </div>
-        <div class="container py-5 py-sm-7">
-            <a class="d-flex justify-content-center mb-5" href="/">
-                <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" style="width: 12rem;">
-                <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" style="width: 12rem;">
-            </a>
-            <div class="mx-auto" style="max-width: 30rem;">
-                <div class="card card-lg shadow-none border rounded-1 mb-5">
-                    <div class="card-body">
-                        <form class="js-validate needs-validation" method="POST" action="{{ route('password.email') }}" novalidate>
-                            @csrf
-                            
-                            @if(session('status'))
-                                <div class="alert alert-soft-success rounded-1" role="alert">{{ session('status') }}</div>
-                            @endif
+        <div class="content container-fluid d-flex position-relative vh-100 align-items-center justify-content-center">
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-4">
+                    <a class="d-flex justify-content-center mb-3 mb-lg-5" href="/">
+                        <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" height="70">
+                        <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" height="70">
+                    </a>
+                    <div class="card card-lg shadow-none border rounded-1 mb-5">
+                        <div class="card-body">
+                            <form class="js-validate needs-validation" method="POST" action="{{ route('password.email') }}" novalidate>
+                                @csrf
+                                
+                                @if(session('status'))
+                                    <div class="alert alert-soft-success rounded-1" role="alert">{{ session('status') }}</div>
+                                @endif
 
-                            <div class="text-start">
-                                <div class="mb-5">
-                                    <h1 class="display-5">{{ __('Forgot Password') }}</h1>
-                                    <p>Enter the email address you used when you joined and we'll send you instructions to reset your password.</p>
+                                <div class="text-start">
+                                    <div class="mb-5">
+                                        <h1 class="display-5 fw-bold">{{ __('Forgot Password') }}</h1>
+                                        <p>{{ __('Enter the email address you used when you joined and we\'ll send you instructions to reset your password.') }}</p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="mb-3">
-                                <label class="form-label text-cap text-muted mb-2" for="email">
-                                    {{ __('Email Address') }}
-                                </label>
-                                <input id="email" type="text" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="eg. nue@btekno.id" autocomplete="email" autofocus>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                @enderror
-                            </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-cap text-muted mb-2" for="email">
+                                        {{ __('Email Address') }}
+                                    </label>
+                                    <input id="email" type="text" name="email" class="form-control form-control-lg rounded-0 @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="eg. nue@btekno.id" autocomplete="email" autofocus>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                    @enderror
+                                </div>
 
-                            <div class="d-grid mb-1">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                            <div class="text-center">
-                                <a class="btn btn-link" href="{{ route('login') }}">
-                                    <i class="bi-chevron-left"></i> Back to Sign in
-                                </a>
-                            </div>
-                        </form>
+                                <div class="d-grid mb-1">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        {{ __('Send Password Reset Link') }}
+                                    </button>
+                                </div>
+                                <div class="text-center">
+                                    <a class="btn btn-link" href="{{ route('login') }}">
+                                        <i class="bi-chevron-left"></i> {{ __('Back to Sign in') }}
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-
-                <div class="position-relative text-center zi-1">
-                    <small class="text-cap text-body mb-4">
-                        Used by them without problems
-                    </small>
-                    <div class="w-85 mx-auto">
-                        <div class="row justify-content-between">
-                            <div class="col">
-                                <img class="img-fluid" src="https://btekno.id/img/btekno-sticker.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
-                            </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-samarinda.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
-                            </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-kukar.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
-                            </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-paser.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
-                            </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-berau.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                    <div class="position-relative text-center zi-1">
+                        <small class="text-cap text-body mb-4">
+                            {{ __('Used by them') }}
+                        </small>
+                        <div class="w-85 mx-auto">
+                            <div class="row justify-content-between">
+                                <div class="col">
+                                    <img class="img-fluid" src="https://btekno.id/img/btekno-sticker.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
+                                <div class="col">
+                                    <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-samarinda.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
+                                <div class="col">
+                                    <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-kukar.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
+                                <div class="col">
+                                    <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-paser.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
+                                <div class="col">
+                                    <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-berau.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
                             </div>
                         </div>
                     </div>

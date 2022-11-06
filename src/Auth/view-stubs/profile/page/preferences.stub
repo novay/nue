@@ -1,0 +1,70 @@
+<div class="card-body">
+    <div class="row gx-2 mb-2">
+        <label for="old_password" class="col-sm-5 col-form-label form-label">
+            {{ __('Select Language') }} <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+            <div class="input-group input-group-vertical rounded-0">
+                @foreach(config('nue.locales') as $i => $temp)
+                    <label class="form-control {{ config('app.locale') == $i ? 'bg-light' : '' }}" for="lang-{{ $i }}">
+                        <a href="{{ route('locale', $i) }}" class="mb-0">
+                            <span class="form-check form-check-reverse text-start">
+                                <span class="form-check-label">
+                                    <img class="avatar avatar-xss avatar-circle me-2" src="{{ config('nue.brand.cdn') }}/vendor/flag-icon-css/flags/1x1/{{ $i == 'en' ? 'us' : $i }}.svg" alt="Flag">
+                                    <span class="text-truncate" title="{{ __($temp) }}">
+                                        {{ __($temp) }}
+                                    </span>
+                                </span>
+                            </span>
+                        </a>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div class="row gx-2 mb-2">
+        <label for="new_password" class="col-sm-5 col-form-label form-label">
+            {{ __('Theme Mode') }} <span class="text-danger">*</span>
+        </label>
+        <div class="col-sm-7">
+            <div class="input-group input-group-vertical rounded-0">
+                <label class="form-control">
+                    <a href="javascript:;" class="mb-0" onclick="return NueThemeAppearance.setAppearance('auto')">
+                        <span class="form-check form-check-reverse text-start">
+                            <span class="form-check-label">
+                                <i class="bi bi-moon-stars me-1"></i>
+                                <span class="text-truncate" title="{{ __('Mode Auto') }}">
+                                    {{ __('Mode Auto') }}
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                </label>
+                <label class="form-control">
+                    <a href="javascript:;" class="mb-0" onclick="return NueThemeAppearance.setAppearance('default')">
+                        <span class="form-check form-check-reverse text-start">
+                            <span class="form-check-label">
+                                <i class="bi bi-brightness-high me-1"></i>
+                                <span class="text-truncate" title="{{ __('Mode Light') }}">
+                                    {{ __('Mode Light') }}
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                </label>
+                <label class="form-control">
+                    <a href="javascript:;" class="mb-0" onclick="return NueThemeAppearance.setAppearance('dark')">
+                        <span class="form-check form-check-reverse text-start">
+                            <span class="form-check-label">
+                                <i class="bi bi-moon me-1"></i>
+                                <span class="text-truncate" title="{{ __('Mode Dark') }}">
+                                    {{ __('Mode Dark') }}
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

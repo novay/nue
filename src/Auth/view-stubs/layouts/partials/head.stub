@@ -7,9 +7,9 @@
 
 	<!-- Favicon, Fonts & Styles -->
 	<link rel="shortcut icon" href="{{ config('nue.brand.favicon') }}">
-	<link rel="stylesheet" href="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/bootstrap-icons/font/bootstrap-icons.css">
-	<link rel="preload" href="{{ config('nue.brand.cdn') }}/css/theme.min.css?v3" data-nue-appearance="default" as="style">
-	<link rel="preload" href="{{ config('nue.brand.cdn') }}/css/theme-dark.min.css?v3" data-nue-appearance="dark" as="style">
+	<link rel="stylesheet" href="{{ config('nue.brand.cdn') }}/vendor/bootstrap-icons/font/bootstrap-icons.css">
+	<link rel="preload" href="{{ config('nue.brand.cdn') }}/css/theme.min.css" data-nue-appearance="default" as="style">
+	<link rel="preload" href="{{ config('nue.brand.cdn') }}/css/theme-dark.min.css" data-nue-appearance="dark" as="style">
 
 	<style data-nue-appearance-onload-styles>
 		* { transition: unset !important }

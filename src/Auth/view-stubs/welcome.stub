@@ -1,132 +1,64 @@
 @extends('layouts.base')
-@section('title', __('Welcome'))
-
-@section('css')
-    <style type="text/css">
-        @media (min-width: 1400px) {
-            .container-lg {
-                max-width: 1140px;
-            }
-        }
-        .nue-title {
-            font-size: 3.35rem;
-            line-height: 1;
-            letter-spacing: -0.025em;
-            font-weight: 800;
-        }
-    </style>
-@endsection
-
-@section('js')
-@endsection
+@section('title', __('Dashboard'))
+@section('m-home', 'active')
 
 @section('content')
-    <header id="header" class="navbar navbar-expand-lg navbar-center navbar-light bg-white navbar-absolute-top navbar-show-hide" data-nue-header-options='{
-            "fixMoment": 0,
-            "fixEffect": "slide"
-        }'>
-        <div class="container-lg">
-            <nav class="js-mega-menu navbar-nav-wrap">
-                <a class="navbar-brand" href="/" aria-label="Logo">
-                    <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.light') }}" alt="Logo" data-nue-theme-appearance="default">
-                    <img class="navbar-brand-logo" height="50" src="{{ config('nue.brand.logo.default.dark') }}" alt="Logo" data-nue-theme-appearance="dark">
+    <div class="content container-fluid bg-light card-body-height pt-3" style="height:calc(100vh - 62px)">
+        <div class="row align-items-center mb-2">
+            <div class="col-sm mb-2 mb-sm-0">
+                <h3 class="page-header-title mb-0">{{ __('Hello') }}, {{ Nue::user()->name }}!</h3>
+                <p class="page-header-text small">{{ __('Hello Desc') }}</p>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-sm btn-dark" href="https://github.com/novay/nue" target="_blank">
+                    <i class="bi-github me-1"></i> Github
                 </a>
-                <div class="navbar-nav-wrap-secondary-content">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="theme-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation></button>
-                        <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border dropdown-menu-end" aria-labelledby="theme-dropdown">
-                            <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
-                                <i class="bi-moon-stars me-2"></i>
-                                <span class="text-truncate" title="{{ __('Mode Auto') }}">{{ __('Mode Auto') }}</span>
-                            </a>
-                            <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
-                                <i class="bi-brightness-high me-2"></i>
-                                <span class="text-truncate" title="{{ __('Mode Light') }}">{{ __('Mode Light') }}</span>
-                            </a>
-                            <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
-                                <i class="bi-moon me-2"></i>
-                                <span class="text-truncate" title="{{ __('Mode Dark') }}">{{ __('Mode Dark') }}</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="dropdown me-2">
-                        <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                            <img class="avatar avatar-xss avatar-circle" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ config('app.locale') == 'id' ? 'id' : 'us' }}.svg" alt="">
-                        </button>
-
-                        <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border dropdown-menu-end" aria-labelledby="language-dropdown">
-                            <span class="dropdown-header">{{ __('Select Language') }}</span>
-                            @foreach(config('nue.locales') as $i => $temp)
-                                <a class="dropdown-item {{ config('app.locale') == $i ? 'active' : '' }}" href="{{ route('locale', $i) }}">
-                                    <img class="avatar avatar-xss avatar-circle me-2" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ $i == 'en' ? 'us' : $i }}.svg" alt="Flag">
-                                    <span class="text-truncate" title="{{ __($temp) }}">
-                                        {{ __($temp) }}
-                                    </span>
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                    @guest
-                        @if(Route::has('login'))
-                            <a class="btn btn-secondary navbar-btn" href="{{ route('login') }}">
-                                {{ __('Sign in') }}
-                            </a>
-                        @endif
-                        @if(Route::has('register'))
-                            <a class="btn btn-primary navbar-btn" href="{{ route('register') }}">
-                                {{ __('Register') }}
-                            </a>
-                        @endif
-                    @else
-                        <a class="btn btn-secondary navbar-btn" href="{{ config('nue.home') }}">
-                            {{ __('Dashboard') }}
-                        </a>
-                    @endguest
-                </div>
-                <div class="collapse navbar-collapse" id="navbarContainerNavDropdown"></div>
-            </nav>
+                <a class="btn btn-sm btn-secondary" href="https://nue.btekno.id/docs" target="_blank">
+                    <i class="bi-book me-1"></i> {{ __('Documentation') }}
+                </a>
+            </div>
         </div>
-    </header>
-    <main id="content" role="main" class="main">
-        <div class="overflow-hidden gradient-radial-sm-primary">
-            <div class="animated fadeInUp container-lg content-space-t-3 content-space-t-lg-4">
-                <div class="w-lg-75 mx-lg-auto mx-auto">
-                    <div class="text-center mb-5">
-                        <h1 class="nue-title mb-3">
-                            {{ __('Welcome Title') }}
-                        </h1>
-                        <p class="fs-2">
-                            {{ __('Welcome Desc') }}
-                        </p>
+        <div class="row gx-2">
+            <div class="col-lg-8">
+                <div class="card shadow-none border rounded-0 mb-1">
+                    <div class="card-header card-header-content-between">
+                        <h4 class="card-header-title">
+                            {{ __('Environment') }}
+                        </h4>
                     </div>
-                    <div class="card bg-dark mb-5">
-                        <div class="card-body font-monospace">
-                            <div class="d-grid gap-6">
-                                <span class="d-grid gap-1">
-                                    <span class="d-block text-white-70">&gt; $ composer require novay/nue</span>
-                                    <span class="d-block text-success">Package manifest generated successfully.</span>
-                                    <span class="d-block text-white-70">&gt; $ php artisan nue</span>
-                                    <span class="d-block text-white-70"></span>
-                                    <span class="d-block text-success">Nue version 3.00</span>
-                                    <span class="d-block text-success">&nbsp;</span>
-                                    <span class="d-block text-warning">Available commands:</span>
-                                    <span class="d-block text-white">&nbsp;nue:install&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Install the Nue components and resources.</span>
-                                    <span class="d-block text-white">&nbsp;nue:auth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scaffold the authentication controllers (silent call).</span>
-                                    <span class="d-block text-white">&nbsp;nue:uninstall&nbsp;&nbsp;&nbsp;Uninstall the Nue package.</span>
-                                    <span class="d-block text-white-70">&nbsp;nue:extend&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build your own Nue extension.</span>
-                                    <span class="d-block text-white-70">&nbsp;nue:import&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import your Nue extension.</span>
-                                </span>
-                            </div>
-                        </div>
+                    <div class="table-responsive border-top">
+                        <table class="table table-striped table-sm">
+                            @foreach($envs as $env)
+                                <tr>
+                                    <td width="25%">{!! $env['name'] !!}</td>
+                                    <td>{!! $env['value'] !!}</td>
+                                </tr>
+                            @endforeach
+                        </table>
                     </div>
                 </div>
-                <div class="d-grid mx-auto" style="max-width: 10rem;">
-                    <a class="btn btn-dark btn-lg fw-semibold" href="https://github.com/novay/nue" target="_blank">
-                        <i class="bi bi-github me-1"></i>
-                        Github
-                    </a>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow-none border rounded-0 mb-1">
+                    <div class="card-header card-header-content-sm-between">
+                        <h4 class="card-header-title mb-2 mb-sm-0">
+                            {{ __('Dependencies') }}
+                        </h4>
+                    </div>
+                    <div class="table-responsive border-top">
+                        <table class="table table-striped table-sm">
+                            @foreach($dependencies as $dependency => $version)
+                            <tr>
+                                <td>
+                                    <code class="small">{{ $dependency }}</code>
+                                </td>
+                                <td align="right"><span class="badge bg-secondary">{{ $version }}</span></td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 @endsection

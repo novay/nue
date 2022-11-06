@@ -49,6 +49,7 @@ class InstallCommand extends Command
         'profile/page/personal.stub' => 'profile/page/personal.blade.php',
         'profile/page/email.stub' => 'profile/page/email.blade.php',
         'profile/page/password.stub' => 'profile/page/password.blade.php',
+        'profile/page/preferences.stub' => 'profile/page/preferences.blade.php',
         'profile/page/terminate.stub' => 'profile/page/terminate.blade.php',
     ];
 

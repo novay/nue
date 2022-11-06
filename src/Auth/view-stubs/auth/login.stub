@@ -12,155 +12,160 @@
 
 @section('content')
     <main id="content" role="main" class="main">
-        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url(https://aws.btekno.id/templates/front-dashboard/2.1/svg/components/card-3.svg);">
+        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ config('nue.brand.cdn') }}/svg/components/card-3.svg);">
             <div class="shape shape-bottom zi-1">
                 <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
                     <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
                 </svg>
             </div>
         </div>
-        <div class="container py-5 py-sm-7">
-            <a class="d-flex justify-content-center mb-5" href="/">
-                <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" style="width: 12rem;">
-                <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" style="width: 12rem;">
-            </a>
-            <div class="mx-auto" style="max-width: 30rem;">
-                <div class="card card-lg shadow-none border rounded-1 mb-2">
-                    <div class="card-body">
-                        <form class="js-validate needs-validation" method="POST" action="{{ route('login') }}" novalidate>
-                            @csrf
-                            <div class="text-start">
-                                <div class="mb-5">
-                                    <h1 class="display-5">
-                                        {{ __('Sign in') }}
-                                    </h1>
-                                    @if(Route::has('register'))
-                                        <p>
-                                            {{ __('Don\'t have an account yet?') }}
-                                            <a class="link" href="{{ route('register') }}">
-                                                {{ __('Sign up here') }}
-                                            </a>
-                                        </p>
-                                    @else
-                                        <p>{{ __('Please sign in to your account.') }}</p>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label text-cap text-muted mb-2" for="{{ config('nue.username') }}">
-                                    @if(config('nue.username') == 'email')
-                                        {{ __('Email Address') }}
-                                    @else
-                                        {{ __('Username') }}
-                                    @endif
-                                </label>
-                                <input type="text" class="form-control form-control-lg @error(config('nue.username')) is-invalid @enderror" name="{{ config('nue.username') }}" id="{{ config('nue.username') }}" value="{{ old(config('nue.username')) }}" placeholder="eg. nue@btekno.id" aria-label="eg. nue@btekno.id" autocomplete="email">
-                                @error(config('nue.username'))
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-4">
-                                <label class="form-label text-cap text-muted mb-2 w-100" for="password">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <span>{{ __('Password') }}</span>
-                                        @if (Route::has('password.request') && config('nue.username') == 'email')
-                                            <a class="form-label-link mb-0" href="{{ route('password.request') }}">
-                                                {{ __('Forgot') }}
-                                            </a>
+        <div class="content container-fluid d-flex position-relative vh-100 align-items-center justify-content-center">
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-4">
+                    <a class="d-flex justify-content-center mb-3 mb-lg-5" href="/">
+                        <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" height="70">
+                        <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" height="70">
+                    </a>
+                    <div class="card card-lg shadow-none border rounded-1 mb-2">
+                        <div class="card-body">
+                            <form class="js-validate needs-validation" method="POST" action="{{ route('login') }}" novalidate>
+                                @csrf
+                                <div class="text-start">
+                                    <div class="mb-4">
+                                        <h1 class="display-5 fw-bold mb-1">
+                                            {{ __('Sign in') }}
+                                        </h1>
+                                        @if(Route::has('register'))
+                                            <p class="text-muted">
+                                                {{ __('Don\'t have an account yet?') }}
+                                                <a class="link" href="{{ route('register') }}">
+                                                    {{ __('Sign up here') }}
+                                                </a>
+                                            </p>
+                                        @else
+                                            <p class="text-muted">{{ __('Please sign in to your account.') }}</p>
                                         @endif
-                                    </span>
-                                </label>
-                                <div class="input-group input-group-merge @error('password') is-invalid @enderror" data-nue-validation-validate-class>
-                                    <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="password" autocomplete="current-password" placeholder="{{ __('Password Placeholder') }}" aria-label="{{ __('Password Placeholder') }}" data-nue-toggle-password-options='{
-                                        "target": "#pass-target",
-                                        "defaultClass": "bi-eye-slash",
-                                        "showClass": "bi-eye",
-                                        "classChangeTarget": "#pass-icon"
-                                    }'>
-                                    <a id="pass-target" class="input-group-append input-group-text" href="javascript:;">
-                                        <i id="pass-icon" class="bi-eye"></i>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label text-cap text-muted mb-2" for="{{ config('nue.username') }}">
+                                        @if(config('nue.username') == 'email')
+                                            {{ __('Email Address') }}
+                                        @else
+                                            {{ __('Username') }}
+                                        @endif
+                                    </label>
+                                    <input type="text" class="form-control form-control-lg rounded-0 @error(config('nue.username')) is-invalid @enderror" name="{{ config('nue.username') }}" id="{{ config('nue.username') }}" value="{{ old(config('nue.username')) }}" placeholder="eg. nue@btekno.id" aria-label="eg. nue@btekno.id" autocomplete="email">
+                                    @error(config('nue.username'))
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label text-muted mb-2 w-100" for="password">
+                                        <span class="d-flex justify-content-between align-items-center">
+                                            <span class="text-cap text-muted mb-0">{{ __('Password') }}</span>
+                                            @if (Route::has('password.request') && config('nue.username') == 'email')
+                                                <a class="form-label-link mb-0" href="{{ route('password.request') }}">
+                                                    {{ __('Forgot') }}
+                                                </a>
+                                            @endif
+                                        </span>
+                                    </label>
+                                    <div class="input-group input-group-merge rounded-0 @error('password') is-invalid @enderror" data-nue-validation-validate-class>
+                                        <input type="password" class="js-toggle-password form-control form-control-lg rounded-0 @error('password') is-invalid @enderror" name="password" id="password" autocomplete="current-password" placeholder="{{ __('Password Placeholder') }}" aria-label="{{ __('Password Placeholder') }}" data-nue-toggle-password-options='{
+                                            "target": "#pass-target",
+                                            "defaultClass": "bi-eye-slash",
+                                            "showClass": "bi-eye",
+                                            "classChangeTarget": "#pass-icon"
+                                        }'>
+                                        <a id="pass-target" class="input-group-append input-group-text" href="javascript:;">
+                                            <i id="pass-icon" class="bi-eye"></i>
+                                        </a>
+                                    </div>
+                                    @error('password')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="remember">
+                                            {{ __('Remember') }}
+                                        </label>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary rounded-xs">
+                                            {{ __('Sign in') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between small px-1 mb-5">
+                        <div>{{ date('Y') }} &copy; Nue v{{ \Novay\Nue\Nue::VERSION }}</div>
+                        <div class="d-flex">
+                            <div class="dropdown dropup me-2">
+                                <button type="button" class="btn btn-xs btn-ghost-secondary btn-icon rounded-circle" id="theme-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation></button>
+                                <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border dropdown-menu-end" aria-labelledby="theme-dropdown">
+                                    <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
+                                        <i class="bi-moon-stars me-2"></i>
+                                        <span class="text-truncate" title="{{ __('Mode Auto') }}">{{ __('Mode Auto') }}</span>
+                                    </a>
+                                    <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
+                                        <i class="bi-brightness-high me-2"></i>
+                                        <span class="text-truncate" title="{{ __('Mode Light') }}">{{ __('Mode Light') }}</span>
+                                    </a>
+                                    <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
+                                        <i class="bi-moon me-2"></i>
+                                        <span class="text-truncate" title="{{ __('Mode Dark') }}">{{ __('Mode Dark') }}</span>
                                     </a>
                                 </div>
-                                @error('password')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
                             </div>
-
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember">
-                                    {{ __('Remember') }}
-                                </label>
-                            </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    {{ __('Sign in') }}
+                            <div class="dropdown dropup">
+                                <button type="button" class="btn btn-xs btn-ghost-secondary btn-icon rounded-circle" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+                                    <img class="avatar avatar-xss avatar-circle" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ config('app.locale') == 'id' ? 'id' : 'us' }}.svg" alt="">
                                 </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between small px-1 mb-4">
-                    <div>Nue v{{ \Novay\Nue\Nue::VERSION }}</div>
-                    <div class="d-flex">
-                        <div class="dropdown dropup me-2">
-                            <button type="button" class="btn btn-xs btn-ghost-secondary btn-icon rounded-circle" id="theme-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation></button>
-                            <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border dropdown-menu-end" aria-labelledby="theme-dropdown">
-                                <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
-                                    <i class="bi-moon-stars me-2"></i>
-                                    <span class="text-truncate" title="{{ __('Mode Auto') }}">{{ __('Mode Auto') }}</span>
-                                </a>
-                                <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
-                                    <i class="bi-brightness-high me-2"></i>
-                                    <span class="text-truncate" title="{{ __('Mode Light') }}">{{ __('Mode Light') }}</span>
-                                </a>
-                                <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
-                                    <i class="bi-moon me-2"></i>
-                                    <span class="text-truncate" title="{{ __('Mode Dark') }}">{{ __('Mode Dark') }}</span>
-                                </a>
+
+                                <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border dropdown-menu-end" aria-labelledby="language-dropdown">
+                                    <span class="dropdown-header">{{ __('Select Language') }}</span>
+                                    @foreach(config('nue.locales') as $i => $temp)
+                                        <a class="dropdown-item {{ config('app.locale') == $i ? 'active' : '' }}" href="{{ route('locale', $i) }}">
+                                            <img class="avatar avatar-xss avatar-circle me-2" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ $i == 'en' ? 'us' : $i }}.svg" alt="Flag">
+                                            <span class="text-truncate" title="{{ __($temp) }}">
+                                                {{ __($temp) }}
+                                            </span>
+                                        </a>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                        <div class="dropdown dropup">
-                            <button type="button" class="btn btn-xs btn-ghost-secondary btn-icon rounded-circle" id="language-dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
-                                <img class="avatar avatar-xss avatar-circle" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ config('app.locale') == 'id' ? 'id' : 'us' }}.svg" alt="">
-                            </button>
+                    </div>  
 
-                            <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless shadow-none rounded-1 border dropdown-menu-end" aria-labelledby="language-dropdown">
-                                <span class="dropdown-header">{{ __('Select Language') }}</span>
-                                @foreach(config('nue.locales') as $i => $temp)
-                                    <a class="dropdown-item {{ config('app.locale') == $i ? 'active' : '' }}" href="{{ route('locale', $i) }}">
-                                        <img class="avatar avatar-xss avatar-circle me-2" src="https://aws.btekno.id/templates/front-dashboard/2.1/vendor/flag-icon-css/flags/1x1/{{ $i == 'en' ? 'us' : $i }}.svg" alt="Flag">
-                                        <span class="text-truncate" title="{{ __($temp) }}">
-                                            {{ __($temp) }}
-                                        </span>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="position-relative text-center zi-1">
-                    <small class="text-cap text-body mb-3">
-                        {{ __('Used by them') }}
-                    </small>
-                    <div class="w-85 mx-auto">
-                        <div class="row justify-content-between">
-                            <div class="col">
-                                <img class="img-fluid" src="https://btekno.id/img/btekno-sticker.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
-                            </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-samarinda.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
-                            </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-kukar.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
-                            </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-paser.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
-                            </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-berau.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                    <div class="position-relative text-center zi-1">
+                        <small class="text-cap text-body mb-3">
+                            {{ __('Used by them') }}
+                        </small>
+                        <div class="w-85 mx-auto">
+                            <div class="row justify-content-between">
+                                <div class="col">
+                                    <img class="img-fluid" src="https://btekno.id/img/btekno-sticker.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
+                                <div class="col">
+                                    <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-samarinda.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
+                                <div class="col">
+                                    <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-kukar.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
+                                <div class="col">
+                                    <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-paser.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
+                                <div class="col">
+                                    <img class="img-fluid" src="https://api.kaltimprov.go.id/img/logo-berau.png" alt="Logo" style="-webkit-filter:grayscale(100%);filter:grayscale(100%)">
+                                </div>
                             </div>
                         </div>
                     </div>

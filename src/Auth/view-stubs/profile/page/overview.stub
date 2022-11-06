@@ -24,25 +24,6 @@
             </div>
         </div>
     @endif
-
-    <div class="row gx-2 align-items-center mb-3">
-        <div class="col-auto">
-            <span class="bg-danger text-white avatar rounded-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon p-2 icon-tabler-alert-triangle" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 9v2m0 4v.01"></path><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path></svg>
-            </span>
-        </div>
-        <div class="col">
-            <div class="font-weight-medium">
-                {{ __('Notif Password') }}
-            </div>
-            <div class="text-muted small">
-                {{ __('Notif Password Desc') }}
-            </div>
-        </div>
-        <div class="col-auto nav">
-            <a href="javascript:;" class="btn btn-sm btn-white">{{ __('Update') }}</a>
-        </div>
-    </div>
 </div>
 <div class="position-absolute bottom-0 left-0 w-100 p-3">
     <div class="d-flex justify-content-between">

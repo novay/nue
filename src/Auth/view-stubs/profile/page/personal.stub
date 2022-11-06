@@ -1,6 +1,4 @@
-<script src="{{ config('nue.brand.cdn') }}/vendor/nue-file-attach/nue-file-attach.min.js"></script>
 <script>
-    new NueFileAttach('.js-file-attach');
     $("#form-personal").validate({
         errorClass: "is-invalid",
         submitHandler: function(form) {
@@ -40,9 +38,9 @@
                     <img class="profile-cover-img rounded-0" src="https://cdn.btekno.id/templates/nue/img/1920x400/img2.jpg" alt="">
                 </div>
             </div>
-            <label class="avatar avatar-xxl avatar-circle avatar-uploader profile-cover-avatar" for="editAvatarUploaderModal">
+            <label class="avatar avatar-xxl avatar-circle avatar-uploader profile-cover-avatar" for="avatar-photo">
                 <img id="editAvatarImgModal" class="avatar-img" src="{{ me()->photo_url }}" alt="">
-                <input type="file" class="js-file-attach avatar-uploader-input" id="editAvatarUploaderModal" name="photo" data-nue-file-attach-options='{
+                <input type="file" class="js-file-attach avatar-uploader-input" id="avatar-photo" name="photo" data-nue-file-attach-options='{
                     "textTarget": "#editAvatarImgModal",
                     "mode": "image",
                     "targetAttr": "src",
@@ -62,7 +60,7 @@
             </div>
         @endif
         <div class="card-body">
-            <div class="row mb-2">                
+            <div class="row mb-1">                
                 <label for="name" class="col-sm-4 col-form-label">
                     {{ __('Name') }} <span class="text-danger">*</span>
                 </label>
@@ -71,7 +69,7 @@
                     <span id="name-error" class="d-block invalid-feedback mt-1"></span>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label for="name" class="col-sm-4 col-form-label">
                     {{ __('Email') }}
                 </label>
@@ -79,7 +77,7 @@
                     {{ Form::text('email', null, ['class' => 'form-control form-control-sm rounded-0', 'placeholder' => __('Enter your email address'), 'disabled']) }}
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label for="phone" class="col-sm-4 col-form-label">
                     {{ __('Phone') }} <span class="form-label-secondary">({{ __('Optional') }})</span>
                 </label>

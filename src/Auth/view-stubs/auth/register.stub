@@ -12,7 +12,7 @@
 
 @section('content')
     <main id="content" role="main" class="main">
-        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url(https://aws.btekno.id/templates/front-dashboard/2.1/svg/components/card-3.svg);">
+        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ config('nue.brand.cdn') }}/svg/components/card-3.svg);">
             <div class="shape shape-bottom zi-1">
                 <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
                     <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
@@ -21,8 +21,8 @@
         </div>
         <div class="container py-5 py-sm-5">
             <a class="d-flex justify-content-center mb-5" href="/">
-                <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" style="width: 12rem;">
-                <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" style="width: 12rem;">
+                <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" height="70">
+                <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" height="70">
             </a>
             <div class="mx-auto" style="max-width: 30rem;">
                 <div class="card card-lg shadow-none border rounded-1 mb-5">
@@ -30,9 +30,9 @@
                         <form class="js-validate needs-validation" method="POST" action="{{ route('register') }}" novalidate>
                             @csrf
                             <div class="text-start">
-                                <div class="mb-5">
-                                    <h1 class="display-5">{{ __('Register') }}</h1>
-                                    <p>Already have an account? <a class="link" href="{{ route('login') }}">Sign in here</a></p>
+                                <div class="mb-4">
+                                    <h1 class="display-5 fw-bold mb-1">{{ __('Register') }}</h1>
+                                    <p>{{ __('Already have an account?') }} <a class="link" href="{{ route('login') }}">{{ __('Sign in here') }}</a></p>
                                 </div>
                             </div>
 
@@ -40,7 +40,7 @@
                                 <label class="form-label text-cap text-muted mb-2" for="name">
                                     {{ __('Name') }} <span class="text-danger">*</span>
                                 </label>
-                                <input id="name" type="text" name="name" class="form-control form-control-lg @error('name') is-invalid @enderror" value="{{ old('name') }}" autocomplete="name" placeholder="eg. Noviyanto Rahmadi">
+                                <input id="name" type="text" name="name" class="form-control rounded-0 @error('name') is-invalid @enderror" value="{{ old('name') }}" autocomplete="name" placeholder="eg. Noviyanto Rahmadi">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                 @enderror
@@ -53,7 +53,7 @@
                                         {{ __('Username') }}
                                     @endif
                                 </label>
-                                <input type="text" class="form-control form-control-lg @error(config('nue.username')) is-invalid @enderror" name="{{ config('nue.username') }}" id="{{ config('nue.username') }}" value="{{ old(config('nue.username')) }}" placeholder="eg. nue@btekno.id" aria-label="eg. nue@btekno.id" autocomplete="email">
+                                <input type="text" class="form-control rounded-0 @error(config('nue.username')) is-invalid @enderror" name="{{ config('nue.username') }}" id="{{ config('nue.username') }}" value="{{ old(config('nue.username')) }}" placeholder="eg. nue@btekno.id" aria-label="eg. nue@btekno.id" autocomplete="email">
                                 @error(config('nue.username'))
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                 @enderror
@@ -62,8 +62,8 @@
                                 <label class="form-label text-cap text-muted mb-2 w-100" for="password">
                                     {{ __('Password') }}
                                 </label>
-                                <div class="input-group input-group-merge @error('password') is-invalid @enderror" data-nue-validation-validate-class>
-                                    <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="password" autocomplete="new-password" data-nue-toggle-password-options='{
+                                <div class="input-group input-group-merge rounded-0 @error('password') is-invalid @enderror" data-nue-validation-validate-class>
+                                    <input type="password" class="js-toggle-password form-control rounded-0" name="password" id="password" autocomplete="new-password" data-nue-toggle-password-options='{
                                         "target": "#new-target",
                                         "defaultClass": "bi-eye-slash",
                                         "showClass": "bi-eye",
@@ -81,8 +81,8 @@
                                 <label class="form-label text-cap text-muted mb-2 w-100" for="password-confirm">
                                     {{ __('Confirm Password') }}
                                 </label>
-                                <div class="input-group input-group-merge @error('password_confirmation') is-invalid @enderror" data-nue-validation-validate-class>
-                                    <input type="password" class="js-toggle-password form-control form-control-lg" name="password_confirmation" id="password-confirm" autocomplete="new-password" data-nue-toggle-password-options='{
+                                <div class="input-group input-group-merge rounded-0 @error('password_confirmation') is-invalid @enderror" data-nue-validation-validate-class>
+                                    <input type="password" class="js-toggle-password form-control rounded-0" name="password_confirmation" id="password-confirm" autocomplete="new-password" data-nue-toggle-password-options='{
                                         "target": "#confirm-target",
                                         "defaultClass": "bi-eye-slash",
                                         "showClass": "bi-eye",
@@ -99,7 +99,7 @@
                             <div class="form-check mb-5">
                                 <input class="form-check-input" type="checkbox" name="agree" id="agree" {{ old('agree') ? 'checked' : '' }} required>
                                 <label class="form-check-label" for="agree">
-                                    I accept the <a href="#">Terms and Conditions</a>
+                                    {{ __('I accept the Terms and Conditions') }}
                                 </label>
                             </div>
 
@@ -114,7 +114,7 @@
 
                 <div class="position-relative text-center zi-1">
                     <small class="text-cap text-body mb-4">
-                        Used by them without problems
+                        {{ __('Used by them') }}
                     </small>
                     <div class="w-85 mx-auto">
                         <div class="row justify-content-between">

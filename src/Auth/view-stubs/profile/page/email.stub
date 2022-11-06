@@ -1,6 +1,4 @@
-<script src="{{ config('nue.brand.cdn') }}/vendor/nue-toggle-password/nue-toggle-password.js"></script>
 <script>
-    new NueTogglePassword('.js-toggle-password');
     $("#form-email").validate({
         errorClass: "is-invalid",
         submitHandler: function(form) {
