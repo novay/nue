@@ -3,7 +3,7 @@
 @section('m-home', 'active')
 
 @section('content')
-    <div class="content container-fluid pt-3">
+    <div class="content container-fluid bg-light card-body-height pt-3" style="height:calc(100vh - 62px)">
         <div class="row align-items-center mb-2">
             <div class="col-sm mb-2 mb-sm-0">
                 <h3 class="page-header-title mb-0">{{ __('Hello') }}, {{ Nue::user()->name }}!</h3>
