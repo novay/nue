@@ -50,6 +50,10 @@ php artisan nue:install --force
 
 ## Configuration
 
+For the first, you can use this default credential :
+- Username : `novay@btekno.id`
+- Password : `admins`
+
 Make sure to check out our config files at `config/nue.php`. Here you can :
 - Change the default application name
 - Customize brands or assets files like favicon and the application logo.
