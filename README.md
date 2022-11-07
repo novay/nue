@@ -5,8 +5,7 @@
 [![Pull request welcome](https://img.shields.io/badge/pr-welcome-green.svg?style=flat-square)]()
 
 
-
-[Baca Dokumentasi Disini](https://nue.btekno.id/docs)
+You'll find the documentation on [https://nue.btekno.id/docs](https://nue.btekno.id/docs).
 
 ## Screenshot
 
