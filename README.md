@@ -32,7 +32,7 @@ You can try this within a new project, because i'm worried that it will interfer
 1. Install package via composer : 
 
 ```bash
-composer require novay/nue "3.102"
+composer require novay/nue "3.103"
 ```
 
 2. Configure your DB :
