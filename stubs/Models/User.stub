@@ -30,19 +30,11 @@ class User extends Model implements AuthenticatableContract//, MustVerifyEmailCo
     use MustVerifyEmail;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
-     * @var array<int, string>
+     * @var array<string>|bool
      */
-    protected $fillable = [
-        'photo',
-        'name',
-        'email',
-        'password',
-        'phone',
-        'last_login_at', 
-        'last_login_ip'
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
