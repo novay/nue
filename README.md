@@ -52,7 +52,7 @@ php artisan nue:install --force
 
 For the first, you can use this default credential :
 - Username : `novay@btekno.id`
-- Password : `admins`
+- Password : `adminsss`
 
 Make sure to check out our config files at `config/nue.php`. Here you can :
 - Change the default application name
