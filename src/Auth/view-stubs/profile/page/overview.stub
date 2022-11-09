@@ -19,7 +19,7 @@
                     {{ __('Notif Personal Desc') }}
                 </div>
             </div>
-            <div class="col-auto nav">
+            <div class="col-auto sembunyi">
                 <a href="javascript:;" class="btn btn-sm btn-white">{{ __('Update') }}</a>
             </div>
         </div>

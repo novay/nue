@@ -25,7 +25,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ config('nue.brand.cdn') }}/vendor/tom-select/css/tom-select.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.btekno.id/templates/nue/css/app.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.btekno.id/templates/nue/css/app.css?v2">
 
     <script src="{{ config('nue.brand.cdn') }}/vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ config('nue.brand.cdn') }}/js/nue-theme-appearance.js"></script>
@@ -49,7 +49,7 @@
     </main>
     @include('nue::partials.footer')
 
-    <div class="modal fade" id="dialog-ajax" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal fade" id="dialog-ajax" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
             <div id="dialog-body" class="w-100"></div>
         </div>
