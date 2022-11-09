@@ -1,3 +1,7 @@
+<script>
+	Nue.components.NueTomSelect.init('.js-select');
+</script>
+
 @isset($edit)
 	<div class="card-body bg-light border-top rounded-0 pb-10" style="min-height:calc(100vh - 130px)">
 @else

@@ -1,12 +1,15 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between border-bottom">
     @isset($datatable)
         <style>
             #datatable_filter {
                 display: none;
             }
             .dataTables_scrollBody thead tr:first-child {
-                height: 0px;
+                height: 0;
                 border-width: 0;
+            }
+            .dataTables_scrollHead {
+                margin-top: -1px;
             }
         </style>
         <div class="w-100">
@@ -20,14 +23,14 @@
     @endisset
     <div class="toolbar d-flex">
         @isset($back)
-            <a class="btn btn-secondary d-inline-flex align-items-center fw-medium border-0 rounded-0" href="{{ $back }}">
+            <a class="btn btn-secondary d-inline-flex align-items-center fw-medium border-0 rounded-0" href="{{ $back }}" data-pjax>
                 <i class="bi bi-chevron-left me-1"></i>
                 {{ __('Back') }}
             </a>
         @endisset
         @isset($datatable)
             <div id="datatable-checkbox-info" style="display: none;">
-                <button type="button" class="btn btn-danger d-inline-flex align-items-center fw-medium border-0 rounded-0" id="delete-selected">
+                <button type="button" class="btn btn-danger d-inline-flex align-items-center fw-medium border-0 rounded-0" onclick="deleteAll()" id="delete-all-button">
                     <i class="bi bi-trash me-1"></i>
                     {{ __('Delete') }} <span id="datatable-checkbox" class="mx-1">0</span> {{ __('rows') }}
                 </button>

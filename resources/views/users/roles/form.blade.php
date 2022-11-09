@@ -1,4 +1,26 @@
-<div class="card-body bg-light pb-10" style="min-height: calc(100vh - 130px);">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-duallistbox@3.0.9/dist/bootstrap-duallistbox.min.css">
+<style>
+    .bootstrap-duallistbox-container select {
+        padding: 10px;
+        border-radius: 0;
+    }
+</style>
+
+<script>
+    $(document).on('pjax:end', function () {
+        loadJS("https://cdn.jsdelivr.net/npm/bootstrap-duallistbox@3.0.9/dist/jquery.bootstrap-duallistbox.min.js", function () {
+            var listbox = $('select[name="permissions[]"]').bootstrapDualListbox();
+
+            $('input.filter').addClass('rounded-0');
+            $('.btn.moveall i').removeClass().addClass('bi bi-arrow-right');
+            $('.removeall i').removeClass().addClass('bi bi-arrow-left');
+            $('.move i').removeClass().addClass('bi bi-arrow-right');
+            $('.remove i').removeClass().addClass('bi bi-arrow-left');
+        });
+    });
+</script>
+
+<div class="card-body">
     <div class="row mb-1">
         <label class="col-sm-2 col-form-label" for="name">
             {{ __('Name') }} <span class="text-danger">*</span>
@@ -39,23 +61,12 @@
             </div>
         </div>
     </div>
-    <div class="mb-10">&nbsp;</div>
 </div>
 
-<div class="position-fixed start-50 bottom-0 translate-middle-x w-100 zi-99 mb-3" style="max-width: 40rem;">
-    <div class="card card-sm bg-dark border-dark mx-2">
-        <div class="card-body">
-            <div class="row justify-content-center justify-content-sm-between">
-                <div class="col"></div>
-                <div class="col-auto">
-                    <div class="d-flex gap-3">
-                        <button type="reset" class="btn btn-ghost-light">{{ __('Reset') }}</button>
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('Save') }}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="card-footer bg-light border-bottom d-flex p-0">
+    <button type="reset" class="btn btn-secondary rounded-0 me-0">{{ __('Reset') }}</button>
+    <button type="submit" class="btn btn-success rounded-0">
+        <i class="bi bi-save me-1"></i>
+        {{ isset($edit) ? __('Save changes') : __('Save') }}
+    </button>
 </div>
