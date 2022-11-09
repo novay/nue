@@ -31,11 +31,6 @@ class InstallCommand extends Command
      * @var array
      */
     protected $views = [
-        'layouts/app.stub' => 'layouts/app.blade.php',
-        'layouts/base.stub' => 'layouts/base.blade.php',
-        'layouts/partials/aside.stub' => 'layouts/partials/aside.blade.php',
-        'layouts/partials/head.stub' => 'layouts/partials/head.blade.php',
-        'layouts/partials/header.stub' => 'layouts/partials/header.blade.php',
         'welcome.stub' => 'welcome.blade.php',
         'auth/login.stub' => 'auth/login.blade.php',
         'auth/passwords/confirm.stub' => 'auth/passwords/confirm.blade.php',
@@ -96,10 +91,6 @@ class InstallCommand extends Command
      */
     protected function ensureDirectoriesExist()
     {
-        if (! is_dir($directory = $this->getViewPath('layouts/partials'))) {
-            mkdir($directory, 0755, true);
-        }
-
         if (! is_dir($directory = $this->getViewPath('profile/page'))) {
             mkdir($directory, 0755, true);
         }

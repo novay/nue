@@ -48,7 +48,8 @@ class Activity
         return config('nue.user_activities.enable')
             && !$this->inExceptArray($request)
             && $this->inAllowedMethods($request->method())
-            && Nue::user();
+            && Nue::user()
+            && !$request->filled('_pjax');
     }
 
     /**

@@ -47,13 +47,15 @@ class AuditController extends Controller
      */
     public function index(Request $request)
     {
+        $title = $this->title; 
+
         $data = $this->data->with('user')->latest();
 
         if($request->has('datatable')):
             return $this->datatable($data);
         endif;
 
-        return view("{$this->view}.index", compact('data'));
+        return nue_view("{$this->view}.index", compact('title', 'data'));
     }
 
     /**
@@ -68,11 +70,15 @@ class AuditController extends Controller
         if($request->has('pilihan')):
             foreach($request->pilihan as $temp):
                 $data = $this->data->findOrFail($temp);
-                $data->delete();
+                switch($id):
+                    case 'bulk-delete':
+                        $data->forceDelete();
+                    break;
+                    default:
+                    break;
+                endswitch;
             endforeach;
-            
-            notify()->flash($this->tDelete, 'success');
-            return redirect()->back();
+            return 'success';
         endif;
     }
 

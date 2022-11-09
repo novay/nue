@@ -9,12 +9,10 @@
                 data: $('#form-email').serialize(),
                 success: function( response ) {
                     document.getElementById("form-email").reset();
-                    Toast.fire({
-                        icon: response.type,
-                        title: response.message
-                    });
+                    toastr.success(response.message);
                     $("#submit-email").attr("disabled", false);
                     $('#dialog-ajax').modal('hide');
+                    $.pjax.reload('#pjax-container');
                 },
                 error: function(reject) {
                     var response = $.parseJSON(reject.responseText);

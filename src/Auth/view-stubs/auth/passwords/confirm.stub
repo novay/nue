@@ -1,11 +1,10 @@
-@extends('layouts.base')
+@extends('nue::blank')
 @section('title', __('Confirm Password'))
 
 @section('js')
+    <script src="{{ config('nue.brand.cdn') }}/vendor/nue-toggle-password/nue-toggle-password.js"></script>
     <script>
-        window.onload = function () {
-            new NueTogglePassword('.js-toggle-password')
-        }
+        new NueTogglePassword('.js-toggle-password')
     </script>
 @endsection
 

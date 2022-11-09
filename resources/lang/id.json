@@ -146,5 +146,11 @@
 	"Forgot Password": "Lupa Sandi", 
 	"Enter the email address you used when you joined and we'll send you instructions to reset your password.": "Masukkan surel yang Anda yang terdaftar dan kami akan mengirimkan instruksi untuk mengatur ulang kata sandi Anda.", 
 	"Send Password Reset Link": "Atur Ulang Kata Sandi", 
-	"Back to Sign in": "Kembali"
+	"Back to Sign in": "Kembali", 
+	"Are you sure?": "Apa Anda Yakin?", 
+	"Please type <b>delete</b> to confirm": "Silahkan ketik kata <b>delete</b> untuk melanjutkan.", 
+	"Sure": "Yakin", 
+	"Cancel": "Batalkan", 
+	"Please enter as instructed.": "Mohon masukkan sesuai dengan yang diperintahkan.", 
+	"An error occurred while deleting data. Try again.": "Terjadi kesalahan saat menghapus data. Coba sekali lagi."
 }

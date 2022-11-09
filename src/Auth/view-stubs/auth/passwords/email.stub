@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('nue::blank')
 @section('title', __('Forgot Password'))
 
 @section('content')

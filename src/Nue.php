@@ -2,13 +2,21 @@
 
 namespace Novay\Nue;
 
+use Closure;
 use Illuminate\Support\Facades\Auth;
 use Novay\Nue\Traits\HasMenu;
 use Novay\Nue\Traits\HasAssets;
 
+use Novay\Nue\Traits\Assets\Js;
+use Novay\Nue\Traits\Assets\Css;
+use Novay\Nue\Traits\Assets\Html;
+
+use Novay\Nue\Layout\Content;
+
 class Nue
 {
-    use HasMenu, HasAssets;
+    use HasMenu;
+    use Js, Css, Html;
 
     /**
      * The Nue version.
@@ -21,6 +29,16 @@ class Nue
      * @var array
      */
     public static $extensions = [];
+
+    /**
+     * @var []Closure
+     */
+    protected static $bootingCallbacks = [];
+
+    /**
+     * @var []Closure
+     */
+    protected static $bootedCallbacks = [];
 
     /**
      * Returns the long version of Nue.
@@ -68,11 +86,9 @@ class Nue
     }
 
     /**
-     * Register the laravel-admin builtin routes.
+     * Register the nue builtin routes.
      *
      * @return void
-     *
-     * @deprecated Use Admin::routes() instead();
      */
     public function registerAuthRoutes()
     {
@@ -80,7 +96,7 @@ class Nue
     }
 
     /**
-     * Register the laravel-admin builtin routes.
+     * Register the nue builtin routes.
      *
      * @return void
      */
@@ -98,6 +114,46 @@ class Nue
     {
         if (request()->pjax()) {
             request()->headers->set('X-PJAX', false);
+        }
+    }
+
+    /**
+     * @param Closure $callable
+     *
+     * @return \Novay\Nue\Layout\Content
+     */
+    public function content(Closure $callable = null)
+    {
+        return new Content($callable);
+    }
+
+    /**
+     * Starting the nue application.
+     */
+    public function start()
+    {
+        $this->fireBootingCallbacks();
+
+        $this->fireBootedCallbacks();
+    }
+
+    /**
+     * Call the booting callbacks for the admin application.
+     */
+    protected function fireBootingCallbacks()
+    {
+        foreach (static::$bootingCallbacks as $callable) {
+            call_user_func($callable);
+        }
+    }
+
+    /**
+     * Call the booted callbacks for the admin application.
+     */
+    protected function fireBootedCallbacks()
+    {
+        foreach (static::$bootedCallbacks as $callable) {
+            call_user_func($callable);
         }
     }
 }

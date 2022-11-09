@@ -1,107 +1,50 @@
-@extends('layouts.app')
+@extends('nue::blank')
 @section('title', __('Verify Your Email Address'))
 
-@section('body')
-    <body>
-        <script src="{{ config('nue.brand.cdn') }}/js/nue-theme-appearance.js"></script>
-        <script src="{{ config('nue.brand.cdn') }}/vendor/nue-navbar-vertical-aside/nue-navbar-vertical-aside-mini-cache.js"></script>
-        <main id="content" role="main" class="main">
-            <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ config('nue.brand.cdn') }}/svg/components/card-3.svg);">
-                <div class="shape shape-bottom zi-1">
-                    <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
-                        <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
-                    </svg>
-                </div>
+@section('content')
+    <main id="content" role="main" class="main">
+        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ config('nue.brand.cdn') }}/svg/components/card-3.svg);">
+            <div class="shape shape-bottom zi-1">
+                <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
+                    <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
+                </svg>
             </div>
+        </div>
 
-            <div class="content container-fluid d-flex position-relative vh-100 align-items-center justify-content-center">
-                <div class="justify-content-center w-25">
-                    <a class="d-flex justify-content-center mb-3 mb-lg-5" href="/">
-                        <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" height="60">
-                        <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" height="60">
-                    </a>
-                    <div class="card card-lg shadow-none border rounded-1 mb-2">
-                        @if(session('resent'))
-                            <div class="alert alert-success m-2 text-center mb-0 rounded-xs" role="alert">
-                                {{ __('A fresh verification link has been sent to your email.') }}
+        <div class="content container-fluid d-flex position-relative vh-100 align-items-center justify-content-center">
+            <div class="justify-content-center w-25">
+                <a class="d-flex justify-content-center mb-3 mb-lg-5" href="/">
+                    <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" height="60">
+                    <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" height="60">
+                </a>
+                <div class="card card-lg shadow-none border rounded-1 mb-2">
+                    @if(session('resent'))
+                        <div class="alert alert-success m-2 text-center mb-0 rounded-xs" role="alert">
+                            {{ __('A fresh verification link has been sent to your email.') }}
+                        </div>
+                    @endif
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="mb-4">
+                                <img class="avatar avatar-xxl avatar-4x3" src="{{ config('nue.brand.cdn') }}/svg/illustrations/oc-email-verification.svg" alt="" data-nue-theme-appearance="default">
+                                <img class="avatar avatar-xxl avatar-4x3" src="{{ config('nue.brand.cdn') }}/svg/illustrations-light/oc-email-verification.svg" alt="" data-nue-theme-appearance="dark">
                             </div>
-                        @endif
-                        <div class="card-body">
-                            <div class="text-center">
-                                <div class="mb-4">
-                                    <img class="avatar avatar-xxl avatar-4x3" src="{{ config('nue.brand.cdn') }}/svg/illustrations/oc-email-verification.svg" alt="" data-nue-theme-appearance="default">
-                                    <img class="avatar avatar-xxl avatar-4x3" src="{{ config('nue.brand.cdn') }}/svg/illustrations-light/oc-email-verification.svg" alt="" data-nue-theme-appearance="dark">
-                                </div>
-                                <h1 class="display-5 fw-bold">{{ __('Verify Your Email') }}</h1>
-                                <p class="mb-1">{{ __('We\'ve sent a link to your email address:') }}</p>
+                            <h1 class="display-5 fw-bold">{{ __('Verify Your Email') }}</h1>
+                            <p class="mb-1">{{ __('We\'ve sent a link to your email address:') }}</p>
 
-                                <span class="d-block text-dark fw-semi-bold mb-1">{{ auth()->user()->email }}</span>
+                            <span class="d-block text-dark fw-semi-bold mb-1">{{ auth()->user()->email }}</span>
 
-                                <p>{{ __('Please follow the link inside to continue.') }}</p>
+                            <p>{{ __('Please follow the link inside to continue.') }}</p>
 
-                                <p>{{ __('Didn\'t receive an email?') }}</p>
-                                <form class="mb-3" method="POST" action="{{ route('verification.resend') }}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">{{ __('Request Another') }}</button>
-                                </form>
-                            </div>
+                            <p>{{ __('Didn\'t receive an email?') }}</p>
+                            <form class="mb-3" method="POST" action="{{ route('verification.resend') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">{{ __('Request Another') }}</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-    </body>
-@endsection@extends('layouts.app')
-@section('title', __('Verify Your Email Address'))
-
-@section('body')
-    <body>
-        <script src="{{ config('nue.brand.cdn') }}/js/nue-theme-appearance.js"></script>
-        <script src="{{ config('nue.brand.cdn') }}/vendor/nue-navbar-vertical-aside/nue-navbar-vertical-aside-mini-cache.js"></script>
-        <main id="content" role="main" class="main">
-            <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ config('nue.brand.cdn') }}/svg/components/card-3.svg);">
-                <div class="shape shape-bottom zi-1">
-                    <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
-                        <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
-                    </svg>
-                </div>
-            </div>
-
-            <div class="content container-fluid d-flex position-relative vh-100 align-items-center justify-content-center">
-                <div class="justify-content-center w-25">
-                    <a class="d-flex justify-content-center mb-3 mb-lg-5" href="/">
-                        <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" height="60">
-                        <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" height="60">
-                    </a>
-                    <div class="card card-lg shadow-none border rounded-1 mb-2">
-                        @if(session('resent'))
-                            <div class="alert alert-success m-2 text-center mb-0 rounded-xs" role="alert">
-                                {{ __('A fresh verification link has been sent to your email.') }}
-                            </div>
-                        @endif
-                        <div class="card-body">
-                            <div class="text-center">
-                                <div class="mb-4">
-                                    <img class="avatar avatar-xxl avatar-4x3" src="{{ config('nue.brand.cdn') }}/svg/illustrations/oc-email-verification.svg" alt="" data-nue-theme-appearance="default">
-                                    <img class="avatar avatar-xxl avatar-4x3" src="{{ config('nue.brand.cdn') }}/svg/illustrations-light/oc-email-verification.svg" alt="" data-nue-theme-appearance="dark">
-                                </div>
-                                <h1 class="display-5 fw-bold">{{ __('Verify Your Email') }}</h1>
-                                <p class="mb-1">{{ __('We\'ve sent a link to your email address:') }}</p>
-
-                                <span class="d-block text-dark fw-semi-bold mb-1">{{ auth()->user()->email }}</span>
-
-                                <p>{{ __('Please follow the link inside to continue.') }}</p>
-
-                                <p>{{ __('Didn\'t receive an email?') }}</p>
-                                <form class="mb-3" method="POST" action="{{ route('verification.resend') }}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">{{ __('Request Another') }}</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </body>
+        </div>
+    </main>
 @endsection

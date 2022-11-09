@@ -54,7 +54,10 @@ class RoleController extends Controller
             return $this->datatable($data);
         endif;
 
-        return view("{$this->view}.index", compact('data'));
+        return nue_view("{$this->view}.index", [
+            'title' => $this->title, 
+            'data' => $data
+        ]);
     }
 
     /**
@@ -66,9 +69,10 @@ class RoleController extends Controller
      */
     public function create(Request $request)
     {
-        $permissions = config('nue.database.permissions_model')::pluck('name', 'id');
-
-        return view("$this->view.create", compact('permissions'));
+        return nue_view("{$this->view}.create", [
+            'title' => $this->title, 
+            'permissions' => config('nue.database.permissions_model')::pluck('name', 'id')
+        ]);
     }
 
     /**
@@ -88,7 +92,7 @@ class RoleController extends Controller
         $role = $this->data->create($input);
         $role->permissions()->sync($request->permissions);
         
-        notify()->flash($this->tCreate, 'success');
+        nue_notify($this->tCreate, 'success');
         return redirect(route("$this->prefix.index"));
     }
 
@@ -115,11 +119,11 @@ class RoleController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $edit = $this->data->findOrFail($id);
-     
-        $permissions = config('nue.database.permissions_model')::pluck('name', 'id');
-
-        return view("{$this->view}.edit", compact('edit', 'permissions'));
+        return nue_view("{$this->view}.edit", [
+            'title' => $this->title, 
+            'edit' => $this->data->findOrFail($id), 
+            'permissions' => config('nue.database.permissions_model')::pluck('name', 'id')
+        ]);
     }
 
     /**
@@ -143,7 +147,7 @@ class RoleController extends Controller
         $edit->update($input);
         $edit->permissions()->sync($request->permissions);
         
-        notify()->flash($this->tUpdate, 'success');
+        nue_notify($this->tUpdate, 'success');
         return redirect(route("$this->prefix.index"));
     }
 
@@ -159,11 +163,15 @@ class RoleController extends Controller
         if($request->has('pilihan')):
             foreach($request->pilihan as $temp):
                 $data = $this->data->findOrFail($temp);
-                $data->delete();
+                switch($id):
+                    case 'bulk-delete':
+                        $data->forceDelete();
+                    break;
+                    default:
+                    break;
+                endswitch;
             endforeach;
-            
-            notify()->flash($this->tDelete, 'success');
-            return redirect()->back();
+            return 'success';
         endif;
     }
 
@@ -189,7 +197,7 @@ class RoleController extends Controller
                 return $return;
             })
             ->editColumn('action', function($data) {
-                return '<a href="'.route("$this->prefix.edit", $data->id).'" class="btn btn-xs btn-info rounded-xs">
+                return '<a href="'.route("$this->prefix.edit", $data->id).'" class="btn btn-xs btn-info rounded-xs" data-pjax>
                         <i class="bi bi-pencil-square"></i>
                         '.__('Edit').'
                     </a>';

@@ -56,7 +56,10 @@ class PermissionController extends Controller
             return $this->datatable($data);
         endif;
 
-        return view("{$this->view}.index", compact('data'));
+        return nue_view("{$this->view}.index", [
+            'title' => $this->title, 
+            'data' => $data
+        ]);
     }
 
     /**
@@ -68,9 +71,10 @@ class PermissionController extends Controller
      */
     public function create(Request $request)
     {
-        $options = $this->getHttpMethodsOptions();
-
-        return view("$this->view.create", compact('options'));
+        return nue_view("{$this->view}.create", [
+            'title' => $this->title, 
+            'options' => $this->getHttpMethodsOptions()
+        ]);
     }
 
     /**
@@ -87,7 +91,7 @@ class PermissionController extends Controller
 
         $this->data->create($request->all());
         
-        notify()->flash($this->tCreate, 'success');
+        nue_notify($this->tCreate, 'success');
         return redirect(route("$this->prefix.index"));
     }
 
@@ -114,11 +118,11 @@ class PermissionController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $edit = $this->data->findOrFail($id);
-     
-        $options = $this->getHttpMethodsOptions();
-
-        return view("{$this->view}.edit", compact('edit', 'options'));
+        return nue_view("{$this->view}.edit", [
+            'title' => $this->title, 
+            'edit' => $this->data->findOrFail($id), 
+            'options' => $this->getHttpMethodsOptions()
+        ]);
     }
 
     /**
@@ -139,7 +143,7 @@ class PermissionController extends Controller
 
         $edit->update($request->all());
         
-        notify()->flash($this->tUpdate, 'success');
+        nue_notify($this->tUpdate, 'success');
         return redirect(route("$this->prefix.index"));
     }
 
@@ -155,11 +159,15 @@ class PermissionController extends Controller
         if($request->has('pilihan')):
             foreach($request->pilihan as $temp):
                 $data = $this->data->findOrFail($temp);
-                $data->delete();
+                switch($id):
+                    case 'bulk-delete':
+                        $data->forceDelete();
+                    break;
+                    default:
+                    break;
+                endswitch;
             endforeach;
-            
-            notify()->flash($this->tDelete, 'success');
-            return redirect()->back();
+            return 'success';
         endif;
     }
 
@@ -213,7 +221,7 @@ class PermissionController extends Controller
                 })->implode('');
             })
             ->editColumn('action', function($data) {
-                return '<a href="'.route("$this->prefix.edit", $data->id).'" class="btn btn-xs btn-info rounded-xs">
+                return '<a href="'.route("$this->prefix.edit", $data->id).'" class="btn btn-xs btn-info rounded-xs" data-pjax>
                         <i class="bi bi-pencil-square"></i>
                         '.__('Edit').'
                     </a>';

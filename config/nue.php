@@ -16,7 +16,7 @@ return [
     */
     'name' => 'Nµe',
     
-    'version' => '3.1.0',
+    'version' => '3.2.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,7 +161,7 @@ return [
         Features::updateEmail(),
         Features::updatePassword(),
         Features::profilePhoto(),
-        Features::terminateAccount(),
+        // Features::terminateAccount(),
     ],
 
     /*
@@ -224,7 +224,7 @@ return [
     */
     'user_activities' => [
 
-        'enable' => false,
+        'enable' => true,
 
         /*
          * Only logging allowed methods in the list
@@ -239,7 +239,7 @@ return [
          */
         'except' => [
             'settings/audit',
-            'settings/audit/hapus-all'
+            'settings/audit/bulk-delete'
         ],
     ],
 

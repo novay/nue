@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\MessageBag;
+use Novay\Nue\Facades\Nue;
+use Novay\Nue\Layout\Content;
 
 if(!function_exists('me')) {
     /**
@@ -189,3 +191,101 @@ if (!function_exists('echo_limit')) {
         endif;
     }
 }
+
+if (!function_exists('nue_notify')) {
+
+    /**
+     * Flash a notify message bag to session.
+     *
+     * @param string $message
+     * @param string $type
+     * @param array  $options
+     */
+    function nue_notify($message = '', $type = 'success', $options = [])
+    {
+        $notify = new MessageBag(get_defined_vars());
+
+        session()->flash('notify', $notify);
+    }
+}
+
+if (!function_exists('nue_success')) {
+
+    /**
+     * Flash a success message bag to session.
+     *
+     * @param string $title
+     * @param string $message
+     */
+    function nue_success($title, $message = '')
+    {
+        nue_info($title, $message, 'success');
+    }
+}
+
+if (!function_exists('nue_error')) {
+
+    /**
+     * Flash a error message bag to session.
+     *
+     * @param string $title
+     * @param string $message
+     */
+    function nue_error($title, $message = '')
+    {
+        nue_info($title, $message, 'error');
+    }
+}
+
+if (!function_exists('nue_warning')) {
+
+    /**
+     * Flash a warning message bag to session.
+     *
+     * @param string $title
+     * @param string $message
+     */
+    function nue_warning($title, $message = '')
+    {
+        nue_info($title, $message, 'warning');
+    }
+}
+
+if (!function_exists('nue_info')) {
+
+    /**
+     * Flash a message bag to session.
+     *
+     * @param string $title
+     * @param string $message
+     * @param string $type
+     */
+    function nue_info($title, $message = '', $type = 'info')
+    {
+        $message = new MessageBag(get_defined_vars());
+
+        session()->flash($type, $message);
+    }
+}
+
+if (!function_exists('nue_view')) {
+    /**
+     * Custom view for using Nue Content.
+     *
+     * @param  string|null  $view
+     * @param  \Illuminate\Contracts\Support\Arrayable|array  $data
+     * @param  string|null  $title
+     */
+    function nue_view($view = null, $data = [])
+    {
+        return Nue::content(function (Content $content) use ($view, $data) {
+            
+            if(isset($data['title'])) {
+                $content->title($data['title']);
+            }
+
+            $content->view($view, $data);
+        });
+    }
+}
+

@@ -40,6 +40,8 @@ class SystemController extends Controller
      */
     public function index()
     {
+        $title = $this->title;
+
         $composerArray = self::getComposerArray();
         $packages = self::getPackagesAndDependencies($composerArray['require']);
 
@@ -80,8 +82,7 @@ class SystemController extends Controller
 
         $matchPHPRequirement = version_compare(phpversion(), $requiredPhpVersion) > 0;
 
-        return view("$this->view.index", compact('packages', 'system', 'server', 
-            'requiredPhpVersion', 'matchPHPRequirement'));
+        return nue_view("{$this->view}.index", compact('title', 'packages', 'system', 'server', 'requiredPhpVersion', 'matchPHPRequirement'));
     }
 
     /**

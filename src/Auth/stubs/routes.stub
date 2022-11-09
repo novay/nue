@@ -1,5 +1,7 @@
 
 
-Route::get('home', 'App\Http\Controllers\HomeController@index')
-    ->name('home')
-    ->prefix(config('nue.route.prefix'));
+Route::namespace('App\Http\Controllers')->middleware(config('nue.route.middleware'))->group(function() {
+    Route::get('/', 'HomeController@index')->name('index');
+    Route::get('home', 'HomeController@dashboard')->name('home')
+        ->middleware(['auth', 'verified']);
+});

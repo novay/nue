@@ -1,114 +1,108 @@
-@extends('layouts.app')
+@extends('nue::blank')
 @section('title', __('Reset Password'))
 
 @section('js')
     <script src="{{ config('nue.brand.cdn') }}/vendor/nue-toggle-password/nue-toggle-password.js"></script>
     <script>
-        window.onload = function () {
-            new NueTogglePassword('.js-toggle-password')
-        }
+        new NueTogglePassword('.js-toggle-password')
     </script>
 @endsection
 
-@section('body')
-    <body>
-        <script src="{{ config('nue.brand.cdn') }}/js/nue-theme-appearance.js"></script>
-        <script src="{{ config('nue.brand.cdn') }}/vendor/nue-navbar-vertical-aside/nue-navbar-vertical-aside-mini-cache.js"></script>
-        <main id="content" role="main" class="main">
-            <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ config('nue.brand.cdn') }}/svg/components/card-3.svg);">
-                <div class="shape shape-bottom zi-1">
-                    <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
-                        <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
-                    </svg>
-                </div>
+@section('content')
+    <main id="content" role="main" class="main">
+        <div class="position-fixed top-0 end-0 start-0 bg-img-start" style="height: 32rem; background-image: url({{ config('nue.brand.cdn') }}/svg/components/card-3.svg);">
+            <div class="shape shape-bottom zi-1">
+                <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
+                    <polygon fill="#fff" points="0,273 1921,273 1921,0 " />
+                </svg>
             </div>
-           <div class="container py-5 py-sm-5">
-                <a class="d-flex justify-content-center mb-5" href="/">
-                    <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" height="70">
-                    <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" height="70">
-                </a>
-                <div class="mx-auto" style="max-width: 25rem;">
-                    <div class="card card-lg shadow-none border rounded-1 mb-2">
-                        <div class="card-body p-4">
-                            <form method="POST" action="{{ route('password.update') }}" novalidate>
-                                @csrf
-                                <input type="hidden" name="token" value="{{ $token }}">
+        </div>
+       <div class="container py-5 py-sm-5">
+            <a class="d-flex justify-content-center mb-5" href="/">
+                <img class="zi-2" src="{{ config('nue.brand.logo.default.light') }}" alt="" data-nue-theme-appearance="default" height="70">
+                <img class="zi-2" src="{{ config('nue.brand.logo.default.dark') }}" alt="" data-nue-theme-appearance="dark" height="70">
+            </a>
+            <div class="mx-auto" style="max-width: 25rem;">
+                <div class="card card-lg shadow-none border rounded-1 mb-2">
+                    <div class="card-body p-4">
+                        <form method="POST" action="{{ route('password.update') }}" novalidate>
+                            @csrf
+                            <input type="hidden" name="token" value="{{ $token }}">
 
-                                <div class="text-start">
-                                    <div class="mb-4">
-                                        <h1 class="display-5 fw-bold mb-2">
-                                            {{ __('Reset Password') }}
-                                        </h1>
-                                        <p class="text-muted">
-                                            {{ __('Enter the email address you used when you joined and we\'ll send you instructions to reset your password.') }}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label text-cap text-muted mb-2" for="{{ config('nue.username') }}">
-                                        @if(config('nue.username') == 'email')
-                                            {{ __('Email Address') }}
-                                        @else
-                                            {{ __('Username') }}
-                                        @endif
-                                    </label>
-                                    <input type="text" class="form-control form-control-lg rounded-0 @error(config('nue.username')) is-invalid @enderror" name="{{ config('nue.username') }}" id="{{ config('nue.username') }}" value="{{ $email ?? old('email') }}" placeholder="eg. nue@btekno.id" aria-label="eg. nue@btekno.id" autocomplete="email">
-                                    @error(config('nue.username'))
-                                        <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label text-cap text-muted mb-2" for="password">
-                                        {{ __('Password') }}
-                                    </label>
-                                    <div class="input-group input-group-merge rounded-0 @error('password') is-invalid @enderror" data-nue-validation-validate-class>
-                                        <input type="password" class="js-toggle-password form-control form-control-lg rounded-0" name="password" id="password" autocomplete="new-password" data-nue-toggle-password-options='{
-                                            "target": "#new-target",
-                                            "defaultClass": "bi-eye-slash",
-                                            "showClass": "bi-eye",
-                                            "classChangeTarget": "#new-icon"
-                                        }'>
-                                        <a id="new-target" class="input-group-append input-group-text" href="javascript:;">
-                                            <i id="new-icon" class="bi-eye"></i>
-                                        </a>
-                                    </div>
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label text-cap text-muted mb-2" for="password-confirm">
-                                        {{ __('Confirm Password') }}
-                                    </label>
-                                    <div class="input-group input-group-merge rounded-0 @error('password_confirmation') is-invalid @enderror" data-nue-validation-validate-class>
-                                        <input type="password" class="js-toggle-password form-control form-control-lg rounded-0" name="password_confirmation" id="password-confirm" autocomplete="new-password" data-nue-toggle-password-options='{
-                                            "target": "#confirm-target",
-                                            "defaultClass": "bi-eye-slash",
-                                            "showClass": "bi-eye",
-                                            "classChangeTarget": "#confirm-icon"
-                                        }'>
-                                        <a id="confirm-target" class="input-group-append input-group-text" href="javascript:;">
-                                            <i id="confirm-icon" class="bi-eye"></i>
-                                        </a>
-                                    </div>
-                                    @error('password_confirmation')
-                                        <span class="invalid-feedback" role="alert">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="d-grid mb-1">
-                                    <button type="submit" class="btn btn-primary btn-lg">
+                            <div class="text-start">
+                                <div class="mb-4">
+                                    <h1 class="display-5 fw-bold mb-2">
                                         {{ __('Reset Password') }}
-                                    </button>
+                                    </h1>
+                                    <p class="text-muted">
+                                        {{ __('Enter the email address you used when you joined and we\'ll send you instructions to reset your password.') }}
+                                    </p>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-cap text-muted mb-2" for="{{ config('nue.username') }}">
+                                    @if(config('nue.username') == 'email')
+                                        {{ __('Email Address') }}
+                                    @else
+                                        {{ __('Username') }}
+                                    @endif
+                                </label>
+                                <input type="text" class="form-control form-control-lg rounded-0 @error(config('nue.username')) is-invalid @enderror" name="{{ config('nue.username') }}" id="{{ config('nue.username') }}" value="{{ $email ?? old('email') }}" placeholder="eg. nue@btekno.id" aria-label="eg. nue@btekno.id" autocomplete="email">
+                                @error(config('nue.username'))
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-cap text-muted mb-2" for="password">
+                                    {{ __('Password') }}
+                                </label>
+                                <div class="input-group input-group-merge rounded-0 @error('password') is-invalid @enderror" data-nue-validation-validate-class>
+                                    <input type="password" class="js-toggle-password form-control form-control-lg rounded-0" name="password" id="password" autocomplete="new-password" data-nue-toggle-password-options='{
+                                        "target": "#new-target",
+                                        "defaultClass": "bi-eye-slash",
+                                        "showClass": "bi-eye",
+                                        "classChangeTarget": "#new-icon"
+                                    }'>
+                                    <a id="new-target" class="input-group-append input-group-text" href="javascript:;">
+                                        <i id="new-icon" class="bi-eye"></i>
+                                    </a>
+                                </div>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-cap text-muted mb-2" for="password-confirm">
+                                    {{ __('Confirm Password') }}
+                                </label>
+                                <div class="input-group input-group-merge rounded-0 @error('password_confirmation') is-invalid @enderror" data-nue-validation-validate-class>
+                                    <input type="password" class="js-toggle-password form-control form-control-lg rounded-0" name="password_confirmation" id="password-confirm" autocomplete="new-password" data-nue-toggle-password-options='{
+                                        "target": "#confirm-target",
+                                        "defaultClass": "bi-eye-slash",
+                                        "showClass": "bi-eye",
+                                        "classChangeTarget": "#confirm-icon"
+                                    }'>
+                                    <a id="confirm-target" class="input-group-append input-group-text" href="javascript:;">
+                                        <i id="confirm-icon" class="bi-eye"></i>
+                                    </a>
+                                </div>
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="d-grid mb-1">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    {{ __('Reset Password') }}
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </main>
-    </body>
+        </div>
+    </main>
 @endsection
