@@ -14,7 +14,7 @@
     $times = '<i class="bi bi-x-lg text-danger"></i>';
 @endphp
 <div class="card rounded-0 border-0 shadow-none bg-transparent">
-    <div class="card-body p-0">
+    <div class="p-0">
         <div class="accordion" id="accordion-example">
             <div class="alert alert-warning mb-0 rounded-0">
                 <p class="mb-2">{{ __('Troubleshooting Desc') }}</p>
@@ -23,148 +23,150 @@
                 </button>
             </div>
         </div>
-        <div class="row gx-2 card-body-height card-system p-2">
-            <div class="col-lg-8">
-                <div class="card mb-0 rounded-0 shadow-none border">
-                    <div class="card-header bg-light p-3">
-                        <h4 class="card-title">
-                            {{ __('Installed Package') }}
-                        </h4>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-sm mb-0">
-                            <thead class="bg-dark">
-                                <tr>
-                                    <th width="50%" class="text-white">{{ __('Package Name') }} : {{ __('Version') }}</th>
-                                    <th class="text-white">{{ __('Dependency Name') }} : {{ __('Version') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($packages as $i => $temp)
+        <div class="card-body-height card-system p-2">
+            <div class="row gx-2">
+                <div class="col-lg-8">
+                    <div class="card mb-0 rounded-0 shadow-none border">
+                        <div class="card-header bg-light p-2">
+                            <h5 class="card-title">
+                                {{ __('Installed Package') }}
+                            </h5>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0">
+                                <thead class="bg-dark">
                                     <tr>
-                                        <td>
-                                            {{ $temp['name'] }} :
-                                            <span class="badge bg-danger mb-1">{{ $temp['version'] }} :</span>
-                                        </td>
-                                        <td>
-                                            <ul class="mb-0 ps-3">
-                                                @foreach($temp['dependencies'] as $ii => $side)
-                                                    <li>{{ $ii }} : <span class="badge bg-danger mb-1">{{ $side }} :</span></li>
-                                                @endforeach
-                                            </ul>
-                                        </td>
+                                        <th width="50%" class="text-white">{{ __('Package Name') }} : {{ __('Version') }}</th>
+                                        <th class="text-white">{{ __('Dependency Name') }} : {{ __('Version') }}</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach($packages as $i => $temp)
+                                        <tr>
+                                            <td>
+                                                {{ $temp['name'] }} :
+                                                <span class="badge bg-danger mb-1">{{ $temp['version'] }} :</span>
+                                            </td>
+                                            <td>
+                                                <ul class="mb-0 ps-3">
+                                                    @foreach($temp['dependencies'] as $ii => $side)
+                                                        <li>{{ $ii }} : <span class="badge bg-danger mb-1">{{ $side }} :</span></li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card mb-2 rounded-0 shadow-none border">
-                    <div class="card-header bg-light p-3">
-                        <h4 class="card-title">
-                            {{ __('System Environment') }}
-                        </h4>
+                <div class="col-lg-4">
+                    <div class="card mb-2 rounded-0 shadow-none border">
+                        <div class="card-header bg-dark rounded-0 border-0 p-2">
+                            <h5 class="card-title text-light">
+                                {{ __('System Environment') }}
+                            </h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Application Version: {{ env('APP_VERSION') }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Framework Version: {{ $system['version'] }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Timezone: {{ $system['timezone'] }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Debug Mode: {!! $system['debug_mode'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Storage Dir Writable: {!! $system['storage_dir_writable'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Cache Dir Writable: {!! $system['cache_dir_writable'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                App Size: <b>{{ $system['app_size'] }}</b>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Application Version: {{ env('APP_VERSION') }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Framework Version: {{ $system['version'] }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Timezone: {{ $system['timezone'] }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Debug Mode: {!! $system['debug_mode'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Storage Dir Writable: {!! $system['storage_dir_writable'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Cache Dir Writable: {!! $system['cache_dir_writable'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            App Size: <b>{{ $system['app_size'] }}</b>
-                        </li>
-                    </ul>
-                </div>
 
-                <div class="card mb-2 rounded-0 shadow-none border">
-                    <div class="card-header bg-light p-3">
-                        <h4 class="card-title">
-                            {{ __('Server Environment') }}
-                        </h4>
+                    <div class="card mb-2 rounded-0 shadow-none border">
+                        <div class="card-header bg-dark rounded-0 border-0 p-2">
+                            <h5 class="card-title text-light">
+                                {{ __('Server Environment') }}
+                            </h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                PHP Version: {{ $server['version'] }} 
+                                @if($matchPHPRequirement)
+                                    {!! $check !!}
+                                @else
+                                    {!! $times !!}
+                                    <span class="text-danger">
+                                        (PHP must be >= {{ $requiredPhpVersion }})
+                                    </span>
+                                @endif
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Memory limit: {!! $server['memory_limit'] ?: '&mdash;' !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Max execution time (s): {!! $server['max_execution_time'] ?: '&mdash;' !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Server Software: {{ $server['server_software'] }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Server OS: {{ $server['server_os'] }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Database: {{ $server['database_connection_name'] }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                SSL Installed:  {!! $server['ssl_installed'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Cache Driver: {{ $server['cache_driver'] }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Session Driver: {{ $server['session_driver'] }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Queue Connection: {{ $server['queue_connection'] }}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                OpenSSL Ext: {!! $server['openssl'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Mbstring Ext: {!! $server['mbstring'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                PDO Ext: {!! $server['pdo'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                CURL Ext: {!! $server['curl'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Exif Ext: {!! $server['exif'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                File info Ext: {!! $server['fileinfo'] ? $check : $times !!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Tokenizer Ext: {!! $server['tokenizer']  ? $check : $times!!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Imagick/GD Ext: {!! $server['imagick_or_gd']  ? $check : $times!!}
+                            </li>
+                            <li class="list-group-item list-group-item-action py-1 px-2">
+                                Zip Ext: {!! $server['zip']  ? $check : $times!!}
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            PHP Version: {{ $server['version'] }} 
-                            @if($matchPHPRequirement)
-                                {!! $check !!}
-                            @else
-                                {!! $times !!}
-                                <span class="text-danger">
-                                    (PHP must be >= {{ $requiredPhpVersion }})
-                                </span>
-                            @endif
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Memory limit: {!! $server['memory_limit'] ?: '&mdash;' !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Max execution time (s): {!! $server['max_execution_time'] ?: '&mdash;' !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Server Software: {{ $server['server_software'] }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Server OS: {{ $server['server_os'] }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Database: {{ $server['database_connection_name'] }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            SSL Installed:  {!! $server['ssl_installed'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Cache Driver: {{ $server['cache_driver'] }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Session Driver: {{ $server['session_driver'] }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Queue Connection: {{ $server['queue_connection'] }}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            OpenSSL Ext: {!! $server['openssl'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Mbstring Ext: {!! $server['mbstring'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            PDO Ext: {!! $server['pdo'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            CURL Ext: {!! $server['curl'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Exif Ext: {!! $server['exif'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            File info Ext: {!! $server['fileinfo'] ? $check : $times !!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Tokenizer Ext: {!! $server['tokenizer']  ? $check : $times!!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Imagick/GD Ext: {!! $server['imagick_or_gd']  ? $check : $times!!}
-                        </li>
-                        <li class="list-group-item list-group-item-action py-2 px-3">
-                            Zip Ext: {!! $server['zip']  ? $check : $times!!}
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
