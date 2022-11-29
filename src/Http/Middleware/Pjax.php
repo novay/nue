@@ -4,96 +4,159 @@ namespace Novay\Nue\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\MessageBag;
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\HttpFoundation\Response as BaseResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Novay\Nue\Facades\Nue;
 
 class Pjax
 {
-    /** @var \Symfony\Component\DomCrawler\Crawler */
-    protected $crawler;
-
-    public function handle(Request $request, Closure $next): BaseResponse
+    /**
+     * Handle an incoming request.
+     *
+     * @param Request $request
+     * @param Closure $next
+     *
+     * @return Response
+     */
+    public function handle($request, Closure $next)
     {
         $response = $next($request);
 
-        if (! $request->pjax() || $response->isRedirection()) {
+        if (!$request->pjax() || $response->isRedirection() || Nue::guard()->guest()) {
             return $response;
         }
 
-        $this->filterResponse($response, $request->header('X-PJAX-Container'))
-            ->setUriHeader($response, $request)
-            ->setVersionHeader($response, $request);
+        if (!$response->isSuccessful()) {
+            return $this->handleErrorResponse($response);
+        }
+
+        try {
+            $this->filterResponse($response, $request->header('X-PJAX-CONTAINER'))
+                ->setUriHeader($response, $request);
+        } catch (\Exception $exception) {
+        }
 
         return $response;
     }
 
-    protected function filterResponse(BaseResponse $response, $container): self
+    /**
+     * Send a response through this middleware.
+     *
+     * @param Response $response
+     */
+    public static function respond(Response $response)
     {
-        $crawler = $this->getCrawler($response);
+        $next = function () use ($response) {
+            return $response;
+        };
+
+        (new static())->handle(Request::capture(), $next)->send();
+
+        exit;
+    }
+
+    /**
+     * Handle Response with exceptions.
+     *
+     * @param Response $response
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function handleErrorResponse(Response $response)
+    {
+        $exception = $response->exception;
+
+        $error = new MessageBag([
+            'type'    => get_class($exception),
+            'message' => $exception->getMessage(),
+            'file'    => $exception->getFile(),
+            'line'    => $exception->getLine(),
+        ]);
+
+        nue_error(get_class($exception), $exception->getMessage());
+
+        return back()->withInput()->withErrors($error, 'exception');
+    }
+
+    /**
+     * Prepare the PJAX-specific response content.
+     *
+     * @param Response $response
+     * @param string   $container
+     *
+     * @return $this
+     */
+    protected function filterResponse(Response $response, $container)
+    {
+        $crawler = new Crawler($response->getContent());
 
         $response->setContent(
             $this->makeTitle($crawler).
-            $this->fetchContainer($crawler, $container)
+            $this->fetchContents($crawler, $container)
         );
 
         return $this;
     }
 
-    protected function makeTitle(Crawler $crawler): ?string
+    /**
+     * Prepare an HTML title tag.
+     *
+     * @param Crawler $crawler
+     *
+     * @return string
+     */
+    protected function makeTitle($crawler)
     {
-        $pageTitle = $crawler->filter('head > title');
+        $pageTitle = $crawler->filter('head > title')->html();
 
-        if (! $pageTitle->count()) {
-            return null;
-        }
-
-        return "<title>{$pageTitle->html()}</title>";
+        return "<title>{$pageTitle}</title>";
     }
 
-    protected function fetchContainer(Crawler $crawler, $container): string
+    /**
+     * Fetch the PJAX-specific HTML from the response.
+     *
+     * @param Crawler $crawler
+     * @param string  $container
+     *
+     * @return string
+     */
+    protected function fetchContents($crawler, $container)
     {
         $content = $crawler->filter($container);
 
-        if (! $content->count()) {
+        if (!$content->count()) {
             abort(422);
         }
 
-        return $content->html();
+        return $this->decodeUtf8HtmlEntities($content->html());
     }
 
-    protected function setUriHeader(Response $response, Request $request): self
+    /**
+     * Decode utf-8 characters to html entities.
+     *
+     * @param string $html
+     *
+     * @return string
+     */
+    protected function decodeUtf8HtmlEntities($html)
     {
-        $response->header('X-PJAX-URL', $request->getRequestUri());
-
-        return $this;
+        return preg_replace_callback('/(&#[0-9]+;)/', function ($html) {
+            return mb_convert_encoding($html[1], 'UTF-8', 'HTML-ENTITIES');
+        }, $html);
     }
 
-    protected function setVersionHeader(Response $response, Request $request): self
+    /**
+     * Set the PJAX-URL header to the current uri.
+     *
+     * @param Response $response
+     * @param Request  $request
+     */
+    protected function setUriHeader(Response $response, Request $request)
     {
-        $crawler = $this->getCrawler($this->createResponseWithLowerCaseContent($response));
-        $node = $crawler->filter('head > meta[http-equiv="x-pjax-version"]');
-
-        if ($node->count()) {
-            $response->header('x-pjax-version', $node->attr('content'));
-        }
-
-        return $this;
-    }
-
-    protected function getCrawler(BaseResponse $response): Crawler
-    {
-        if ($this->crawler) {
-            return $this->crawler;
-        }
-
-        return $this->crawler = new Crawler($response->getContent());
-    }
-
-    protected function createResponseWithLowerCaseContent(Response $response): Response
-    {
-        $lowercaseContent = strtolower($response->getContent());
-
-        return new Response($lowercaseContent);
+        $response->header(
+            'X-PJAX-URL',
+            $request->getRequestUri()
+        );
     }
 }
