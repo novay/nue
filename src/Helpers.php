@@ -3,6 +3,7 @@
 use Illuminate\Support\MessageBag;
 use Novay\Nue\Facades\Nue;
 use Novay\Nue\Layout\Content;
+use Novay\Nue\Exception\NueException;
 
 if(!function_exists('me')) {
     /**
@@ -289,3 +290,14 @@ if (!function_exists('nue_view')) {
     }
 }
 
+if (!function_exists('nue_exception')) {
+    /**
+     * Flash error about the exception inside alert
+     *
+     * @param  string  $e
+     */
+    function nue_exception($e)
+    {
+        return NueException::renderException($e);
+    }
+}
