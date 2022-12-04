@@ -84,7 +84,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return $input = $request->all();
         $this->validate($request, [
             'photo' => 'mimes:jpg,jpeg,png', 
             'name' => 'required', 
@@ -103,8 +102,6 @@ class UserController extends Controller
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
         }
-
-
         
         nue_notify($this->tCreate, 'success');
         return redirect(route("$this->prefix.index"));
