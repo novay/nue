@@ -285,23 +285,24 @@ if (!function_exists('nue_view')) {
                 $content->title($data['title']);
             }
 
-            if(isset($data['theme'])) {
-                $content->theme($data['theme']);
+            if(isset($data['menu'])) {
+                $content->menu($data['menu']);
             }
 
             $content->view($view, $data);
         });
     }
-}
 
-if (!function_exists('nue_exception')) {
-    /**
-     * Flash error about the exception inside alert
-     *
-     * @param  string  $e
-     */
-    function nue_exception($e)
-    {
-        return NueException::renderException($e);
+    if (!function_exists('nue_exception')) {
+        /**
+         * Flash error about the exception inside alert
+         *
+         * @param  string  $e
+         */
+        function nue_exception($e)
+        {
+            return NueException::renderException($e);
+        }
     }
 }
+
