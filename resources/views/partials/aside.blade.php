@@ -11,13 +11,13 @@
             </a>
             <div class="navbar-vertical-content">
                 <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
-                    @isset($_menu_)
+                    @if(!is_null($_menu_))
                         @include($_menu_)
                     @else
                         @auth
                             @each('nue::partials.menu', Nue::menu(), 'item')
                         @endauth
-                    @endisset
+                    @endif
                 </div>
             </div>
             <div class="navbar-vertical-footer bg-white">
