@@ -79,15 +79,15 @@ class Content implements Renderable
     }
 
     /**
-     * Set theme of the content.
+     * Set menu of the content.
      *
-     * @param string $theme
+     * @param string $menu
      *
      * @return $this
      */
-    public function theme($theme = '')
+    public function menu($menu = '')
     {
-        $this->theme = $theme;
+        $this->menu = $menu;
 
         return $this;
     }
@@ -207,7 +207,7 @@ class Content implements Renderable
             'description' => $this->description,
             '_content_'   => $this->build(),
             '_view_'      => $this->view,
-            '_theme_'     => $this->theme,
+            '_menu_'     => $this->menu,
             '_user_'      => $this->getUserData(),
         ];
 
