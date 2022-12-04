@@ -285,6 +285,10 @@ if (!function_exists('nue_view')) {
                 $content->title($data['title']);
             }
 
+            if(isset($data['theme'])) {
+                $content->theme($data['theme']);
+            }
+
             $content->view($view, $data);
         });
     }
