@@ -24,6 +24,13 @@ class Content implements Renderable
     protected $description = ' ';
 
     /**
+     * Content menu.
+     *
+     * @var string
+     */
+    protected $menu = ' ';
+
+    /**
      * @var array
      */
     protected $view;
@@ -207,7 +214,7 @@ class Content implements Renderable
             'description' => $this->description,
             '_content_'   => $this->build(),
             '_view_'      => $this->view,
-            '_menu_'     => $this->menu,
+            '_menu_'      => $this->menu,
             '_user_'      => $this->getUserData(),
         ];
 
