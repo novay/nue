@@ -28,7 +28,7 @@ class Content implements Renderable
      *
      * @var string
      */
-    protected $menu = ' ';
+    protected $menu;
 
     /**
      * @var array
