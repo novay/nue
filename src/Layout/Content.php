@@ -24,13 +24,6 @@ class Content implements Renderable
     protected $description = ' ';
 
     /**
-     * Page breadcrumb.
-     *
-     * @var array
-     */
-    protected $breadcrumb = [];
-
-    /**
      * @var array
      */
     protected $view;
@@ -86,39 +79,17 @@ class Content implements Renderable
     }
 
     /**
-     * Set breadcrumb of content.
+     * Set theme of the content.
      *
-     * @param array ...$breadcrumb
+     * @param string $theme
      *
      * @return $this
      */
-    public function breadcrumb(...$breadcrumb)
+    public function theme($theme = '')
     {
-        $this->validateBreadcrumb($breadcrumb);
-
-        $this->breadcrumb = (array) $breadcrumb;
+        $this->theme = $theme;
 
         return $this;
-    }
-
-    /**
-     * Validate content breadcrumb.
-     *
-     * @param array $breadcrumb
-     *
-     * @throws \Exception
-     *
-     * @return bool
-     */
-    protected function validateBreadcrumb(array $breadcrumb)
-    {
-        foreach ($breadcrumb as $item) {
-            if (!is_array($item) || !Arr::has($item, 'text')) {
-                throw new  \Exception('Breadcrumb format error!');
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -234,9 +205,9 @@ class Content implements Renderable
         $items = [
             'header'      => $this->title,
             'description' => $this->description,
-            'breadcrumb'  => $this->breadcrumb,
             '_content_'   => $this->build(),
             '_view_'      => $this->view,
+            '_theme_'     => $this->theme,
             '_user_'      => $this->getUserData(),
         ];
 
