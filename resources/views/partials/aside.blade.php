@@ -11,39 +11,56 @@
             </a>
             <div class="navbar-vertical-content">
                 <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
-                    @if(!is_null($_menu_))
-                        @include($_menu_)
+                    @isset($menu)
+                        <div class="nav-item">
+                            <a class="nav-link rounded-2 " href="{{ route('home') }}" data-placement="left">
+                                <i class="bi bi-chevron-left nav-icon"></i>
+                                <span class="nav-link-title">Kembali</span>
+                            </a>
+                        </div>
+                        @yield('menu')
                     @else
                         @auth
                             @each('nue::partials.menu', Nue::menu(), 'item')
                         @endauth
-                    @endif
+                    @endisset
                 </div>
             </div>
-            <div class="navbar-vertical-footer bg-white">
-                <div class="nav nav-pills nav-vertical card-navbar-nav p-0 mb-2">
-                    <div class="nav-item">
-                        <a class="nav-link" href="javascript:;" data-href="{{ route('profile.show') }}?page=preferences&time={{ time() }}" id="dialog-button" data-size="modal-lg">
-                            <i class="bi bi-gear nav-icon me-n2"></i>
-                            <span class="nav-link-title">
-                                Settings
-                            </span>
-                        </a>
-                    </div>
-                    <div class="nav-item">
-                        <a class="nav-link" href="javascript:;">
-                            <i class="bi bi-info-circle nav-icon me-n2"></i>
-                            <span class="nav-link-title">
-                                Kirim Masukan
-                            </span>
-                        </a>
+            <div class="navbar-vertical-footer p-0 bg-light">
+                @if(!tahun())
+                    <a href="{{ route('data-dasar.tahun-anggaran.index') }}">
+                        <div class="alert alert-danger text-center small p-2 rounded-0 mb-0">
+                            Tahun Anggaran belum aktif!
+                        </div>
+                    </a>
+                @endif
+                <div class="p-2">
+                    <div class="nav nav-pills nav-vertical card-navbar-nav p-0 mb-0">
+                        <div class="nav-item">
+                            <a class="nav-link" href="javascript:;" data-href="{{ route('profile.show') }}?page=preferences&time={{ time() }}" id="dialog-button" data-size="modal-lg">
+                                <i class="bi bi-gear nav-icon me-n2"></i>
+                                <span class="nav-link-title">
+                                    Settings
+                                </span>
+                            </a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="{{ route('masukan.index') }}" class="nav-link">
+                                <i class="bi bi-info-circle nav-icon me-n2"></i>
+                                <span class="nav-link-title">
+                                    Kritik & Saran
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <hr class="mt-0 mb-3" />
-                <p class="mb-0 text-start small text-muted" style="font-size:70%">
-                    {{ date('Y') }} © Enter(wind)<br/>
-                    {{ config('nue.name') }} v{{ config('nue.version') }}
-                </p>
+                <hr class="mt-0 mb-0" />
+                <div class="p-3">
+                    <p class="mb-0 text-start small text-muted" style="font-size:70%">
+                        {{ date('Y') }} © Enter(wind)<br/>
+                        {{ config('nue.name') }} v{{ config('nue.version') }}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
