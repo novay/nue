@@ -9,8 +9,8 @@ trait HasPermissions
 {
     /**
      * Create a new Eloquent model instance.
-     *
-     * @param array $attributes
+        *
+        * @param array $attributes
      */
     public function __construct(array $attributes = [])
     {
@@ -25,8 +25,8 @@ trait HasPermissions
 
     /**
      * A user has and belongs to many roles.
-     *
-     * @return BelongsToMany
+        *
+        * @return BelongsToMany
      */
     public function roles(): BelongsToMany
     {
@@ -39,8 +39,8 @@ trait HasPermissions
 
     /**
      * A User has and belongs to many permissions.
-     *
-     * @return BelongsToMany
+        *
+        * @return BelongsToMany
      */
     public function permissions(): BelongsToMany
     {
@@ -50,7 +50,7 @@ trait HasPermissions
 
         return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'permission_id');
     }
-    
+
     /**
      * Get all permissions of user.
      *
@@ -64,10 +64,10 @@ trait HasPermissions
     /**
      * Check if user has permission.
      *
-     * @param $ability
-     * @param array $arguments
-     *
-     * @return bool
+        * @param $ability
+     * @param  array  $arguments
+        *
+        * @return bool
      */
     public function can($ability, $arguments = []): bool
     {
@@ -88,14 +88,15 @@ trait HasPermissions
 
     /**
      * Check if user has no permission.
-     *
-     * @param $permission
-     *
-     * @return bool
+        *
+        * @param $abilities
+        * @param array $arguments
+        *
+        * @return bool
      */
-    public function cannot(string $permission): bool
+    public function cannot($abilities, $arguments = []): bool
     {
-        return !$this->can($permission);
+        return ! $this->can($abilities, $arguments);
     }
 
     /**
@@ -111,8 +112,8 @@ trait HasPermissions
     /**
      * Check if user is $role.
      *
-     * @param string $role
-     *
+        * @param string $role
+        *
      * @return mixed
      */
     public function isRole(string $role): bool
@@ -123,8 +124,8 @@ trait HasPermissions
     /**
      * Check if user in $roles.
      *
-     * @param array $roles
-     *
+        * @param array $roles
+        *
      * @return mixed
      */
     public function inRoles(array $roles = []): bool
@@ -134,10 +135,10 @@ trait HasPermissions
 
     /**
      * If visible for roles.
-     *
-     * @param $roles
-     *
-     * @return bool
+        *
+        * @param $roles
+        *
+        * @return bool
      */
     public function visible(array $roles = []): bool
     {
