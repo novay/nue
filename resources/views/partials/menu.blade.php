@@ -1,10 +1,15 @@
 @if(Nue::user()->visible(\Illuminate\Support\Arr::get($item, 'roles', [])) && Nue::user()->can(\Illuminate\Support\Arr::get($item, 'permission')))
     @if(!isset($item['children']))
         <div class="nav-item">
+            @php
+                $isActive = Request::is($item['uri']) || Request::is($item['uri'].'/*');
+            @endphp
             @if(url()->isValidUrl($item['uri']))
-                <a class="nav-link {{ Request::is($item['uri']) ? 'active' : '' }}" href="{{ $item['uri'] }}" target="_blank">
+                <a class="nav-link {{ $isActive ? 'active' : '' }}" href="{{ $item['uri'] }}" target="_blank">
+            @elseif(\Nwidart\Modules\Facades\Module::has($item['uri']))
+                <a class="nav-link {{ $isActive ? 'active' : '' }}" href="{{ nue_url($item['uri']) }}">
             @else
-                <a class="nav-link {{ Request::is($item['uri']) ? 'active' : '' }}" href="{{ nue_url($item['uri']) }}" data-pjax>
+                <a class="nav-link {{ $isActive ? 'active' : '' }}" href="{{ nue_url($item['uri']) }}" data-pjax>
             @endif
                 @if(!is_null($item['icon']))
                     <i class="bi bi-{{ $item['icon'] }} nav-icon me-n1"></i>
