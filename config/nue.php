@@ -124,7 +124,7 @@ return [
     |
     */
 
-    'home' => env('NUE_AUTH_HOME', RouteServiceProvider::HOME),
+    'home' => env('NUE_AUTH_HOME', '/'),
 
     /*
     |--------------------------------------------------------------------------
